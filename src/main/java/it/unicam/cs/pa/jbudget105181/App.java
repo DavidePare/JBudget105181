@@ -1,18 +1,23 @@
-package it.unicam.cs.pa.jbudget105181.Controller;
+package it.unicam.cs.pa.jbudget105181;
 
 import java.util.InputMismatchException;
 /*import java.util.Iterator;
 import java.util.List;*/
 import java.util.Scanner;
 
+import it.unicam.cs.pa.jbudget105181.Controller.ApplicationOperationCase;
 import it.unicam.cs.pa.jbudget105181.Model.Ledger;
 import it.unicam.cs.pa.jbudget105181.View.ConsoleView;
+import it.unicam.cs.pa.jbudget105181.View.FXMLStart;
+import javafx.application.Application;
 
 public class App {
 	
 	public static void main(String[] args) {
 		//Generare vista
 		// Apertura vista
+		Application.launch(FXMLStart.class);
+
 		int x=0;
 		ConsoleView view= new ConsoleView();
 		view.open();
