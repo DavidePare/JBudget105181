@@ -94,7 +94,13 @@ public class ApplicationOperationCase implements IApplicationOperationCase{
 		}
 	}
 	
-	
+
+
+
+
+
+
+
 	public List<ITag> insertTagforTransazioni(ILedger l,ControllerTransazioni control ,ConsoleViewTransazioni viewTr) {
 		boolean continua=control.yesornoResponse(viewTr.insertTagYorN());;
 		List<ITag> listtag = new ArrayList<>();
