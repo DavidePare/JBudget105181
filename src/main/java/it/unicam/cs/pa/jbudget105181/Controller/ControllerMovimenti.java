@@ -30,9 +30,9 @@ public class ControllerMovimenti {
 		return data;
 	}
 	/*	Ritorni
-	 *  id se è un numero corretto
+	 *  id se Ã¨ un numero corretto
 	 *  -3 se deve stampare le transazioni
-	 *  -2 se è una stringa
+	 *  -2 se Ã¨ una stringa
 	 *  -1 se non esiste alcun id associato alla transazione
 	 */
 	public int verificaIDtransazione(String id,ILedger ledger) {

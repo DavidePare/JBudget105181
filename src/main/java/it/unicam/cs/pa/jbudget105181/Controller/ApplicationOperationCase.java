@@ -59,7 +59,7 @@ public class ApplicationOperationCase implements IApplicationOperationCase{
 					}else vistaAccount.alreadyExistName();
 				}
 			}
-		} else vistaAccount.accountTypeInesistente();;
+		} else vistaAccount.accountTypeInesistente();
 	}
 	
 	public boolean errorCodeAccount(int resID, ConsoleViewAccount vistaAccount) {

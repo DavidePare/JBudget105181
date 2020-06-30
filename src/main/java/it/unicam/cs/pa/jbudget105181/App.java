@@ -18,7 +18,7 @@ public class App {
 		// Apertura vista
 		Application.launch(FXMLStart.class);
 
-		int x=0;
+	/*	int x=0;
 		ConsoleView view= new ConsoleView();
 		view.open();
 		Ledger ledger= new Ledger();
@@ -38,7 +38,7 @@ public class App {
 			}
 		}
 		sc.close();
-		view.close();
+		view.close();*/
 		
 	}
 	public static void options(int x, Ledger ledger) {
