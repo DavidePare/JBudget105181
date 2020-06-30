@@ -11,7 +11,7 @@ public class FXMLStart extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/FXMLHome.fxml"));
         stage.setTitle("JBudget");
-        stage.setScene(new Scene(root, 1050, 500));
+        stage.setScene(new Scene(root, 640, 400));
         stage.show();
     }
 }
