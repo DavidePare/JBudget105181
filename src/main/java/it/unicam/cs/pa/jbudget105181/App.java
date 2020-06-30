@@ -1,14 +1,11 @@
 package it.unicam.cs.pa.jbudget105181;
 
-import java.util.InputMismatchException;
 /*import java.util.Iterator;
 import java.util.List;*/
-import java.util.Scanner;
 
 import it.unicam.cs.pa.jbudget105181.Controller.ApplicationOperationCase;
 import it.unicam.cs.pa.jbudget105181.Model.Ledger;
-import it.unicam.cs.pa.jbudget105181.View.ConsoleView;
-import it.unicam.cs.pa.jbudget105181.View.FXMLStart;
+		import it.unicam.cs.pa.jbudget105181.GUIView.FXMLStart;
 import javafx.application.Application;
 
 public class App {

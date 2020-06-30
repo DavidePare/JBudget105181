@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.pa.jbudget105181.View.GUIController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.pa.jbudget105181.GUIView.GUIController">
   <children>
     <MenuBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
       <menus>
@@ -115,7 +115,7 @@
                               <ButtonBar layoutX="-2.0" layoutY="298.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="640.0">
                                 <buttons>
                                     <Button mnemonicParsing="false" text="View Movements" />
-                                  <Button minWidth="42.0" mnemonicParsing="false" prefHeight="26.0" text="Add Movement" />
+                                  <Button minWidth="42.0" mnemonicParsing="false" onAction="#addMovement" prefHeight="26.0" text="Add Movement" />
                                     <Button mnemonicParsing="false" text="Remove" />
                                     <Button mnemonicParsing="false" text="Modify" />
                                     <Button mnemonicParsing="false" text="Add Transaction" />
@@ -129,10 +129,10 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView layoutY="51.0" prefHeight="295.0" prefWidth="640.0">
+                              <TableView fx:id="tagTable" layoutY="51.0" prefHeight="295.0" prefWidth="640.0">
                                  <columns>
-                                    <TableColumn prefWidth="149.5999755859375" text="Nome" />
-                                    <TableColumn prefWidth="319.199951171875" text="Descrizione" />
+                                    <TableColumn fx:id="tagNameColumn" prefWidth="149.5999755859375" text="Nome" />
+                                    <TableColumn fx:id="tagDescriptionColumn" prefWidth="319.199951171875" text="Descrizione" />
                                  </columns>
                               </TableView>
                               <GridPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="38.0" prefWidth="640.0">
@@ -146,10 +146,10 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="118.0" text="Delete" GridPane.columnIndex="3" />
-                                    <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="Add" GridPane.columnIndex="2" />
-                                    <TextField prefHeight="26.0" prefWidth="291.0" promptText="Description" GridPane.columnIndex="1" />
-                                    <TextField promptText="Name" />
+                                    <Button mnemonicParsing="false" onAction="#deleteTag" prefHeight="26.0" prefWidth="118.0" text="Delete" GridPane.columnIndex="3" />
+                                    <Button mnemonicParsing="false" onAction="#addTag" prefHeight="26.0" prefWidth="92.0" text="Add" GridPane.columnIndex="2" />
+                                    <TextField fx:id="tagDescription" prefHeight="26.0" prefWidth="291.0" promptText="Description" GridPane.columnIndex="1" />
+                                    <TextField fx:id="tagName" promptText="Name" />
                                  </children>
                                  <opaqueInsets>
                                     <Insets />

@@ -1,4 +1,4 @@
-package it.unicam.cs.pa.jbudget105181.View;
+package it.unicam.cs.pa.jbudget105181.GUIView;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
