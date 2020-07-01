@@ -20,7 +20,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.pa.jbudget105181.GUIView.GUIController">
   <children>
@@ -52,12 +51,13 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="551.0" prefWidth="640.0">
                            <children>
-                              <TableView prefHeight="346.0" prefWidth="640.0">
+                              <TableView fx:id="accountTable" prefHeight="346.0" prefWidth="640.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="ID" />
-                                  <TableColumn prefWidth="75.0" text="Nome" />
-                                    <TableColumn prefWidth="75.0" text="Type" />
-                                    <TableColumn prefWidth="75.0" text="Amount" />
+                                  <TableColumn fx:id="accountIDColumn" prefWidth="75.0" text="ID" />
+                                    <TableColumn fx:id="accountNameColumn" prefWidth="75.0" text="Name" />
+                                    <TableColumn fx:id="accountTypeColumn" prefWidth="75.0" text="Type" />
+                                  <TableColumn fx:id="accountAmountColumn" prefWidth="75.0" text="Amount" />
+                                    <TableColumn fx:id="accountDescriptionColumn" prefWidth="180.79998779296875" text="Description" />
                                 </columns>
                                  <padding>
                                     <Insets top="35.0" />
@@ -70,7 +70,6 @@
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.5999755859375" minWidth="10.0" prefWidth="111.0" />
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="103.39998779296872" minWidth="10.0" prefWidth="96.99996337890622" />
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="89.60002441406255" minWidth="10.0" prefWidth="66.60003662109375" />
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="89.5999755859375" minWidth="10.0" prefWidth="83.20001220703125" />
@@ -79,17 +78,12 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="118.0" text="Modify" GridPane.columnIndex="6" />
-                                          <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="Add" GridPane.columnIndex="5" />
-                                          <ChoiceBox prefWidth="150.0" GridPane.columnIndex="4" />
-                                          <TextField promptText="Description" GridPane.columnIndex="1" />
-                                          <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="109.0" text="Add Description" textAlignment="CENTER" GridPane.columnIndex="3">
-                                             <font>
-                                                <Font name="Calibri" size="10.0" />
-                                             </font>
-                                          </Button>
-                                          <TextField promptText="Balance" GridPane.columnIndex="2" />
-                                          <TextField promptText="Name" />
+                                          <Button mnemonicParsing="false" onAction="#addAccount" prefHeight="26.0" prefWidth="92.0" text="Add" GridPane.columnIndex="4" />
+                                          <ChoiceBox fx:id="accountType" prefWidth="150.0" GridPane.columnIndex="3" />
+                                          <TextField fx:id="descriptionAccount" promptText="Description" GridPane.columnIndex="1" />
+                                          <TextField fx:id="balanceAccount" promptText="Balance" GridPane.columnIndex="2" />
+                                          <TextField fx:id="nameAccount" promptText="Name" />
+                                          <Button mnemonicParsing="false" onAction="#deleteAccount" prefHeight="26.0" prefWidth="92.0" text="Delete" GridPane.columnIndex="5" />
                                        </children>
                                        <opaqueInsets>
                                           <Insets />
@@ -97,6 +91,8 @@
                                     </GridPane>
                                  </children>
                               </AnchorPane>
+                              <Button fx:id="modifyAccButton" layoutX="410.0" layoutY="346.0" mnemonicParsing="false" onAction="#modifyAccount" prefHeight="26.0" prefWidth="118.0" text="Modify" />
+                              <Button layoutX="528.0" layoutY="346.0" mnemonicParsing="false" onAction="#selectAccount" prefHeight="26.0" prefWidth="102.0" text="Select" />
                            </children>
                         </AnchorPane>
                   </content>

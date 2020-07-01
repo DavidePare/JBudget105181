@@ -1,6 +1,10 @@
 package it.unicam.cs.pa.jbudget105181.GUIView;
 
-import java.io.Serializable;
+import javafx.fxml.Initializable;
 
-public interface ControllerFXML extends Serializable {
+import java.io.Serializable;
+/*
+Create a module of controller
+ */
+public interface ControllerFXML extends Initializable {
 }

@@ -22,4 +22,5 @@ public interface ILedger{
 //	void removeMovement(Predicate<IMovement> p,int id);
 
 	void removeMovement(int id, int idMov);
+	void removeAccount(IAccount account);
 }

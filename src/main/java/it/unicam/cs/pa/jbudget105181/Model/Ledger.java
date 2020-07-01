@@ -12,7 +12,7 @@ public class Ledger implements ILedger{
 	 */
 	private ArrayList<ITransazione> allTransaction= new ArrayList<ITransazione>();
 	/*
-	 * Questa variabile conterrà tutti i tag usati sarà utile per stamparli a video nel caso l utente lo richieda
+	 * Questa variabile conterrï¿½ tutti i tag usati sarï¿½ utile per stamparli a video nel caso l utente lo richieda
 	 */
 	private List<ITag> tag= new ArrayList<ITag>(); 
 	private List<IAccount> listaAccount= new ArrayList<IAccount>(); 
@@ -163,5 +163,10 @@ public class Ledger implements ILedger{
 			i++;
 		}
 		return null;
+	}
+	public void removeAccount(IAccount account){
+		List<IAccount> app= new ArrayList<>();
+		listaAccount.stream().filter(t-> t.getIDAccount() == account.getIDAccount()).forEach(t -> app.add(t));
+		listaAccount.removeAll(app);
 	}
 }
