@@ -69,10 +69,10 @@ public class GUIController implements Initializable {
         }
     }
     public void addTransaction(){
-        openWindow("Add Transaction", "/FXMLAddTransaction.fxml", new ControllerAddMovement(controller));
+        openWindow("Add Transaction", "/FXMLAddTransaction.fxml", new ControllerAddTransaction(controller));
     }
-    public void saveNewTransaction(){
 
+    public void saveNewTransaction(){
 
     }
 
