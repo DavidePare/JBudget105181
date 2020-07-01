@@ -18,4 +18,5 @@ public interface ITransazione {
 	void addMovement(IMovement addMov);
 	void removeMovement(IMovement m);
 	boolean getPagata();
+	int getNumMov();
 }

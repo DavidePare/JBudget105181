@@ -7,6 +7,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.pa.jbudget105181.GUIView.GUIController">
    <children>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="628.0" prefWidth="898.0">
          <children>
@@ -37,14 +38,17 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <RadioButton mnemonicParsing="false" text="Programmed Transaction" GridPane.columnIndex="1" />
-                        <RadioButton mnemonicParsing="false" text="Instant Transaction" GridPane.columnIndex="2" />
+                        <RadioButton fx:id="programmedTransaction" mnemonicParsing="false" text="Programmed Transaction" GridPane.columnIndex="1">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="tgTransaction" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="instantTransaction" mnemonicParsing="false" text="Instant Transaction" toggleGroup="$tgTransaction" GridPane.columnIndex="2" />
                         <Label prefHeight="18.0" prefWidth="152.0" text="Type of Transaction">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <DatePicker prefHeight="17.0" prefWidth="174.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <DatePicker fx:id="transactionDate" prefHeight="17.0" prefWidth="174.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label text="Description" GridPane.rowIndex="3">
                            <font>
@@ -60,7 +64,7 @@
                <bottom>
                   <ButtonBar prefHeight="0.0" prefWidth="640.0" BorderPane.alignment="CENTER">
                     <buttons>
-                      <Button mnemonicParsing="false" text="Save" />
+                      <Button mnemonicParsing="false" onAction="#saveNewTransaction" text="Save" />
                         <Button mnemonicParsing="false" text="&lt;Back" />
                     </buttons>
                   </ButtonBar>

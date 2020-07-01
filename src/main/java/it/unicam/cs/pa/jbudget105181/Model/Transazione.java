@@ -59,7 +59,7 @@ public class Transazione implements ITransazione{
 	@Override
 	public void setData(LocalDate dataNuova) {
 		// SISTEMARE. 
-		// Se la modifica della data è precedente alla data odierna
+		// Se la modifica della data ï¿½ precedente alla data odierna
 		if(LocalDate.now().isAfter(dataNuova) ) {
 			if(!this.pagata) {
 				System.out.println("Devo decrementare budget");
@@ -102,6 +102,9 @@ public class Transazione implements ITransazione{
 	}
 	public boolean getPagata() {
 		return pagata;
+	}
+	public int getNumMov(){
+		return movimenti.size();
 	}
 
 }
