@@ -32,14 +32,28 @@ public class MainController {
     public void removeAccount(IAccount account){
         ledger.removeAccount(account);
     }
+
+
+    //TODO
     public void removeAccount(Predicate<IAccount> p){
         //Sistemare
         List<IAccount> acc=ledger.getAccounts().stream().filter(p).collect(Collectors.toList());
-        if(!acc.isEmpty()) this.removeAccount(acc.get(0));
+        if(!acc.isEmpty()) {
+            for (ITransazione t : ledger.getAllTransactions()) {
+                for (IMovement m : t.movements()) {
+                    if (m.getAccount().getIDAccount() == acc.get(0).getIDAccount()) {
+                        t.removeMovement(m); //Sistemare
+                    }
+                }
+            }
+            this.removeAccount(acc.get(0));
+        }
     }
+
     public void removeTag(ITag tag){
         ledger.removeTag(t-> ( t.getNome().compareTo(tag.getNome())==0));
     }
+
     public ArrayList<ITransazione> getTransaction(){
         return ledger.getAllTransactions();
     }

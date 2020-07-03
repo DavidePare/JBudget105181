@@ -5,6 +5,9 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -34,15 +37,15 @@
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="65.79999389648438" minHeight="10.0" prefHeight="27.400000000000006" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <RadioButton fx:id="programmedTransaction" mnemonicParsing="false" text="Programmed Transaction" GridPane.columnIndex="1">
+                        <RadioButton fx:id="programmedTransaction" mnemonicParsing="false" onAction="#activeNumWeek" text="Programmed Transaction" GridPane.columnIndex="1">
                            <toggleGroup>
                               <ToggleGroup fx:id="tgTransaction" />
                            </toggleGroup></RadioButton>
-                        <RadioButton fx:id="instantTransaction" mnemonicParsing="false" text="Instant Transaction" toggleGroup="$tgTransaction" GridPane.columnIndex="2" />
+                        <RadioButton fx:id="instantTransaction" mnemonicParsing="false" onAction="#deactiveNumWeek" text="Instant Transaction" toggleGroup="$tgTransaction" GridPane.columnIndex="2" />
                         <Label prefHeight="18.0" prefWidth="152.0" text="Type of Transaction">
                            <font>
                               <Font size="13.0" />
@@ -55,19 +58,55 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label text="Number of weeks" GridPane.rowIndex="2" />
+                        <TextField fx:id="numweekTransaction" prefHeight="26.0" prefWidth="70.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Label fx:id="numweeklabel" text="Number of weeks" GridPane.rowIndex="2" />
                         <Label text="Date" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </center>
                <bottom>
-                  <ButtonBar prefHeight="0.0" prefWidth="640.0" BorderPane.alignment="CENTER">
-                    <buttons>
-                      <Button mnemonicParsing="false" onAction="#saveNewTransaction" text="Save" />
-                        <Button mnemonicParsing="false" text="&lt;Back" />
-                    </buttons>
-                  </ButtonBar>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <bottom>
+                        <ButtonBar prefHeight="0.0" prefWidth="640.0" BorderPane.alignment="CENTER">
+                          <buttons>
+                            <Button mnemonicParsing="false" onAction="#saveNewTransaction" text="Save" />
+                              <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonAction" text="&lt;Back" />
+                          </buttons>
+                        </ButtonBar>
+                     </bottom>
+                     <left>
+                        <TableView fx:id="tableAllTag" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TableColumn fx:id="columnNameA" prefWidth="75.0" text="Name" />
+                            <TableColumn fx:id="columnDescriptionA" prefWidth="75.0" text="Description" />
+                          </columns>
+                        </TableView>
+                     </left>
+                     <right>
+                        <TableView fx:id="tableAddedTag" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TableColumn fx:id="columnNameB" prefWidth="75.0" text="Name" />
+                            <TableColumn fx:id="columnDescriptionB" prefWidth="75.0" text="Description" />
+                          </columns>
+                        </TableView>
+                     </right>
+                     <center>
+                        <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <Button layoutX="93.0" layoutY="29.0" mnemonicParsing="false" onAction="#addTag" text="Button" />
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <Button layoutX="93.0" layoutY="29.0" mnemonicParsing="false" onAction="#leaveTag" text="Button" />
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </center>
+                  </BorderPane>
                </bottom>
             </BorderPane>
          </children>
