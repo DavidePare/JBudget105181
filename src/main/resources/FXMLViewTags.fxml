@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="450.0" prefWidth="345.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="345.0" VBox.vgrow="ALWAYS">
+         <children>
+            <BorderPane>
+               <center>
+                  <TableView fx:id="tableTags" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="345.0" BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn fx:id="columnName" prefWidth="173.59997862577438" text="Name" />
+                      <TableColumn fx:id="columnDescription" prefWidth="171.99998474121094" text="Description" />
+                    </columns>
+                  </TableView>
+               </center>
+               <top>
+                  <Label text="Tag Associated" BorderPane.alignment="CENTER" />
+               </top>
+            </BorderPane>
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

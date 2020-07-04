@@ -12,15 +12,15 @@ public class ControllerAccount {
 	
 	/*
 	 * Codici di errore :
-	 * -1 Il numero inserito è negativo 
-	 * -2 Il numero inserito è occupato perciò bisogna inserire un altro integer non occupato
+	 * -1 Il numero inserito ï¿½ negativo 
+	 * -2 Il numero inserito ï¿½ occupato perciï¿½ bisogna inserire un altro integer non occupato
 	 */
 	public int controlID(ILedger ledger,String idStringa) { 
 		int ID=-3;
 		try {
 			ID=Integer.parseInt(idStringa);
 			if(ID < 0)	return -1;
-			long contatore=ledger.getAccounts().stream().filter(t -> Integer.parseInt(idStringa) == t.getIDAccount()).count();
+			long contatore=ledger.getAccounts().stream().filter(t -> Integer.parseInt(idStringa) == t.getID()).count();
 			if(contatore!=0)	return -2;
 		}catch(IllegalArgumentException e) {
 			System.err.println("Errore"+ e.getMessage());

@@ -1,7 +1,7 @@
 package it.unicam.cs.pa.jbudget105181.Model;
 import java.util.List;
-public interface IMovement {
-	int getID();
+public interface IMovement extends IUtility{
+
 	String getDescription();
 	double getAmount();
 	IAccount getAccount();

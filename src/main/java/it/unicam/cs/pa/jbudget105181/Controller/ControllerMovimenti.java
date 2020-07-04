@@ -54,7 +54,7 @@ public class ControllerMovimenti {
 		try {
 			int idint=Integer.parseInt(id);
 			if(idint < 0)	return -1;
-			long contatore=ledger.getAccounts().stream().filter(t -> idint == t.getIDAccount()).count();
+			long contatore=ledger.getAccounts().stream().filter(t -> idint == t.getID()).count();
 			if(contatore==1) return idint;
 		}catch(IllegalArgumentException e) {
 			System.err.println("Errore"+e.getMessage());

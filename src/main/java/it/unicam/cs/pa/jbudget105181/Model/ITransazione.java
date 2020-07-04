@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-public interface ITransazione {
-	int getID();
+public interface ITransazione extends IUtility{
+
 	ArrayList<IMovement> movements();
 	List<ITag> tags(); 
 	void addTag(ITag nuovoTag);

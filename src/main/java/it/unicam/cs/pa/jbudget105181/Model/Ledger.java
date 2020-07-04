@@ -1,9 +1,8 @@
 package it.unicam.cs.pa.jbudget105181.Model;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 //import java.util.Iterator;
-import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 
 public class Ledger implements ILedger{
@@ -117,7 +116,7 @@ public class Ledger implements ILedger{
 	}
 	public void removeMovementAcc(IMovement x) {
 	//	List<IMovement> elim = new ArrayList<IMovement>();
-		listaAccount.stream().filter(t-> t.getIDAccount() ==x.getAccount().getIDAccount()).forEach(t-> t.removeMovementAccount(x));
+		listaAccount.stream().filter(t-> t.getID() ==x.getAccount().getID()).forEach(t-> t.removeMovementAccount(x));
 	//	System.out.println("errore prima");
 	}
 	
@@ -157,7 +156,7 @@ public class Ledger implements ILedger{
 	public IAccount getAccountForID(int id) {
 		int i=0;
 		while(i<listaAccount.size()) {
-			if(listaAccount.get(i).getIDAccount() == id) {
+			if(listaAccount.get(i).getID() == id) {
 				return listaAccount.get(i);
 			}
 			i++;
@@ -166,7 +165,32 @@ public class Ledger implements ILedger{
 	}
 	public void removeAccount(IAccount account){
 		List<IAccount> app= new ArrayList<>();
-		listaAccount.stream().filter(t-> t.getIDAccount() == account.getIDAccount()).forEach(t -> app.add(t));
+		listaAccount.stream().filter(t-> t.getID() == account.getID()).forEach(t -> app.add(t));
 		listaAccount.removeAll(app);
+	}
+
+
+	/**
+	 * Metodo che ha la responsabilità di ritornare un certo elemento T ricercato per id in una
+	 * Collenction parametrizzata rispetto a lui.
+	 * @param collection Collection nella quale ricercare il determinato oggetto.
+	 * @param ID Identificativo dell'oggetto ricercato.
+	 * @param <T> Tipo dell'oggetto ricercato.
+	 * @return Oggetto ricercato.
+	 */
+	public <T extends IUtility> T get(Collection<T> collection, int ID){
+		AtomicReference<T> v = new AtomicReference<>();
+		collection.stream().filter(t->t.getID()==ID).forEach(t->v.set(t));
+		return v.get();
+	}
+
+	public <T extends IUtility> int generateID(Collection<T> collection){
+		AtomicReference<T> v = new AtomicReference<>();
+		//collection.stream().filter(t->t.getID()==ID).forEach(t->v.set(t));
+		if(collection.stream().count() ==0) return 1;
+		int max=collection.stream().mapToInt(t-> t.getID()).max().orElseThrow(NoSuchElementException::new);
+		//int max=ledger.getAccounts().stream().mapToInt(t-> t.getID()).max().orElseThrow(NoSuchElementException::new);
+		return max+1;
+
 	}
 }

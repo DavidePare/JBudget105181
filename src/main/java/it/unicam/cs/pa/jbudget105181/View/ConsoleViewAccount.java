@@ -37,15 +37,15 @@ public class ConsoleViewAccount extends AVariablesConsoleView{
 	}
 	
 	public void alreadyExistID() {
-		System.out.println("L'ID esiste già");
+		System.out.println("L'ID esiste giï¿½");
 	}
 	
 	public void alreadyExistName() {
-		System.out.println("Il nome esiste già");
+		System.out.println("Il nome esiste giï¿½");
 	}
 	
 	public void accountTypeInesistente() {
-		System.out.println("Attenzione il tipo di account inserito è inestitente inserire LIABILITIES oppure ASSETS!");
+		System.out.println("Attenzione il tipo di account inserito ï¿½ inestitente inserire LIABILITIES oppure ASSETS!");
 	}
 	
 	public void IDnegativo() {
@@ -70,7 +70,7 @@ public class ConsoleViewAccount extends AVariablesConsoleView{
 		return scanner.nextLine();
 	}
 	public void stampaAccount(IAccount account) {
-		System.out.println("[ID :"+account.getIDAccount()+"\t Nome:" +account.getNameAccount() +"\t Descrizione:" + account.getDescriptionAccount()+
+		System.out.println("[ID :"+account.getID()+"\t Nome:" +account.getNameAccount() +"\t Descrizione:" + account.getDescriptionAccount()+
 				"\t Tipo di account:"+ account.getTypeAccount()+"\t Denaro: "+account.getBalanceOfAccount() +"]");
 	}
 }

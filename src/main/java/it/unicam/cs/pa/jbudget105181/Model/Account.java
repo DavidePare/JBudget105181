@@ -31,7 +31,7 @@ public class Account implements IAccount {
 	}
 
 	@Override
-	public int getIDAccount() {
+	public int getID() {
 		// TODO Auto-generated method stub
 		return ID;
 	}
@@ -82,7 +82,18 @@ public class Account implements IAccount {
 	public void removeMovementAccount(IMovement x) {
 		movimenti.remove(x);
 	}
-
+	public void setName(String name){
+		this.name=name;
+	}
+	public void setDescription(String description){
+		this.description=description;
+	}
+	public void setType(AccountType type){
+		this.type=type;
+	}
+	public void setConto(Double amount){
+		this.conto=amount;
+	}
 
 
 }

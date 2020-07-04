@@ -14,9 +14,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ControllerAddTransaction implements ControllerFXML{
     private MainController controller;
@@ -40,15 +39,17 @@ public class ControllerAddTransaction implements ControllerFXML{
 
     @FXML private ObservableList<ITag> lTags;
     @FXML private ObservableList<ITag> lTagsAdded;
-    private List<ITag> listTagAddable;
+    private List<ITag> listTagAddable=new ArrayList<>();
     private List<ITag> listTagTrans;
+    private List<ITag> appoggio;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         numweeklabel.setVisible(false);
         numweekTransaction.setVisible(false);
         lTags = FXCollections.observableArrayList();
         lTagsAdded=FXCollections.observableArrayList();
-        listTagAddable= controller.getTags();
+        appoggio=controller.getTags();
+        listTagAddable = controller.getTags().stream().collect(Collectors.toList());
         listTagTrans=new ArrayList<ITag>();
         updateTags();
         updateAddedTags();
@@ -68,6 +69,15 @@ public class ControllerAddTransaction implements ControllerFXML{
     }
     public void saveNewTransaction(){
         try{
+            controller.addTransaction(transactionDate.getValue(),listTagTrans);
+            Stage stage = (Stage) saveButton.getScene().getWindow();
+            stage.hide();
+            FXMLLoader loader =new FXMLLoader(getClass().getResource("/FXMLHome.fxml"));
+            loader.setController(new GUIController(controller));
+
+            stage.setTitle("JBudget");
+            stage.setScene(new Scene(loader.load(), 640, 400));
+            stage.show();
 
         }catch(Exception e){
 
@@ -79,9 +89,11 @@ public class ControllerAddTransaction implements ControllerFXML{
         try {
             Stage stage = (Stage) backButton.getScene().getWindow();
             stage.hide();
-            Parent root = FXMLLoader.load(getClass().getResource("/FXMLHome.fxml"));
+            FXMLLoader loader =new FXMLLoader(getClass().getResource("/FXMLHome.fxml"));
+            loader.setController(new GUIController(controller));
+
             stage.setTitle("JBudget");
-            stage.setScene(new Scene(root, 640, 400));
+            stage.setScene(new Scene(loader.load(), 640, 400));
             stage.show();
         }catch (Exception e){
 
@@ -107,6 +119,7 @@ public class ControllerAddTransaction implements ControllerFXML{
                 ITag tag = tableAllTag.getSelectionModel().getSelectedItem();
                 listTagTrans.add(tag);
                 listTagAddable.remove(tag);
+                List<ITag> ciao=controller.getTags();
                 updateAddedTags();
                 updateTags();
             }catch(Exception e){
@@ -133,4 +146,14 @@ public class ControllerAddTransaction implements ControllerFXML{
                 (cellData -> new SimpleObjectProperty<>(cellData.getValue().getDescription()));
         this.tableAllTag.refresh();
     }
+
+    /*
+    *Questo metodo aprirà una nuova finestra che permetterà semplicente di vedere tutti i tag associati a una transazione
+     */
+    public void viewTagsTransaction(){
+
+    }
+
+
 }
+

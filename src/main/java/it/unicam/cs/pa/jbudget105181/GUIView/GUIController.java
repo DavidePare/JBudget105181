@@ -1,19 +1,15 @@
 package it.unicam.cs.pa.jbudget105181.GUIView;
 
-import it.unicam.cs.pa.jbudget105181.Controller.ControllerMovimenti;
 import it.unicam.cs.pa.jbudget105181.Controller.MainController;
 import it.unicam.cs.pa.jbudget105181.Model.*;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -62,7 +58,7 @@ public class GUIController implements Initializable {
     private ObservableList<AccountType> typeAccMenu;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        controller = new MainController();
+        //controller = new MainController();
         lTags = FXCollections.observableArrayList();
         lTransactions = FXCollections.observableArrayList();
         lAccount = FXCollections.observableArrayList();
@@ -72,6 +68,12 @@ public class GUIController implements Initializable {
         updateTags();
         updateTransaction();
         updateAccount();
+    }
+    public GUIController(){
+        controller = new MainController();
+    }
+    public GUIController(MainController controller){
+        this.controller=controller;
     }
     private void inizializeTypeAccount(){
         typeAccMenu.addAll(AccountType.values());
@@ -94,12 +96,13 @@ public class GUIController implements Initializable {
             e.printStackTrace();
         }
     }
+
     private void updateAccount(){
         lAccount.removeAll(lAccount);
         lAccount.addAll(controller.getAccount());
         accountTable.setItems(lAccount);
         this.accountIDColumn.setCellValueFactory
-                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getIDAccount()));
+                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getID()));
         this.accountAmountColumn.setCellValueFactory
                 (cellData -> new SimpleObjectProperty<>(cellData.getValue().getBalanceOfAccount()));
 
@@ -139,17 +142,19 @@ public class GUIController implements Initializable {
             descriptionAccount.setText(account.getDescriptionAccount());
             balanceAccount.setText(Double.toString(account.getBalanceOfAccount()));
             accountType.setValue(account.getTypeAccount());
-            idAcc=account.getIDAccount();
+            idAcc=account.getID();
             modifyAccButton.setDisable(false);
         }
     }
     public void modifyAccount(){
         if(!accountTable.getItems().isEmpty()){
-            IAccount newAcc= new Account(idAcc,nameAccount.getText(),descriptionAccount.getText(),accountType.getValue(),Double.valueOf(balanceAccount.getText()));
+            //IAccount newAcc= new Account(idAcc,nameAccount.getText(),descriptionAccount.getText(),accountType.getValue(),Double.valueOf(balanceAccount.getText()));
             try{
-                IAccount account= new Account(idAcc,nameAccount.getText(),descriptionAccount.getText(),accountType.getValue(),Double.valueOf(balanceAccount.getText()));
-                controller.removeAccount(t-> t.getIDAccount()==idAcc);
-                controller.addAccount(account);
+              /*  IAccount account= new Account(idAcc,nameAccount.getText(),descriptionAccount.getText(),accountType.getValue(),Double.valueOf(balanceAccount.getText()));
+                controller.removeAccount(t-> t.getID()==idAcc);
+                controller.addAccount(account);*/
+                controller.modifyAccount(idAcc,nameAccount.getText(),descriptionAccount.getText(),
+                        accountType.getValue(),Double.valueOf(balanceAccount.getText()));
             }catch(Exception e){
 
             }finally{
@@ -242,5 +247,20 @@ public class GUIController implements Initializable {
         this.tagDescriptionColumn.setCellValueFactory
                 (cellData -> new SimpleObjectProperty<>(cellData.getValue().getDescription()));
         this.tagTable.refresh();
+    }
+    public void viewTagsTransaction(){
+        try{
+            if(transTable.getSelectionModel().getSelectedItem() != null) {
+                Stage stage = new Stage();
+                stage.setTitle("Tag Transaction");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViewTags.fxml"));
+                loader.setController(new ControllerViewTag(transTable.getSelectionModel().getSelectedItem()));
+                stage.setScene(new Scene(loader.load(), 345, 400));
+                stage.show();
+            }
+        }catch(Exception e){
+
+        }
     }
 }

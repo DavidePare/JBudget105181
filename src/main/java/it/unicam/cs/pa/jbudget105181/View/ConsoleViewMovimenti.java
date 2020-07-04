@@ -5,13 +5,13 @@ import it.unicam.cs.pa.jbudget105181.Model.IMovement;
 public class ConsoleViewMovimenti extends AbsConsoleMovimentiTransazioni{
 	
 	public void errorDouble() {
-		System.out.println("Non è stato inserito un numero double!");
+		System.out.println("Non ï¿½ stato inserito un numero double!");
 	}
 	public void errorNoAccOrTran(){
 		System.out.println("Errore prima di realizzare un movimento necessiti di una transazione e di un account!");
 	}
 	public void errorNoIDesiste() {
-		System.out.println("l'id scelto non è associato a niente");
+		System.out.println("l'id scelto non ï¿½ associato a niente");
 	}
 	public void errorInaspettaStringa() {
 		System.out.println("non va bene una stringa!");
@@ -63,7 +63,7 @@ public class ConsoleViewMovimenti extends AbsConsoleMovimentiTransazioni{
 		
 	}
 	public void printMovement(IMovement x) {
-		System.out.println("[ Account:" +x.getAccount().getIDAccount() +"\t TipoMovimento" + x.getTipo() +
+		System.out.println("[ Account:" +x.getAccount().getID() +"\t TipoMovimento" + x.getTipo() +
 				"\t ID Transazione associata:"+ x.getIDTransazione()+"ID Movimento:"+x.getID()+ "\t Importo:" +x.getAmount() +"]");
 	//	System.out.println(x.tags().get(0).getNome() +x.tags().get(0).getDescription());
 	}

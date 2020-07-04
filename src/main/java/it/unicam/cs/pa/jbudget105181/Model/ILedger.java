@@ -1,6 +1,7 @@
 package it.unicam.cs.pa.jbudget105181.Model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -20,6 +21,9 @@ public interface ILedger{
 	boolean removeTagTransaction(List<ITag> t);
 	void removeTransaction(Predicate<ITransazione> p);
 //	void removeMovement(Predicate<IMovement> p,int id);
+
+	<T extends IUtility> T get(Collection<T> collection, int ID);
+	<T extends IUtility> int generateID(Collection<T> collection);
 
 	void removeMovement(int id, int idMov);
 	void removeAccount(IAccount account);

@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.pa.jbudget105181.GUIView.GUIController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
       <menus>
@@ -49,9 +49,9 @@
               <tabs>
                 <Tab text="Account">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="551.0" prefWidth="640.0">
+                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="551.0" prefWidth="680.0">
                            <children>
-                              <TableView fx:id="accountTable" prefHeight="346.0" prefWidth="640.0">
+                              <TableView fx:id="accountTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="680.0">
                                 <columns>
                                   <TableColumn fx:id="accountIDColumn" prefWidth="75.0" text="ID" />
                                     <TableColumn fx:id="accountNameColumn" prefWidth="75.0" text="Name" />
@@ -109,14 +109,19 @@
                                     <TableColumn fx:id="transDateColumn" minWidth="0.0" prefWidth="64.79998779296875" text="Date" />
                                  </columns>
                               </TableView>
-                              <ButtonBar layoutX="-2.0" layoutY="298.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="640.0">
+                              <ButtonBar layoutX="-2.0" layoutY="298.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="680.0">
                                 <buttons>
-                                    <Button mnemonicParsing="false" text="View Movements" />
-                                  <Button minWidth="42.0" mnemonicParsing="false" onAction="#addMovement" prefHeight="26.0" text="Add Movement" />
+                                  <Button mnemonicParsing="false" onAction="#addMovement" prefHeight="26.0" prefWidth="199.0" text="Add Movement" />
                                     <Button mnemonicParsing="false" text="Remove" />
                                     <Button mnemonicParsing="false" text="Modify" />
-                                    <Button mnemonicParsing="false" onAction="#addTransaction" text="Add Transaction" />
+                                    <Button fx:id="addTransactionButton" mnemonicParsing="false" onAction="#addTransaction" text="Add Transaction" />
                                 </buttons>
+                              </ButtonBar>
+                              <ButtonBar layoutY="345.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="680.0">
+                                 <buttons>
+                                    <Button mnemonicParsing="false" onAction="#viewTagsTransaction" prefHeight="26.0" prefWidth="141.0" text="View Tags" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="578.0" text="View Movements" />
+                                 </buttons>
                               </ButtonBar>
                            </children>
                         </AnchorPane>
@@ -124,9 +129,9 @@
                 </Tab>
                   <Tab text="Tag">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="tagTable" layoutY="51.0" prefHeight="295.0" prefWidth="640.0">
+                              <TableView fx:id="tagTable" layoutY="51.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="295.0" prefWidth="680.0">
                                  <columns>
                                     <TableColumn fx:id="tagNameColumn" prefWidth="149.5999755859375" text="Nome" />
                                     <TableColumn fx:id="tagDescriptionColumn" prefWidth="319.199951171875" text="Descrizione" />

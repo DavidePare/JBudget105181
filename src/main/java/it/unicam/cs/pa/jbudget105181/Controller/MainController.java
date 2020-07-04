@@ -2,7 +2,9 @@ package it.unicam.cs.pa.jbudget105181.Controller;
 
 import it.unicam.cs.pa.jbudget105181.Model.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Predicate;
@@ -41,7 +43,7 @@ public class MainController {
         if(!acc.isEmpty()) {
             for (ITransazione t : ledger.getAllTransactions()) {
                 for (IMovement m : t.movements()) {
-                    if (m.getAccount().getIDAccount() == acc.get(0).getIDAccount()) {
+                    if (m.getAccount().getID() == acc.get(0).getID()) {
                         t.removeMovement(m); //Sistemare
                     }
                 }
@@ -79,8 +81,30 @@ public class MainController {
     * This function is used to generate an integer ID for account
      */
     public int generateIDAccount(){
-        if(ledger.getAccounts().isEmpty()) return 1;
-        int max=ledger.getAccounts().stream().mapToInt(t-> t.getIDAccount()).max().orElseThrow(NoSuchElementException::new);
-        return max+1;
+        return ledger.generateID(ledger.getAccounts());
+    }
+
+    public int generateIDTransaction(){
+        return ledger.generateID(ledger.getAllTransactions());
+    }
+
+    /*
+    *TODO AGGIUSTARE generazione id movimento
+     */
+    public int generateIDMovement(ITransazione transaction){
+    /*    Collection<ITransazione> collect = ledger.getAllTransactions().stream().filter(t -> t.getID() == transaction.getID()).collect(Collectors.toCollection());
+        return ledger.generateID();*/
+        return 1;
+    }
+    public void modifyAccount(int accID, String name, String description, AccountType type, Double value){
+        ledger.get(ledger.getAccounts(),accID).setName(name);
+        ledger.get(ledger.getAccounts(),accID).setDescription(description);
+        ledger.get(ledger.getAccounts(),accID).setType(type);
+        ledger.get(ledger.getAccounts(),accID).setConto(value);
+    }
+    public void addTransaction(LocalDate data,List<ITag> tag){
+        int id=generateIDTransaction();
+        ITransazione t= new Transazione(id,data,tag,false);
+        ledger.addTransazione(t);
     }
 }

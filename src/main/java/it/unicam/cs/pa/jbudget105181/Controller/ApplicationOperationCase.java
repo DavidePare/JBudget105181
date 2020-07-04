@@ -227,7 +227,7 @@ public class ApplicationOperationCase implements IApplicationOperationCase{
 	public void risolviMovimento(IMovement m,ILedger ledger){
 		int idTransazione=m.getIDTransazione();
 		ledger.getAllTransactions().stream().filter(t -> t.getID() == idTransazione).forEach(t -> t.addMovement(m));
-		ledger.getAccounts().stream().filter(t -> t.getIDAccount() == m.getAccount().getIDAccount()).forEach(t -> t.addMovement(m));
+		ledger.getAccounts().stream().filter(t -> t.getID() == m.getAccount().getID()).forEach(t -> t.addMovement(m));
 	}
 	
 	public int IDverifica(int passID,ILedger ledger,ConsoleViewMovimenti viewMovimenti, boolean accOrTransaction) {
@@ -250,7 +250,7 @@ public class ApplicationOperationCase implements IApplicationOperationCase{
 		String accountScelto= viewM.inputAccount();
 		int IDAccount=IDverifica(control.verificaIDAccount(accountScelto, ledger),ledger,viewM,false);
 		if(IDAccount>0) {
-			ledger.getAccountForID(IDAccount).getMovementsOfAccount().stream().filter(t -> t.getAccount().getIDAccount() ==IDAccount).forEach(t-> viewM.printMovement(t));
+			ledger.getAccountForID(IDAccount).getMovementsOfAccount().stream().filter(t -> t.getAccount().getID() ==IDAccount).forEach(t-> viewM.printMovement(t));
 		}
 	}
 	public void caseSevenPrintTransaction(ILedger ledger) {
