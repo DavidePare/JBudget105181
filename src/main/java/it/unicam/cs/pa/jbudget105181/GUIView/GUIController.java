@@ -158,6 +158,7 @@ public class GUIController implements Initializable {
         }
 
     }
+    
     public void deleteAccount(){
        // try {
             IAccount account = accountTable.getSelectionModel().getSelectedItem();
