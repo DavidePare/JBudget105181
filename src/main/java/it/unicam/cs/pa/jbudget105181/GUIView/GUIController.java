@@ -10,8 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -77,9 +79,13 @@ public class GUIController implements Initializable {
     }
     public void openWindow(String title, String fileFXML,ControllerFXML controllerFXML){
         try {
-            Stage stage = new Stage();
+            //Stage stage = new Stage();
+
+            //Invece di modifyAccButton sarebbe meglio aggiungere un qualcosa di più specifico
+            Stage stage = (Stage) modifyAccButton.getScene().getWindow();
+            stage.hide();
             stage.setTitle(title);
-            stage.initModality(Modality.APPLICATION_MODAL);
+            //stage.initModality(Modality.APPLICATION_MODAL);
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fileFXML));
             loader.setController(controllerFXML);
             stage.setScene(new Scene(loader.load(), 800, 400));

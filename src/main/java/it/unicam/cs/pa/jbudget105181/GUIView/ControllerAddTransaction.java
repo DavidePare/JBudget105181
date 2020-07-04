@@ -7,6 +7,9 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -73,8 +76,16 @@ public class ControllerAddTransaction implements ControllerFXML{
         }
     }
     public void backButtonAction(){
-        Stage stage = (Stage) backButton.getScene().getWindow();
-        stage.close();
+        try {
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            stage.hide();
+            Parent root = FXMLLoader.load(getClass().getResource("/FXMLHome.fxml"));
+            stage.setTitle("JBudget");
+            stage.setScene(new Scene(root, 640, 400));
+            stage.show();
+        }catch (Exception e){
+
+        }
     }
 
 
