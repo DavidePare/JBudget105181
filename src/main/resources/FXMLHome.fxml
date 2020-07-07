@@ -111,7 +111,7 @@
                               </TableView>
                               <ButtonBar layoutX="-2.0" layoutY="298.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="680.0">
                                 <buttons>
-                                  <Button mnemonicParsing="false" onAction="#addMovement" prefHeight="26.0" prefWidth="199.0" text="Add Movement" />
+                                  <Button fx:id="buttonAddMovement" mnemonicParsing="false" onAction="#addMovement" prefHeight="26.0" prefWidth="199.0" text="Add Movement" />
                                     <Button mnemonicParsing="false" text="Remove" />
                                     <Button mnemonicParsing="false" text="Modify" />
                                     <Button fx:id="addTransactionButton" mnemonicParsing="false" onAction="#addTransaction" text="Add Transaction" />

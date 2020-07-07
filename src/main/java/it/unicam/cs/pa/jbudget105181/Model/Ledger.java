@@ -178,7 +178,7 @@ public class Ledger implements ILedger{
 	 * @param <T> Tipo dell'oggetto ricercato.
 	 * @return Oggetto ricercato.
 	 */
-	public <T extends IUtility> T get(Collection<T> collection, int ID){
+	private <T extends IUtility> T get(Collection<T> collection, int ID){
 		AtomicReference<T> v = new AtomicReference<>();
 		collection.stream().filter(t->t.getID()==ID).forEach(t->v.set(t));
 		return v.get();
@@ -192,5 +192,18 @@ public class Ledger implements ILedger{
 		//int max=ledger.getAccounts().stream().mapToInt(t-> t.getID()).max().orElseThrow(NoSuchElementException::new);
 		return max+1;
 
+	}
+
+	public void modifyAccount(int accID, String name, String description, AccountType type, Double value){
+		IAccount account=this.get(listaAccount,accID);
+		account.setName(name);
+		account.setConto(value);
+		account.setDescription(description);
+		account.setType(type);
+	}
+
+	public void addMovement(IMovement movement){
+		this.get(listaAccount,movement.getAccount().getID()).addMovement(movement);
+		this.get(allTransaction,movement.getIDTransazione()).addMovement(movement);
 	}
 }

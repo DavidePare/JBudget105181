@@ -41,18 +41,16 @@ public class ControllerAddTransaction implements ControllerFXML{
     @FXML private ObservableList<ITag> lTagsAdded;
     private List<ITag> listTagAddable=new ArrayList<>();
     private List<ITag> listTagTrans;
-    private List<ITag> appoggio;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         numweeklabel.setVisible(false);
         numweekTransaction.setVisible(false);
         lTags = FXCollections.observableArrayList();
         lTagsAdded=FXCollections.observableArrayList();
-        appoggio=controller.getTags();
         listTagAddable = controller.getTags().stream().collect(Collectors.toList());
         listTagTrans=new ArrayList<ITag>();
         updateTags();
-        updateAddedTags();
+      //  updateAddedTags();
     }
     public ControllerAddTransaction(MainController controller) {
         this.controller = controller;
@@ -107,7 +105,7 @@ public class ControllerAddTransaction implements ControllerFXML{
                 ITag tag = tableAddedTag.getSelectionModel().getSelectedItem();
                 listTagTrans.remove(tag);
                 listTagAddable.add(tag);
-                updateAddedTags();
+              //  updateAddedTags();
                 updateTags();
             }catch(Exception e){
             }
@@ -120,12 +118,13 @@ public class ControllerAddTransaction implements ControllerFXML{
                 listTagTrans.add(tag);
                 listTagAddable.remove(tag);
                 List<ITag> ciao=controller.getTags();
-                updateAddedTags();
+            //    updateAddedTags();
                 updateTags();
             }catch(Exception e){
             }
         }
     }
+    /*
     private void updateAddedTags(){
         lTagsAdded.removeAll(lTagsAdded);
         lTagsAdded.addAll(listTagTrans);
@@ -135,18 +134,37 @@ public class ControllerAddTransaction implements ControllerFXML{
         this.columnDescriptionB.setCellValueFactory
                 (cellData -> new SimpleObjectProperty<>(cellData.getValue().getDescription()));
         this.tableAddedTag.refresh();
-    }
+    }*/
     private void updateTags(){
         lTags.removeAll(lTags);
         lTags.addAll(listTagAddable);
+        lTagsAdded.removeAll(lTagsAdded);
+        lTagsAdded.addAll(listTagTrans);
         tableAllTag.setItems(lTags);
         this.columnNameA.setCellValueFactory
                 (cellData -> new SimpleObjectProperty<>(cellData.getValue().getNome()));
         this.columnDescriptionA.setCellValueFactory
                 (cellData -> new SimpleObjectProperty<>(cellData.getValue().getDescription()));
+        tableAddedTag.setItems(lTagsAdded);
+        this.columnNameB.setCellValueFactory
+                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getNome()));
+        this.columnDescriptionB.setCellValueFactory
+                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getDescription()));
+        this.tableAddedTag.refresh();
         this.tableAllTag.refresh();
     }
 
+    /*
+    private void updateTags(List<ITag> lTags,List<ITag> listTagApp,TableColumn<ITag,String> column1,TableColumn<ITag,String> column2,TableView<ITag> tabella){
+        lTags.removeAll(lTags);
+        lTags.addAll(listTagApp);
+        tableAllTag.setItems(lTags);
+        column1.setCellValueFactory
+                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getNome()));
+        column2.setCellValueFactory
+                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getDescription()));
+        this.tableAllTag.refresh();
+    }*/
     /*
     *Questo metodo aprirà una nuova finestra che permetterà semplicente di vedere tutti i tag associati a una transazione
      */

@@ -51,6 +51,7 @@ public class GUIController implements Initializable {
     @FXML private TableColumn<IAccount,String> accountDescriptionColumn;
     @FXML private ChoiceBox<AccountType> accountType;
     @FXML private Button modifyAccButton;
+    @FXML private Button buttonAddMovement;
     private int idAcc=-1;
     private ObservableList<IAccount> lAccount;
     private ObservableList<ITag> lTags;
@@ -189,9 +190,14 @@ public class GUIController implements Initializable {
    //     }
     }
 
+    /*
+     * Nel caso è stata selezionata una transazione ed esiste almeno un account è possibile aggiungere un movimento
+     */
     public void addMovement() {
-        if(!controller.getTransaction().isEmpty()) {
-            openWindow("Add Movement", "/FXMLAddMovement.fxml", new ControllerAddMovement(controller));
+
+        ITransazione transaction = transTable.getSelectionModel().getSelectedItem();
+        if(transaction != null && !controller.getAccount().isEmpty()) {
+            openWindow("Add Movement", "/FXMLAddMovement.fxml", new ControllerAddMovement(controller,transaction));
         }
     }
 

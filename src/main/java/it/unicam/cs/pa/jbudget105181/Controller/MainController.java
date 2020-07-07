@@ -97,14 +97,22 @@ public class MainController {
         return 1;
     }
     public void modifyAccount(int accID, String name, String description, AccountType type, Double value){
-        ledger.get(ledger.getAccounts(),accID).setName(name);
+      /*  ledger.get(ledger.getAccounts(),accID).setName(name);
         ledger.get(ledger.getAccounts(),accID).setDescription(description);
         ledger.get(ledger.getAccounts(),accID).setType(type);
-        ledger.get(ledger.getAccounts(),accID).setConto(value);
+        ledger.get(ledger.getAccounts(),accID).setConto(value);*/
+        ledger.modifyAccount(accID,name,description, type,value);
     }
     public void addTransaction(LocalDate data,List<ITag> tag){
         int id=generateIDTransaction();
         ITransazione t= new Transazione(id,data,tag,false);
         ledger.addTransazione(t);
+    }
+
+    /*
+     * metodo che richiama il costruttore per aggiungere il movimento
+     */
+    public void addMovement(IMovement movimento){
+        ledger.addMovement(movimento);
     }
 }

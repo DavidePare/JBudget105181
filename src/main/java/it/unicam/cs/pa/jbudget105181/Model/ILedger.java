@@ -22,9 +22,10 @@ public interface ILedger{
 	void removeTransaction(Predicate<ITransazione> p);
 //	void removeMovement(Predicate<IMovement> p,int id);
 
-	<T extends IUtility> T get(Collection<T> collection, int ID);
+	//<T extends IUtility> T get(Collection<T> collection, int ID);
 	<T extends IUtility> int generateID(Collection<T> collection);
-
+	void modifyAccount(int accID, String name, String description, AccountType type, Double value);
 	void removeMovement(int id, int idMov);
 	void removeAccount(IAccount account);
+	public void addMovement(IMovement movement);
 }
