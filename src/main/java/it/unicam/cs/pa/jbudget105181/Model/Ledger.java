@@ -102,6 +102,9 @@ public class Ledger implements ILedger{
 		}
 		return true;
 	}
+	/*
+	 * rimuovere
+	 */
 	@Override
 	public void removeTransaction(Predicate<ITransazione> p) {
 		List<ITransazione> elim = new ArrayList<ITransazione>();
@@ -205,5 +208,13 @@ public class Ledger implements ILedger{
 	public void addMovement(IMovement movement){
 		this.get(listaAccount,movement.getAccount().getID()).addMovement(movement);
 		this.get(allTransaction,movement.getIDTransazione()).addMovement(movement);
+	}
+
+	public void removeTransaction(ITransazione transazione){
+		for(IMovement movement : transazione.movements()){
+			IAccount account=movement.getAccount();
+			this.get(listaAccount,account.getID()).removeMovementAccount(movement);
+		}
+		allTransaction.remove(transazione);
 	}
 }

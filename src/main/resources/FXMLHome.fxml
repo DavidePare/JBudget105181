@@ -112,7 +112,7 @@
                               <ButtonBar layoutX="-2.0" layoutY="298.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="680.0">
                                 <buttons>
                                   <Button fx:id="buttonAddMovement" mnemonicParsing="false" onAction="#addMovement" prefHeight="26.0" prefWidth="199.0" text="Add Movement" />
-                                    <Button mnemonicParsing="false" text="Remove" />
+                                    <Button mnemonicParsing="false" onAction="#removeTransaction" text="Remove" />
                                     <Button mnemonicParsing="false" text="Modify" />
                                     <Button fx:id="addTransactionButton" mnemonicParsing="false" onAction="#addTransaction" text="Add Transaction" />
                                 </buttons>
@@ -120,7 +120,7 @@
                               <ButtonBar layoutY="345.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="680.0">
                                  <buttons>
                                     <Button mnemonicParsing="false" onAction="#viewTagsTransaction" prefHeight="26.0" prefWidth="141.0" text="View Tags" />
-                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="578.0" text="View Movements" />
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#viewMovementTransaction" prefHeight="26.0" prefWidth="578.0" text="View Movements" />
                                  </buttons>
                               </ButtonBar>
                            </children>

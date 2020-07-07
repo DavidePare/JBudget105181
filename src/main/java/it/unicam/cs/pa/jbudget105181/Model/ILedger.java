@@ -27,5 +27,6 @@ public interface ILedger{
 	void modifyAccount(int accID, String name, String description, AccountType type, Double value);
 	void removeMovement(int id, int idMov);
 	void removeAccount(IAccount account);
-	public void addMovement(IMovement movement);
+	void addMovement(IMovement movement);
+	void removeTransaction(ITransazione transazione);
 }

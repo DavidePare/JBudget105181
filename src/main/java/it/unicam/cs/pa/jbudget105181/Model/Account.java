@@ -81,6 +81,17 @@ public class Account implements IAccount {
 	}
 	public void removeMovementAccount(IMovement x) {
 		movimenti.remove(x);
+		if(type.equals(AccountType.ASSETS)) {
+			if(x.getTipo().equals(MovementType.CREDIT))
+				conto-=x.getAmount();
+			else
+				conto+=x.getAmount();
+		}else {
+			if(x.getTipo().equals(MovementType.CREDIT))
+				conto+=x.getAmount();
+			else
+				conto-=x.getAmount();
+		}
 	}
 	public void setName(String name){
 		this.name=name;
@@ -93,7 +104,29 @@ public class Account implements IAccount {
 	}
 	public void setConto(Double amount){
 		this.conto=amount;
+		recalculateConto();
+	}
+	/*
+	 * quando modifichi il conto iniziale dell'account
+	 */
+	private void recalculateConto(){
+		for(IMovement mov : movimenti){
+			if(type.equals(AccountType.ASSETS)) {
+				if(mov.getTipo().equals(MovementType.CREDIT))
+					conto+=mov.getAmount();
+				else
+					conto-=mov.getAmount();
+			}else {
+				if(mov.getTipo().equals(MovementType.CREDIT))
+					conto-=mov.getAmount();
+				else
+					conto+=mov.getAmount();
+			}
+		}
 	}
 
-
+	@Override
+	public String toString() {
+		return name;
+	}
 }

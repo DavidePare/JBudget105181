@@ -120,8 +120,6 @@ public class ControllerAddMovement implements ControllerFXML {
     }
     public void saveNewMovement(){
         try{
-            	//public Movement(int ID, String descrizione, MovementType type,double prezzo, IAccount account, List<ITag> tag, int idT) {
-
                 IMovement mov = new Movement(1,descriptionMovement.getText(),movementTypeChoiceBox.getValue(),
                         Double.valueOf(amountMovement.getText()), accountChoiceBox.getValue(),lTagsAdded ,transaction.getID());
                 controller.addMovement(mov);
@@ -169,6 +167,7 @@ public class ControllerAddMovement implements ControllerFXML {
                 listTagAddable.add(tag);
                 updateTags();
             }catch(Exception e){
+
             }
         }
     }

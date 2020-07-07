@@ -269,4 +269,28 @@ public class GUIController implements Initializable {
 
         }
     }
+
+    public void removeTransaction(){
+        if(transTable.getSelectionModel().getSelectedItem() != null){
+            controller.removeTransaction(transTable.getSelectionModel().getSelectedItem());
+            updateTransaction();
+            updateAccount();
+        }
+    }
+
+    public void viewMovementTransaction(){
+        try{
+            if(transTable.getSelectionModel().getSelectedItem() != null) {
+                Stage stage = new Stage();
+                stage.setTitle("Movement Transaction");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViewMovement.fxml"));
+                loader.setController(new ControllerViewMovement(transTable.getSelectionModel().getSelectedItem(),controller));
+                stage.setScene(new Scene(loader.load(), 640, 440));
+                stage.show();
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }
