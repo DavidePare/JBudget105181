@@ -15,14 +15,14 @@
          <children>
             <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                <center>
-                  <TableView fx:id="tableMovement" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+                  <TableView fx:id="tableMovement" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="640.0" BorderPane.alignment="CENTER">
                      <columns>
-                        <TableColumn fx:id="columnIDMovement" prefWidth="173.59997862577438" text="ID Movimento" />
-                        <TableColumn fx:id="columnIDTransaction" prefWidth="171.99998474121094" text="ID Transazione" />
-                        <TableColumn fx:id="ColumnIDAccount" prefWidth="171.99998474121094" text="ID Account" />
-                        <TableColumn fx:id="columnType" prefWidth="171.99998474121094" text="Tipo" />
-                        <TableColumn fx:id="columnAmount" prefWidth="171.99998474121094" text="Amount" />
-                        <TableColumn fx:id="columnDescription" prefWidth="171.99998474121094" text="Descrizione" />
+                        <TableColumn fx:id="columnIDMovement" prefWidth="96.79999083280563" text="ID Movimento" />
+                        <TableColumn fx:id="columnIDTransaction" prefWidth="101.5999755859375" text="ID Transazione" />
+                        <TableColumn fx:id="ColumnIDAccount" prefWidth="74.39988708496094" text="ID Account" />
+                        <TableColumn fx:id="columnType" prefWidth="87.99993896484375" text="Tipo" />
+                        <TableColumn fx:id="columnAmount" maxWidth="100.0" prefWidth="503.20001220703125" text="Amount" />
+                        <TableColumn fx:id="columnDescription" prefWidth="175.2000732421875" text="Descrizione" />
                      </columns>
                   </TableView>
                </center>
@@ -30,7 +30,7 @@
                   <Label text="Tag Associated" BorderPane.alignment="CENTER" />
                </top>
                <bottom>
-                  <ButtonBar prefHeight="40.0" prefWidth="926.0" BorderPane.alignment="CENTER">
+                  <ButtonBar prefHeight="40.0" prefWidth="640.0" BorderPane.alignment="CENTER">
                     <buttons>
                       <Button mnemonicParsing="false" onAction="#viewTag" prefHeight="25.0" prefWidth="266.0" text="View Tag" />
                         <Button layoutX="971.0" layoutY="18.0" mnemonicParsing="false" onAction="#deleteMovement" text="Delete" />

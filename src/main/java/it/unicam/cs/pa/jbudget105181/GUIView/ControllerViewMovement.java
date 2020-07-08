@@ -34,7 +34,7 @@ public class ControllerViewMovement  implements ControllerFXML{
     }
     public void initialize(URL location, ResourceBundle resources){
         lMovement = FXCollections.observableArrayList();
-        lMovement.addAll(transaction.movements());
+        if(!transaction.movements().isEmpty()) lMovement.addAll(transaction.movements());
         showmovement();
     }
     private void showmovement(){
