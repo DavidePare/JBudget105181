@@ -11,6 +11,8 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -58,7 +60,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="numweekTransaction" prefHeight="26.0" prefWidth="70.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <TextField fx:id="numweekTransaction" prefHeight="26.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label fx:id="numweeklabel" text="Number of weeks" GridPane.rowIndex="2" />
                         <Label text="Date" GridPane.rowIndex="1" />
                      </children>
@@ -95,12 +97,22 @@
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <Button layoutX="93.0" layoutY="29.0" mnemonicParsing="false" onAction="#addTag" text="Button" />
+                                    <Button layoutX="93.0" layoutY="29.0" mnemonicParsing="false" onAction="#addTag" />
+                                    <ImageView fitHeight="84.0" fitWidth="94.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@freccia.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <Button layoutX="93.0" layoutY="29.0" mnemonicParsing="false" onAction="#leaveTag" text="Button" />
+                                    <Button layoutX="93.0" layoutY="29.0" mnemonicParsing="false" onAction="#leaveTag" />
+                                    <ImageView fitHeight="84.0" fitWidth="93.0" layoutX="76.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@freccia.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
                               </AnchorPane>
                           </items>
