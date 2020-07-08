@@ -13,6 +13,6 @@ public interface IMovement extends IUtility{
 	//LocalDate getDate();
 	//void modifyMovement(int ID, String description, );
 	void removeTag(List<ITag> t);
-	
+	int getIDAccount();
 	
 }

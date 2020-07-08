@@ -277,22 +277,28 @@ public class GUIController implements Initializable {
             updateAccount();
         }
     }
-
+    /*
+     * Aprirà una finestra dove sarranno mostrati tutti i movimenti associati alla transazione selezionata.
+     */
     public void viewMovementTransaction(){
-        try{/*
+        try{
             if(transTable.getSelectionModel().getSelectedItem() != null) {
                 Stage stage = new Stage();
                 stage.setTitle("Movement Transaction");
                 stage.initModality(Modality.APPLICATION_MODAL);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViewTags.fxml"));
-                ControllerViewMovement c= new ControllerViewMovement(new Transazione(1,null,null,false),controller);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViewMovement.fxml"));
+                ControllerViewMovement c= new ControllerViewMovement(transTable.getSelectionModel().getSelectedItem(),controller);
                 loader.setController(c);
-                stage.setScene(new Scene(loader.load(), 640, 450));
+                stage.setScene(new Scene(loader.load(), 1500, 1500));
                 stage.show();
-            }*/
+            }
            // openWindow("View Movement","/FXMLViewTags.fxml",new ControllerViewMovement(transTable.getSelectionModel().getSelectedItem(),controller));
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void modifyTransaction(){
+
     }
 }

@@ -121,4 +121,7 @@ public class MainController {
     public void removeTransaction(ITransazione transazione){
         ledger.removeTransaction(transazione);
     }
+    public void removeMovement(IMovement movimento){
+        ledger.removeMovement(movimento);
+    }
 }

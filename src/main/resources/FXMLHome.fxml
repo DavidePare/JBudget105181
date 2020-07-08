@@ -113,7 +113,7 @@
                                 <buttons>
                                   <Button fx:id="buttonAddMovement" mnemonicParsing="false" onAction="#addMovement" prefHeight="26.0" prefWidth="199.0" text="Add Movement" />
                                     <Button mnemonicParsing="false" onAction="#removeTransaction" text="Remove" />
-                                    <Button mnemonicParsing="false" text="Modify" />
+                                    <Button mnemonicParsing="false" onAction="#modifyTransaction" text="Modify" />
                                     <Button fx:id="addTransactionButton" mnemonicParsing="false" onAction="#addTransaction" text="Add Transaction" />
                                 </buttons>
                               </ButtonBar>

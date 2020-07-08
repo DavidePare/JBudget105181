@@ -36,7 +36,7 @@ public class Movement implements IMovement{
 	}
 	
 	
-	public void setAccount(Account acc) {
+	public void setAccount(IAccount acc) {
 		this.account=acc;
 	}
 	public IAccount getAccount() {
@@ -82,5 +82,7 @@ public class Movement implements IMovement{
 	public int getIDTransazione() {
 		return idTransazione;
 	}
-
+	public int getIDAccount(){
+		return account.getID();
+	}
 }

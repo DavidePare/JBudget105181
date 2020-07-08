@@ -217,4 +217,8 @@ public class Ledger implements ILedger{
 		}
 		allTransaction.remove(transazione);
 	}
+	public void removeMovement(IMovement movement){
+		this.get(allTransaction,movement.getIDTransazione()).removeMovement(movement);
+		this.get(listaAccount,movement.getAccount().getID()).removeMovementAccount(movement);
+	}
 }

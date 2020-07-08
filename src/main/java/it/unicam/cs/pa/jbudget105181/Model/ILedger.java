@@ -29,4 +29,5 @@ public interface ILedger{
 	void removeAccount(IAccount account);
 	void addMovement(IMovement movement);
 	void removeTransaction(ITransazione transazione);
+	void removeMovement(IMovement movement);
 }
