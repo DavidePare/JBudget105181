@@ -90,15 +90,12 @@ public class ControllerAddTransaction implements ControllerFXML{
                 if(numweekTransaction.isVisible()){
                     if(!controller.getAccount().isEmpty()) {
                         LocalDate data = transactionDate.getValue();
-                        ITransazione t = controller.addTransaction(data, listTagTrans,descriptionTransaction.getText(),transactionDate.getValue().isBefore(LocalDate.now()));
-                        openWindow("Add Movement", "/FXMLAddMovement.fxml", new ControllerAddMovement(controller, t));
-                        List<IMovement> listMovement=t.movements().stream().filter(p-> p== p ).collect(Collectors.toList());
+                        List<ITransazione> listTransactionRated= new ArrayList<ITransazione>();
                         for (int x = 0; x < numberOfTransaction.getValue(); x++) {
-                          //  ITransazione t = controller.addTransaction(data, listTagTrans,descriptionTransaction.getText(),transactionDate.getValue().isBefore(LocalDate.now()));
+                            listTransactionRated.add(controller.addTransaction(data, listTagTrans, descriptionTransaction.getText(), transactionDate.getValue().isBefore(LocalDate.now())));
                             data = data.plusDays(Long.parseLong(numweekTransaction.getText()));
-                            ITransazione transazione=controller.addTransaction(data,listTagTrans,descriptionTransaction.getText(),transactionDate.getValue().isBefore(LocalDate.now()));
-                            controller.addMovementList(transazione,listMovement);
                         }
+                        openWindow("Add Movement", "/FXMLAddMovement.fxml", new ControllerAddMovement(controller, listTransactionRated,true));
                     }else errorText.setVisible(true);
                 }else{
                     controller.addTransaction(transactionDate.getValue(),listTagTrans,descriptionTransaction.getText(),transactionDate.getValue().isBefore(LocalDate.now()));

@@ -125,7 +125,6 @@ public class Account implements IAccount {
 			}
 		}
 	}
-
 	@Override
 	public String toString() {
 		return name;

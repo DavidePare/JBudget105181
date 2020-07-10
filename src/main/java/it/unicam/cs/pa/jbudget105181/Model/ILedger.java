@@ -30,4 +30,7 @@ public interface ILedger{
 	void addMovement(IMovement movement);
 	void removeTransaction(ITransazione transazione);
 	void removeMovement(IMovement movement);
+
+
+	void addRateMovement(List<ITransazione> lTransaction, IMovement movement);
 }

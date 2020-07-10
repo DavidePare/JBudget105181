@@ -85,4 +85,13 @@ public class Movement implements IMovement{
 	public int getIDAccount(){
 		return account.getID();
 	}
+
+	@Override
+	public void setIDTransaction(int id){
+		idTransazione=id;
+	}
+	@Override
+	public void setID(int idMovement){
+		this.ID= idMovement;
+	}
 }

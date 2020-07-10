@@ -1,6 +1,7 @@
 package it.unicam.cs.pa.jbudget105181.Controller;
 
 import it.unicam.cs.pa.jbudget105181.Model.*;
+import javafx.scene.input.InputMethodTextRun;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -89,9 +90,8 @@ public class MainController {
     *TODO AGGIUSTARE generazione id movimento
      */
     public int generateIDMovement(ITransazione transaction){
-    /*    Collection<ITransazione> collect = ledger.getAllTransactions().stream().filter(t -> t.getID() == transaction.getID()).collect(Collectors.toCollection());
-        return ledger.generateID();*/
-        return 1;
+        return ledger.generateID(transaction.movements());
+
     }
     public void modifyAccount(int accID, String name, String description, AccountType type, Double value){
       /*  ledger.get(ledger.getAccounts(),accID).setName(name);
@@ -133,5 +133,9 @@ public class MainController {
     public void addMovementList(ITransazione t,List<IMovement> lMovements){
         List<ITransazione> transazione=ledger.getTransaction(p-> t.getID()==p.getID());
         transazione.get(0).addMovementList(lMovements);
+    }
+    public void addRateMovement(List<ITransazione> lTransaction, IMovement movement){
+        ledger.addRateMovement(lTransaction,movement);
+
     }
 }

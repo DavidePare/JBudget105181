@@ -25,12 +25,15 @@ public class ControllerAddMovement implements ControllerFXML {
     /*
      *  variabile che verifica se un movimento è rateizzazto cioè deve essere inserito su più transazioni
      */
-
     private MainController controller;
     /*
      * Riferimento della transazione alla quale viene aggiunto il movimento
      */
     private ITransazione transaction;
+
+    private boolean rated=false;
+
+    private List<ITransazione> listTransaction=new ArrayList<ITransazione>();
     /*
      * TextArea per prendere in input la descrizione dell'account
      */
@@ -81,6 +84,8 @@ public class ControllerAddMovement implements ControllerFXML {
         lTagsAdded=FXCollections.observableArrayList();
         listTagAddable = controller.getTags().stream().collect(Collectors.toList());
         listTagTrans=new ArrayList<ITag>();
+        if(!rated) saveButtonRated.setVisible(false);
+        else saveButton.setVisible(false);
         inizializzateTypeMovement();
         inizializzateAccountList();
         updateTags();
@@ -102,6 +107,11 @@ public class ControllerAddMovement implements ControllerFXML {
         this.transaction=transazione;
         this.controller=controller;
     }
+    public ControllerAddMovement(MainController controller, List<ITransazione> lTransaction,boolean rated){
+        this.listTransaction=lTransaction;
+        this.controller=controller;
+        this.rated=rated;
+    }
 
     /*
      * Metodo che permetterà di tornare indietro senza attuare alcuna modifica
@@ -122,9 +132,9 @@ public class ControllerAddMovement implements ControllerFXML {
     }
     public void saveNewMovement(){
         try{
-                IMovement mov = new Movement(1,descriptionMovement.getText(),movementTypeChoiceBox.getValue(),
-                        Double.valueOf(amountMovement.getText()), accountChoiceBox.getValue(),lTagsAdded ,transaction.getID());
-                controller.addMovement(mov);
+
+            controller.addMovement( IFactory.generateMovement(controller.generateIDMovement(transaction), descriptionMovement.getText(), movementTypeChoiceBox.getValue(),
+                    Double.parseDouble(amountMovement.getText()), accountChoiceBox.getValue(), lTagsAdded, transaction.getID()));
         }catch(Exception e){
 
         }finally {
@@ -135,6 +145,9 @@ public class ControllerAddMovement implements ControllerFXML {
             lTags.addAll(controller.getTags());
             amountMovement.clear();
         }
+    }
+    private void saveMovementRated(IMovement movement){
+
     }
     /*
      * Questo metodo aggiornerà le due tabelle con i tag inseriti e quelli che non sono stati inseriti
@@ -191,6 +204,19 @@ public class ControllerAddMovement implements ControllerFXML {
 
 
     public void saveRatedMovement(){
-
+        try{
+            IMovement mov = new Movement(-1, descriptionMovement.getText(), movementTypeChoiceBox.getValue(),
+                    Double.parseDouble(amountMovement.getText()), accountChoiceBox.getValue(), lTagsAdded, -1);
+            controller.addRateMovement(listTransaction,mov);
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+                descriptionMovement.clear();
+                movementTypeChoiceBox.setValue(null);
+                lTagsAdded.removeAll(lTagsAdded);
+                lTags.removeAll(lTags);
+                lTags.addAll(controller.getTags());
+                amountMovement.clear();
+        }
     }
 }

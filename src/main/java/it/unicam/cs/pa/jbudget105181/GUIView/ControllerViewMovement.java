@@ -45,6 +45,7 @@ public class ControllerViewMovement  implements ControllerFXML{
         showmovement();
     }
     private void showmovement(){
+        lMovement.removeAll(lMovement);
         lMovement.addAll(transaction.movements());
         tableMovement.setItems(lMovement);
       /*  this.columnIDAccount.setCellValueFactory
