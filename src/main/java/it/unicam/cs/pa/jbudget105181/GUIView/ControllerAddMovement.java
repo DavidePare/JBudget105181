@@ -146,9 +146,6 @@ public class ControllerAddMovement implements ControllerFXML {
             amountMovement.clear();
         }
     }
-    private void saveMovementRated(IMovement movement){
-
-    }
     /*
      * Questo metodo aggiornerà le due tabelle con i tag inseriti e quelli che non sono stati inseriti
      */

@@ -56,7 +56,7 @@ public class ControllerAddTransaction implements ControllerFXML{
         numberOfTransaction.setItems(FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10,11,12,18,24));
         lTags = FXCollections.observableArrayList();
         lTagsAdded=FXCollections.observableArrayList();
-        listTagAddable = controller.getTags().stream().collect(Collectors.toList());
+        listTagAddable = controller.getTags().parallelStream().collect(Collectors.toList());
         listTagTrans=new ArrayList<ITag>();
         instantTransaction.fire();
         updateTags();

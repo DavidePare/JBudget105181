@@ -23,7 +23,6 @@ public class Movement implements IMovement{
 		
 	}
 	
-	
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub

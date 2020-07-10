@@ -112,6 +112,7 @@ public class Account implements IAccount {
 	 */
 	private void recalculateConto(){
 		for(IMovement mov : movimenti){
+
 			if(type.equals(AccountType.ASSETS)) {
 				if(mov.getTipo().equals(MovementType.CREDIT))
 					conto+=mov.getAmount();

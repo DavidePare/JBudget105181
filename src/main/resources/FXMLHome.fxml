@@ -104,7 +104,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="680.0">
                            <children>
-                              <TableView fx:id="transTable" layoutX="-3.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="297.0" prefWidth="670.0">
+                              <TableView fx:id="transTable" layoutX="-3.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#selectTransaction" onMouseClicked="#selectTransaction" prefHeight="297.0" prefWidth="670.0">
                                  <columns>
                                     <TableColumn fx:id="transIDColumn" prefWidth="75.0" text="ID" />
                                     <TableColumn fx:id="transAmountColumn" prefWidth="75.0" text="Amount" />
@@ -115,9 +115,8 @@
                               </TableView>
                               <ButtonBar layoutX="-2.0" layoutY="298.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="680.0">
                                 <buttons>
-                                  <Button fx:id="buttonAddMovement" mnemonicParsing="false" onAction="#addMovement" prefHeight="26.0" prefWidth="199.0" text="Add Movement" />
+                                  <Button fx:id="buttonAddMovement" mnemonicParsing="false" onAction="#addMovement" prefHeight="26.0" prefWidth="317.0" text="Add Movement" />
                                     <Button mnemonicParsing="false" onAction="#removeTransaction" text="Remove" />
-                                    <Button mnemonicParsing="false" onAction="#selectTransaction" text="Select" />
                                     <Button fx:id="addTransactionButton" mnemonicParsing="false" onAction="#addTransaction" text="Add Transaction" />
                                 </buttons>
                               </ButtonBar>

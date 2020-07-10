@@ -239,14 +239,13 @@ public class GUIController implements Initializable {
     public void addTag() {
         try{
             FailedOperationTag.setText("");
-            if(!(tagName.getText().equals(""))) {
-                if(this.controller.alreadyExistTag(IFactory.generateTag(tagName.getText(),tagDescription.getText()))) {
-                    this.controller.addTag(IFactory.generateTag(tagName.getText(),tagDescription.getText()));
-                    updateTags();
-                }else FailedOperationTag.setText("Failed Operation! If tag alreasy exists unaddable!");
-            }
-        }catch (Exception e){
 
+            if(this.controller.alreadyExistTag(IFactory.generateTag(tagName.getText(),tagDescription.getText()))) {
+                this.controller.addTag(IFactory.generateTag(tagName.getText(),tagDescription.getText()));
+                updateTags();
+            }else FailedOperationTag.setText("Failed Operation! If tag alreasy exists unaddable!");
+        }catch (Exception e){
+            FailedOperationTag.setText(e.getMessage());
         }finally {
             tagName.clear();
             tagDescription.clear();

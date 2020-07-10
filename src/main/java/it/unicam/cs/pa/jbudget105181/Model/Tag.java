@@ -4,6 +4,7 @@ public class Tag implements ITag {
 	private String descrizione="";
 	private String nome;
 	public Tag(String nome, String descrizione) {
+		if(nome.isEmpty() || descrizione.isEmpty() ) throw new IllegalArgumentException("You don't insert all data!");
 		this.descrizione=descrizione;
 		this.nome=nome;
 	}

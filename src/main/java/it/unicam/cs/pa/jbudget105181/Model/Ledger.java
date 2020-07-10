@@ -232,7 +232,9 @@ public class Ledger implements ILedger{
 			int MovementID=generateID(transaction.movements());
 			movement.setIDTransaction(transaction.getID());
 			movement.setID(MovementID);
-			transaction.addMovement(movement);*/
+			transaction.addMovement(movement);
+
+			*/
 			transaction.addMovement(mov);
 			/*this.get(allTransaction,transaction.getID()).addMovement(movement);*/
 			this.get(listaAccount,movement.getAccount().getID()).addMovement(movement);
