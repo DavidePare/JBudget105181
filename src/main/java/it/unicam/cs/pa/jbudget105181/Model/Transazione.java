@@ -10,12 +10,14 @@ public class Transazione implements ITransazione{
 	private ArrayList<IMovement> movimenti=new ArrayList<IMovement>();
 	private List<ITag> tag;
 	private LocalDate data;
+	private String description;
 	private double cost=0;
-	public Transazione(int ID,LocalDate data, List<ITag> tag, boolean pagata) {
+	public Transazione(int ID,LocalDate data, List<ITag> tag,String description, boolean pagata) {
 		this.pagata=pagata;
 		this.ID=ID;
 		this.tag=tag;
 		this.data=data;
+		this.description=description;
 	}
 	
 	@Override
@@ -107,4 +109,16 @@ public class Transazione implements ITransazione{
 		return movimenti.size();
 	}
 
+	@Override
+	public String getDescription(){
+		return this.description;
+	}
+	@Override
+	public void setDescription(String description){
+		this.description=description;
+	}
+	@Override
+	public void addMovementList(List<IMovement> lMovent){
+		movements().addAll(lMovent);
+	}
 }

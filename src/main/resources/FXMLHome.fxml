@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -13,7 +14,9 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -49,7 +52,7 @@
               <tabs>
                 <Tab text="Account">
                   <content>
-                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="551.0" prefWidth="680.0">
+                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="421.0" prefWidth="680.0">
                            <children>
                               <TableView fx:id="accountTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="680.0">
                                 <columns>
@@ -99,7 +102,7 @@
                 </Tab>
                 <Tab text="Transazioni">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="314.0" prefWidth="640.0">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="680.0">
                            <children>
                               <TableView fx:id="transTable" layoutX="-3.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="297.0" prefWidth="670.0">
                                  <columns>
@@ -107,13 +110,14 @@
                                     <TableColumn fx:id="transAmountColumn" prefWidth="75.0" text="Amount" />
                                     <TableColumn fx:id="transNumMovColumn" prefWidth="156.0" text="Number Of Movement" />
                                     <TableColumn fx:id="transDateColumn" minWidth="0.0" prefWidth="64.79998779296875" text="Date" />
+                                    <TableColumn fx:id="transDescriptionColumn" minWidth="0.0" prefWidth="170.39996337890625" text="Description" />
                                  </columns>
                               </TableView>
                               <ButtonBar layoutX="-2.0" layoutY="298.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="680.0">
                                 <buttons>
                                   <Button fx:id="buttonAddMovement" mnemonicParsing="false" onAction="#addMovement" prefHeight="26.0" prefWidth="199.0" text="Add Movement" />
                                     <Button mnemonicParsing="false" onAction="#removeTransaction" text="Remove" />
-                                    <Button mnemonicParsing="false" onAction="#modifyTransaction" text="Modify" />
+                                    <Button mnemonicParsing="false" onAction="#selectTransaction" text="Select" />
                                     <Button fx:id="addTransactionButton" mnemonicParsing="false" onAction="#addTransaction" text="Add Transaction" />
                                 </buttons>
                               </ButtonBar>
@@ -123,6 +127,29 @@
                                     <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#viewMovementTransaction" prefHeight="26.0" prefWidth="578.0" text="View Movements" />
                                  </buttons>
                               </ButtonBar>
+                            <TitledPane fx:id="modifyTransactionMenu" animated="false" layoutX="3.0" layoutY="387.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Modify">
+                                 <content>
+                                    <GridPane prefHeight="46.0" prefWidth="675.0">
+                                      <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <TextArea fx:id="descriptionTransactionNew" prefHeight="200.0" prefWidth="131.0" GridPane.columnIndex="3" />
+                                          <DatePicker fx:id="dataTransactionNew" GridPane.columnIndex="1" />
+                                          <Label prefHeight="18.0" prefWidth="165.0" text="New Date" />
+                                          <Label prefHeight="18.0" prefWidth="136.0" text="New Description" GridPane.columnIndex="2" />
+                                          <Button fx:id="modifyTransactionButton" mnemonicParsing="false" onAction="#modifyTransaction" prefHeight="26.0" prefWidth="130.0" text="Modify" GridPane.columnIndex="4" />
+                                       </children>
+                                    </GridPane>
+                                 </content>
+                              </TitledPane>
                            </children>
                         </AnchorPane>
                   </content>

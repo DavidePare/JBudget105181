@@ -19,4 +19,7 @@ public interface ITransazione extends IUtility{
 	void removeMovement(IMovement m);
 	boolean getPagata();
 	int getNumMov();
+	String getDescription();
+	void setDescription(String description);
+	void addMovementList(List<IMovement> lMovent);
 }

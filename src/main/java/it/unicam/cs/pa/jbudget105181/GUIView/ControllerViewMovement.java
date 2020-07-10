@@ -45,8 +45,7 @@ public class ControllerViewMovement  implements ControllerFXML{
         showmovement();
     }
     private void showmovement(){
-
-        if(!transaction.movements().isEmpty()) lMovement.addAll(transaction.movements());
+        lMovement.addAll(transaction.movements());
         tableMovement.setItems(lMovement);
       /*  this.columnIDAccount.setCellValueFactory
                 (cellData -> new SimpleObjectProperty<>(cellData.getValue().getAccount().getNameAccount()));*/
@@ -80,6 +79,7 @@ public class ControllerViewMovement  implements ControllerFXML{
     public void deleteMovement(){
         if(tableMovement.getSelectionModel().getSelectedItem() != null) {
             controller.removeMovement(tableMovement.getSelectionModel().getSelectedItem());
+            lMovement.remove(tableMovement.getSelectionModel().getSelectedItem());
             showmovement();
         }
     }

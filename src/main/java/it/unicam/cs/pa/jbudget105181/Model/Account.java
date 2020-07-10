@@ -80,17 +80,18 @@ public class Account implements IAccount {
 		}
 	}
 	public void removeMovementAccount(IMovement x) {
-		movimenti.remove(x);
-		if(type.equals(AccountType.ASSETS)) {
-			if(x.getTipo().equals(MovementType.CREDIT))
-				conto-=x.getAmount();
-			else
-				conto+=x.getAmount();
-		}else {
-			if(x.getTipo().equals(MovementType.CREDIT))
-				conto+=x.getAmount();
-			else
-				conto-=x.getAmount();
+		if(movimenti.remove(x)) {
+			if (type.equals(AccountType.ASSETS)) {
+				if (x.getTipo().equals(MovementType.CREDIT))
+					conto -= x.getAmount();
+				else
+					conto += x.getAmount();
+			} else {
+				if (x.getTipo().equals(MovementType.CREDIT))
+					conto += x.getAmount();
+				else
+					conto -= x.getAmount();
+			}
 		}
 	}
 	public void setName(String name){

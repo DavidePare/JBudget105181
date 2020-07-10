@@ -3,10 +3,7 @@ package it.unicam.cs.pa.jbudget105181.Controller;
 import it.unicam.cs.pa.jbudget105181.Model.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -103,10 +100,11 @@ public class MainController {
         ledger.get(ledger.getAccounts(),accID).setConto(value);*/
         ledger.modifyAccount(accID,name,description, type,value);
     }
-    public void addTransaction(LocalDate data,List<ITag> tag){
+    public ITransazione addTransaction(LocalDate data,List<ITag> tag,String description,boolean pagata){
         int id=generateIDTransaction();
-        ITransazione t= new Transazione(id,data,tag,false);
+        ITransazione t= new Transazione(id,data,tag,description,pagata);
         ledger.addTransazione(t);
+        return t;
     }
 
     /*
@@ -123,5 +121,17 @@ public class MainController {
     }
     public void removeMovement(IMovement movimento){
         ledger.removeMovement(movimento);
+    }
+    public void modifyTransactiond(int idTrans,ITransazione transazione, LocalDate data , String description){
+        //ledger.getAllTransactions().stream().filter(p-> p.getID()== idTrans).peek(x-> x.setDescription(description)).forEach( t->
+          //      t.setData(data));//collect(Collectors.toCollection());
+        //transaction.get(1).setData(data);
+        transazione.setData(data);
+        transazione.setDescription(description);
+    }
+
+    public void addMovementList(ITransazione t,List<IMovement> lMovements){
+        List<ITransazione> transazione=ledger.getTransaction(p-> t.getID()==p.getID());
+        transazione.get(0).addMovementList(lMovements);
     }
 }

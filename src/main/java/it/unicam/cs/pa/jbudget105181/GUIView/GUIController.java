@@ -36,6 +36,7 @@ public class GUIController implements Initializable {
     @FXML private TableColumn<ITransazione,Double> transAmountColumn;
     @FXML private TableColumn<ITransazione,Integer> transNumMovColumn;
     @FXML private TableColumn<ITransazione, LocalDate> transDateColumn;
+    @FXML private TableColumn<ITransazione, String> transDescriptionColumn;
 
 
     @FXML private Label FailedOperationTag;
@@ -52,6 +53,12 @@ public class GUIController implements Initializable {
     @FXML private ChoiceBox<AccountType> accountType;
     @FXML private Button modifyAccButton;
     @FXML private Button buttonAddMovement;
+
+    @FXML private TitledPane modifyTransactionMenu;
+    @FXML private DatePicker dataTransactionNew;
+    @FXML private TextArea descriptionTransactionNew;
+    @FXML private Button modifyTransactionButton;
+    private int idTransaction=-1;
     private int idAcc=-1;
     private ObservableList<IAccount> lAccount;
     private ObservableList<ITag> lTags;
@@ -65,6 +72,8 @@ public class GUIController implements Initializable {
         lAccount = FXCollections.observableArrayList();
         typeAccMenu= FXCollections.observableArrayList();
         modifyAccButton.setDisable(true);
+        modifyTransactionMenu.setExpanded(false);
+        modifyTransactionButton.setDisable(false);
         inizializeTypeAccount();
         updateTags();
         updateTransaction();
@@ -123,8 +132,7 @@ public class GUIController implements Initializable {
     public void addAccount(){
         try{
             if(controller.alreadyExistNameAccount(nameAccount.getText()) && accountType.getValue()!=null){
-                IAccount account= new Account(controller.generateIDAccount(),nameAccount.getText(),descriptionAccount.getText(),accountType.getValue(),Double.valueOf(balanceAccount.getText()));
-                controller.addAccount(account);
+                controller.addAccount(IFactory.generateAccount(controller.generateIDAccount(),nameAccount.getText(),descriptionAccount.getText(),accountType.getValue(),Double.valueOf(balanceAccount.getText())));
             }
         }catch(Exception e){
         }finally{
@@ -214,6 +222,8 @@ public class GUIController implements Initializable {
                 (cellData -> new SimpleObjectProperty<>(cellData.getValue().getNumMov()));
         this.transDateColumn.setCellValueFactory
                 (cellData -> new SimpleObjectProperty<>(cellData.getValue().getData()));
+        this.transDescriptionColumn.setCellValueFactory
+                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getDescription()));
         this.transTable.refresh();
     }
 
@@ -230,9 +240,8 @@ public class GUIController implements Initializable {
         try{
             FailedOperationTag.setText("");
             if(!(tagName.getText().equals(""))) {
-                ITag tag = new Tag(tagName.getText(), tagDescription.getText());
-                if(this.controller.alreadyExistTag(tag)) {
-                    this.controller.addTag(tag);
+                if(this.controller.alreadyExistTag(IFactory.generateTag(tagName.getText(),tagDescription.getText()))) {
+                    this.controller.addTag(IFactory.generateTag(tagName.getText(),tagDescription.getText()));
                     updateTags();
                 }else FailedOperationTag.setText("Failed Operation! If tag alreasy exists unaddable!");
             }
@@ -289,16 +298,41 @@ public class GUIController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXMLViewMovement.fxml"));
                 ControllerViewMovement c= new ControllerViewMovement(transTable.getSelectionModel().getSelectedItem(),controller);
                 loader.setController(c);
-                stage.setScene(new Scene(loader.load(), 1500, 1500));
+                stage.setScene(new Scene(loader.load(), 640, 440));
                 stage.show();
             }
-           // openWindow("View Movement","/FXMLViewTags.fxml",new ControllerViewMovement(transTable.getSelectionModel().getSelectedItem(),controller));
         }catch(Exception e){
             e.printStackTrace();
+        }finally {
+            updateTransaction();
+            updateAccount();
         }
     }
 
-    public void modifyTransaction(){
+    public void selectTransaction(){
+        try {
+            if(transTable.getSelectionModel().getSelectedItem() != null){
+                modifyTransactionMenu.setExpanded(true);
+                dataTransactionNew.setValue(transTable.getSelectionModel().getSelectedItem().getData());
+                descriptionTransactionNew.setText(transTable.getSelectionModel().getSelectedItem().getDescription());
+                idTransaction=transTable.getSelectionModel().getSelectedItem().getID();
+                modifyTransactionButton.setDisable(false);
+            }
+        }catch(Exception e){
 
+        }
+    }
+    public void modifyTransaction(){
+        try{
+            controller.modifyTransactiond(idTransaction,transTable.getSelectionModel().getSelectedItem(),
+                    dataTransactionNew.getValue(),descriptionTransactionNew.getText());
+            updateTransaction();
+        }catch (Exception e){
+
+        }finally{
+            modifyTransactionMenu.setExpanded(false);
+            dataTransactionNew.setValue(null);
+            descriptionTransactionNew.clear();
+        }
     }
 }

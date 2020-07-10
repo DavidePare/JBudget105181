@@ -3,9 +3,8 @@ package it.unicam.cs.pa.jbudget105181;
 /*import java.util.Iterator;
 import java.util.List;*/
 
-import it.unicam.cs.pa.jbudget105181.Controller.ApplicationOperationCase;
 import it.unicam.cs.pa.jbudget105181.Model.Ledger;
-		import it.unicam.cs.pa.jbudget105181.GUIView.FXMLStart;
+import it.unicam.cs.pa.jbudget105181.GUIView.FXMLStart;
 import javafx.application.Application;
 
 public class App {
@@ -37,68 +36,6 @@ public class App {
 		sc.close();
 		view.close();*/
 		
-	}
-	public static void options(int x, Ledger ledger) {
-		ApplicationOperationCase operation= new ApplicationOperationCase();
-		switch(x) {
-			case 1:
-				operation.caseOneInsertTag(ledger);
-				break;
-				
-				
-			case 2:
-				//Inserimento nuovo Account
-				operation.caseTwoInsertAccount(ledger);
-				
-				break;
-			case 3:
-				// Creazione nuova transazione 
-				operation.caseThreeInsertTransaction(ledger);
-				
-				
-				break;
-			case 4:
-				//Inserimento transazione :) :) :) :) :)
-				operation.caseFourAddMovementToTransaction(ledger);
-				break;
-			case 5:
-				operation.caseFiveInsertMovement(ledger);
-				break;
-			case 6:
-				operation.caseSixPrintAccountMovement(ledger);
-				break;
-			case 7:
-				//Stampa delle transazioni
-				operation.caseSevenPrintTransaction(ledger);
-				break;
-			case 8:
-				//Stampa degli Account
-				operation.caseEightPrintAccount(ledger);
-			
-				break;
-			case 9:
-				//Stampa dei Tag
-				operation.caseNinePrintTag(ledger);
-				break;
-			case 10:
-				operation.caseTenRemoveTag(ledger);
-				break;
-			case 11:
-				operation.caseElevenRemoveTransaction(ledger);
-				break;
-			case 12:
-				operation.caseTwelveRemoveMovement(ledger);
-				break;
-			case 13:
-				operation.caseThirteenRemoveAccount(ledger);
-				break;
-			case 14:
-				operation.caseFourteenPrintMovForTransaction(ledger);
-				break;
-			case 15:
-				
-				break;
-		}
 	}
 	
 }

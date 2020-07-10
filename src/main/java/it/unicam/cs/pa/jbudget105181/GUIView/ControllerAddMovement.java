@@ -1,11 +1,8 @@
 package it.unicam.cs.pa.jbudget105181.GUIView;
 
-import com.sun.tools.javac.Main;
-import it.unicam.cs.pa.jbudget105181.Controller.ControllerMovimenti;
 import it.unicam.cs.pa.jbudget105181.Controller.MainController;
 import it.unicam.cs.pa.jbudget105181.Model.*;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,8 +14,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.awt.*;
-import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +22,9 @@ import java.util.stream.Collectors;
 
 public class ControllerAddMovement implements ControllerFXML {
 
+    /*
+     *  variabile che verifica se un movimento è rateizzazto cioè deve essere inserito su più transazioni
+     */
 
     private MainController controller;
     /*
@@ -73,6 +71,10 @@ public class ControllerAddMovement implements ControllerFXML {
      * Lista che mostrerà nella choiceBox i tipi di movimento
      */
     private ObservableList<MovementType> typeMovement;
+
+    @FXML private Button saveButtonRated;
+    @FXML private Button saveButton;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         lTags = FXCollections.observableArrayList();
@@ -96,11 +98,11 @@ public class ControllerAddMovement implements ControllerFXML {
     public ControllerAddMovement(MainController controller) {
         this.controller = controller;
     }
-
     public ControllerAddMovement(MainController controller, ITransazione transazione){
         this.transaction=transazione;
         this.controller=controller;
     }
+
     /*
      * Metodo che permetterà di tornare indietro senza attuare alcuna modifica
      */
@@ -187,4 +189,8 @@ public class ControllerAddMovement implements ControllerFXML {
         }
     }
 
+
+    public void saveRatedMovement(){
+
+    }
 }

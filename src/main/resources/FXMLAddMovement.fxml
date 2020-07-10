@@ -39,6 +39,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <ChoiceBox fx:id="movementTypeChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -49,6 +50,7 @@
                               <TextArea fx:id="descriptionMovement" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <ChoiceBox fx:id="accountChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label text="Account" GridPane.rowIndex="3" />
+                              <Label prefHeight="18.0" prefWidth="193.0" text="List of Tag" GridPane.rowIndex="4" />
                            </children>
                         </GridPane>
                      </children>
@@ -61,6 +63,7 @@
          <bottom>
             <ButtonBar prefHeight="0.0" prefWidth="640.0" BorderPane.alignment="CENTER">
                <buttons>
+                  <Button fx:id="saveButtonRated" layoutX="500.0" layoutY="10.0" mnemonicParsing="false" onAction="#saveRatedMovement" text="Save Rated Movement" />
                   <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveNewMovement" text="Save" />
                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonAction" text="&lt;Back" />
                </buttons>
@@ -87,22 +90,27 @@
                <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <Button layoutX="78.0" layoutY="-3.0" mnemonicParsing="false" onAction="#addTag" prefHeight="86.0" prefWidth="110.0" />
-                        <ImageView fitHeight="81.0" fitWidth="113.0" layoutX="77.0">
-                           <image>
-                              <Image url="@freccia.png" />
-                           </image>
-                        </ImageView>
+                        <Button layoutX="78.0" layoutY="-3.0" mnemonicParsing="false" onAction="#addTag" prefHeight="86.0" prefWidth="110.0">
+                           <graphic>
+                              <ImageView fitHeight="81.0" fitWidth="113.0">
+                                 <image>
+                                    <Image url="@freccia.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                      </children>
                   </AnchorPane>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <Button layoutX="79.0" layoutY="-3.0" mnemonicParsing="false" onAction="#addTag" prefHeight="86.0" prefWidth="110.0" />
-                        <ImageView fitHeight="81.0" fitWidth="113.0" layoutX="78.0" layoutY="-1.0" nodeOrientation="RIGHT_TO_LEFT">
-                           <image>
-                              <Image url="@freccia.png" />
-                           </image>
-                        </ImageView>
+                        <Button layoutX="79.0" layoutY="-3.0" mnemonicParsing="false" onAction="#addTag" prefHeight="86.0" prefWidth="110.0">
+                           <graphic>
+                              <ImageView fitHeight="81.0" fitWidth="113.0" nodeOrientation="RIGHT_TO_LEFT">
+                                 <image>
+                                    <Image url="@freccia.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
                   </AnchorPane>
                </items>
