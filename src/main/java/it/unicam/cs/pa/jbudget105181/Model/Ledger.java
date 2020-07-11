@@ -227,8 +227,9 @@ public class Ledger implements ILedger{
 		for(ITransazione transaction : lTransaction){
 			IMovement mov= IFactory.generateMovement(generateID(transaction.movements()),movement.getDescription(),
 					movement.getTipo(),movement.getAmount(),movement.getAccount(),movement.tags(),transaction);
+			this.get(allTransaction,transaction.getID()).addMovement(mov);
 			transaction.addMovement(mov);
-			this.get(listaAccount,movement.getAccount().getID()).addMovement(movement);
+			this.get(listaAccount,movement.getAccount().getID()).addMovement(mov);
 		}
 	}
 }

@@ -60,17 +60,15 @@ public class Transazione implements ITransazione{
 
 	@Override
 	public void setData(LocalDate dataNuova) {
-		// SISTEMARE. 
-		// Se la modifica della data � precedente alla data odierna
-		if(LocalDate.now().isAfter(dataNuova) ) {
-			if(!this.pagata) {
-				System.out.println("Devo decrementare budget");
-				this.pagata=true;
-			}else {
-				this.pagata=false;
+		if((LocalDate.now().isAfter(dataNuova) && LocalDate.now().isBefore(data))||
+				(!LocalDate.now().isAfter(dataNuova) && !LocalDate.now().isBefore(data))){
+			for(IMovement x : movements()){
+				x.getAccount().recalculateConto();
 			}
+			this.setPagata(!pagata);
 		}
 		this.data=dataNuova;
+
 		
 	}
 
@@ -120,5 +118,10 @@ public class Transazione implements ITransazione{
 	@Override
 	public void addMovementList(List<IMovement> lMovent){
 		movements().addAll(lMovent);
+	}
+
+	@Override
+	public void setPagata(boolean pagata){
+		this.pagata=pagata;
 	}
 }

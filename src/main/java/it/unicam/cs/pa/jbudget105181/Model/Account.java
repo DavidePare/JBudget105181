@@ -1,5 +1,6 @@
 package it.unicam.cs.pa.jbudget105181.Model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -67,30 +68,35 @@ public class Account implements IAccount {
 	
 	public void addMovement(IMovement mov) {
 		movimenti.add(mov);
-		if(type.equals(AccountType.ASSETS)) {
-			if(mov.getTipo().equals(MovementType.CREDIT))
-				conto+=mov.getAmount();
-			else
-				conto-=mov.getAmount();
-		}else {
-			if(mov.getTipo().equals(MovementType.CREDIT))
-				conto-=mov.getAmount();
-			else
-				conto+=mov.getAmount();
+		if(!mov.getTransaction().getData().isAfter(LocalDate.now()) && !mov.getTransaction().getPagata()) {
+			if(type.equals(AccountType.ASSETS)) {
+				if(mov.getTipo().equals(MovementType.CREDIT))
+					conto+=mov.getAmount();
+				else
+					conto-=mov.getAmount();
+			}else {
+				if(mov.getTipo().equals(MovementType.CREDIT))
+					conto-=mov.getAmount();
+				else
+					conto+=mov.getAmount();
+			}
 		}
 	}
 	public void removeMovementAccount(IMovement x) {
 		if(movimenti.remove(x)) {
-			if (type.equals(AccountType.ASSETS)) {
-				if (x.getTipo().equals(MovementType.CREDIT))
-					conto -= x.getAmount();
-				else
-					conto += x.getAmount();
-			} else {
-				if (x.getTipo().equals(MovementType.CREDIT))
-					conto += x.getAmount();
-				else
-					conto -= x.getAmount();
+			if (x.getTransaction().getPagata()) {
+				if (type.equals(AccountType.ASSETS)) {
+					if (x.getTipo().equals(MovementType.CREDIT))
+						conto -= x.getAmount();
+					else
+						conto += x.getAmount();
+				} else {
+					if (x.getTipo().equals(MovementType.CREDIT))
+						conto += x.getAmount();
+					else
+						conto -= x.getAmount();
+				}
+				x.getTransaction().setPagata(true);
 			}
 		}
 	}
@@ -110,19 +116,20 @@ public class Account implements IAccount {
 	/*
 	 * quando modifichi il conto iniziale dell'account
 	 */
-	private void recalculateConto(){
+	public void recalculateConto(){
 		for(IMovement mov : movimenti){
-
-			if(type.equals(AccountType.ASSETS)) {
-				if(mov.getTipo().equals(MovementType.CREDIT))
-					conto+=mov.getAmount();
-				else
-					conto-=mov.getAmount();
-			}else {
-				if(mov.getTipo().equals(MovementType.CREDIT))
-					conto-=mov.getAmount();
-				else
-					conto+=mov.getAmount();
+			if(mov.getTransaction().getPagata()) {
+				if (type.equals(AccountType.ASSETS)) {
+					if (mov.getTipo().equals(MovementType.CREDIT))
+						conto += mov.getAmount();
+					else
+						conto -= mov.getAmount();
+				} else {
+					if (mov.getTipo().equals(MovementType.CREDIT))
+						conto -= mov.getAmount();
+					else
+						conto += mov.getAmount();
+				}
 			}
 		}
 	}

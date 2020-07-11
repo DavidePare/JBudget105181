@@ -127,6 +127,7 @@ public class MainController {
         //transaction.get(1).setData(data);
         transazione.setData(data);
         transazione.setDescription(description);
+
     }
 
     public void addMovementList(ITransazione t,List<IMovement> lMovements){

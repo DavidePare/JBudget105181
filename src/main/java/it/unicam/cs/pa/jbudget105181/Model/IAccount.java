@@ -18,4 +18,6 @@ public interface IAccount extends IUtility{
 	void setDescription(String description);
 	void setType(AccountType type);
 	void setConto(Double amount);
+
+	void recalculateConto();
 }

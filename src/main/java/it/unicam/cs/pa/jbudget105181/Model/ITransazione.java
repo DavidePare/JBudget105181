@@ -22,4 +22,5 @@ public interface ITransazione extends IUtility{
 	String getDescription();
 	void setDescription(String description);
 	void addMovementList(List<IMovement> lMovent);
+	void setPagata(boolean pagata);
 }
