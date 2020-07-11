@@ -68,7 +68,7 @@ public class Account implements IAccount {
 	
 	public void addMovement(IMovement mov) {
 		movimenti.add(mov);
-		if(!mov.getTransaction().getData().isAfter(LocalDate.now()) && !mov.getTransaction().getPagata()) {
+		if(!mov.getTransaction().getData().isAfter(LocalDate.now()) ) {
 			if(type.equals(AccountType.ASSETS)) {
 				if(mov.getTipo().equals(MovementType.CREDIT))
 					conto+=mov.getAmount();
@@ -80,9 +80,11 @@ public class Account implements IAccount {
 				else
 					conto+=mov.getAmount();
 			}
+			mov.getTransaction().setPagata(true);
 		}
 	}
 	public void removeMovementAccount(IMovement x) {
+
 		if(movimenti.remove(x)) {
 			if (x.getTransaction().getPagata()) {
 				if (type.equals(AccountType.ASSETS)) {
@@ -96,7 +98,7 @@ public class Account implements IAccount {
 					else
 						conto -= x.getAmount();
 				}
-				x.getTransaction().setPagata(true);
+			//	x.getTransaction().setPagata(true);
 			}
 		}
 	}

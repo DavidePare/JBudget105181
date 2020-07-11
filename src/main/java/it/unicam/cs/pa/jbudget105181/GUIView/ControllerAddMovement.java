@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -54,6 +55,7 @@ public class ControllerAddMovement implements ControllerFXML {
      * Bottone per tornare indietro
      */
     @FXML private Button backButton;
+    @FXML private Label messageAddMovement;
     @FXML private TableView<ITag> tableAllTag;
     @FXML private TableView<ITag> tableAddedTag;
 
@@ -82,7 +84,7 @@ public class ControllerAddMovement implements ControllerFXML {
     public void initialize(URL location, ResourceBundle resources) {
         lTags = FXCollections.observableArrayList();
         lTagsAdded=FXCollections.observableArrayList();
-        listTagAddable = controller.getTags().stream().collect(Collectors.toList());
+        listTagAddable = controller.getTags();//.stream().collect(Collectors.toList()); //TODO ricontrolla che non hai testato la nuova modifica dovrebbe funzionare
         listTagTrans=new ArrayList<ITag>();
         if(!rated) saveButtonRated.setVisible(false);
         else saveButton.setVisible(false);
@@ -135,8 +137,12 @@ public class ControllerAddMovement implements ControllerFXML {
 
             controller.addMovement( IFactory.generateMovement(controller.generateIDMovement(transaction), descriptionMovement.getText(), movementTypeChoiceBox.getValue(),
                     Double.parseDouble(amountMovement.getText()), accountChoiceBox.getValue(), listTagTrans, transaction));
+            messageAddMovement.setText("Successfull! Movement correct Added!");
+            messageAddMovement.setTextFill(Color.GREEN);
         }catch(Exception e){
-
+            e.printStackTrace();
+            messageAddMovement.setText("Wrong! Insert all Data!");
+            messageAddMovement.setTextFill(Color.RED);
         }finally {
             descriptionMovement.clear();
             movementTypeChoiceBox.setValue(null);
@@ -208,8 +214,11 @@ public class ControllerAddMovement implements ControllerFXML {
             IMovement mov = new Movement(-1, descriptionMovement.getText(), movementTypeChoiceBox.getValue(),
                     Double.parseDouble(amountMovement.getText()), accountChoiceBox.getValue(), lTagsAdded, null);
             controller.addRateMovement(listTransaction,mov);
+            messageAddMovement.setText("Successfull! Movement correct Added!");
+            messageAddMovement.setTextFill(Color.GREEN);
         }catch(Exception e){
-            e.printStackTrace();
+            messageAddMovement.setText("Wrong! Insert all Data!");
+            messageAddMovement.setTextFill(Color.RED);
         }finally {
             descriptionMovement.clear();
             movementTypeChoiceBox.setValue(null);

@@ -60,15 +60,6 @@
          </children>
       </AnchorPane>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
-         <bottom>
-            <ButtonBar prefHeight="0.0" prefWidth="640.0" BorderPane.alignment="CENTER">
-               <buttons>
-                  <Button fx:id="saveButtonRated" layoutX="500.0" layoutY="10.0" mnemonicParsing="false" onAction="#saveRatedMovement" text="Save Rated Movement" />
-                  <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveNewMovement" text="Save" />
-                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonAction" text="&lt;Back" />
-               </buttons>
-            </ButtonBar>
-         </bottom>
          <left>
             <TableView fx:id="tableAllTag" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <columns>
@@ -116,6 +107,28 @@
                </items>
             </SplitPane>
          </center>
+         <bottom>
+            <SplitPane prefHeight="30.0" prefWidth="650.0" BorderPane.alignment="CENTER">
+               <items>
+                  <AnchorPane prefHeight="29.0" prefWidth="385.0">
+                     <children>
+                        <Label fx:id="messageAddMovement" prefHeight="18.0" prefWidth="285.0" />
+                        <AnchorPane layoutX="78.0" layoutY="-1.0" prefHeight="29.0" prefWidth="486.0">
+                           <children>
+                              <ButtonBar layoutX="188.0" prefHeight="26.0" prefWidth="452.0">
+                                 <buttons>
+                                    <Button fx:id="saveButtonRated" layoutX="500.0" layoutY="10.0" mnemonicParsing="false" onAction="#saveRatedMovement" text="Save Rated Movement" />
+                                    <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveNewMovement" text="Save" />
+                                    <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonAction" text="&lt;Back" />
+                                 </buttons>
+                              </ButtonBar>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
+         </bottom>
       </BorderPane>
    </children>
 </VBox>
