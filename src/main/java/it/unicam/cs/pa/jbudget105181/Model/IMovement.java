@@ -14,7 +14,7 @@ public interface IMovement extends IUtility{
 	//void modifyMovement(int ID, String description, );
 	void removeTag(List<ITag> t);
 	int getIDAccount();
-
-	void setIDTransaction(int id);
 	void setID(int idMovement);
+	ITransazione getTransaction();
+	void setTransaction(ITransazione transaction);
 }

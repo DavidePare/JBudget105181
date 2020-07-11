@@ -102,10 +102,8 @@ public class MainController {
     }
     public ITransazione addTransaction(LocalDate data,List<ITag> tag,String description,boolean pagata){
         int id=generateIDTransaction();
-        ITransazione t= new Transazione(id,data,tag,description,pagata);
-        // IFACTORY.
-        ledger.addTransazione(t);
-        return t;
+        ledger.addTransazione(IFactory.generateTransaction(id,data,tag,description,pagata));
+        return IFactory.generateTransaction(id,data,tag,description,pagata);
     }
 
     /*

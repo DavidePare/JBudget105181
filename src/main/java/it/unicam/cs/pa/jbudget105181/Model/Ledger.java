@@ -226,17 +226,8 @@ public class Ledger implements ILedger{
 	public void addRateMovement(List<ITransazione> lTransaction, IMovement movement){
 		for(ITransazione transaction : lTransaction){
 			IMovement mov= IFactory.generateMovement(generateID(transaction.movements()),movement.getDescription(),
-					movement.getTipo(),movement.getAmount(),movement.getAccount(),movement.tags(),transaction.getID());
-			/*
-			int ID, String descrizione, MovementType type,double prezzo, IAccount account, List<ITag> tag, int idT
-			int MovementID=generateID(transaction.movements());
-			movement.setIDTransaction(transaction.getID());
-			movement.setID(MovementID);
-			transaction.addMovement(movement);
-
-			*/
+					movement.getTipo(),movement.getAmount(),movement.getAccount(),movement.tags(),transaction);
 			transaction.addMovement(mov);
-			/*this.get(allTransaction,transaction.getID()).addMovement(movement);*/
 			this.get(listaAccount,movement.getAccount().getID()).addMovement(movement);
 		}
 	}

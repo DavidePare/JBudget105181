@@ -134,7 +134,7 @@ public class ControllerAddMovement implements ControllerFXML {
         try{
 
             controller.addMovement( IFactory.generateMovement(controller.generateIDMovement(transaction), descriptionMovement.getText(), movementTypeChoiceBox.getValue(),
-                    Double.parseDouble(amountMovement.getText()), accountChoiceBox.getValue(), listTagTrans, transaction.getID()));
+                    Double.parseDouble(amountMovement.getText()), accountChoiceBox.getValue(), listTagTrans, transaction));
         }catch(Exception e){
 
         }finally {
@@ -206,7 +206,7 @@ public class ControllerAddMovement implements ControllerFXML {
     public void saveRatedMovement(){
         try{
             IMovement mov = new Movement(-1, descriptionMovement.getText(), movementTypeChoiceBox.getValue(),
-                    Double.parseDouble(amountMovement.getText()), accountChoiceBox.getValue(), lTagsAdded, -1);
+                    Double.parseDouble(amountMovement.getText()), accountChoiceBox.getValue(), lTagsAdded, null);
             controller.addRateMovement(listTransaction,mov);
         }catch(Exception e){
             e.printStackTrace();

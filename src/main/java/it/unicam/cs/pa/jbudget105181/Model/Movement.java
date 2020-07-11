@@ -11,15 +11,16 @@ public class Movement implements IMovement{
 	private IAccount account;
 	private List<ITag> tag=new ArrayList<ITag>();
 	private int idTransazione;
+	private ITransazione associatedTransaction;
 	
-	public Movement(int ID, String descrizione, MovementType type,double prezzo, IAccount account, List<ITag> tag, int idT) {
+	public Movement(int ID, String descrizione, MovementType type,double prezzo, IAccount account, List<ITag> tag, ITransazione transaction) {
 		this.ID=ID;
 		this.descrizione=descrizione;
 		this.type=type;
 		this.amount=prezzo;
 		this.account=account;
 		this.tag=tag;
-		this.idTransazione=idT;
+		this.associatedTransaction=transaction;
 		
 	}
 
@@ -74,20 +75,25 @@ public class Movement implements IMovement{
 	}
 
 	@Override
+	public ITransazione getTransaction(){
+		return associatedTransaction;
+	}
+
+	@Override
 	public void removeTag(List<ITag> t) {
 		// TODO Auto-generated method stub
 		tag.removeAll(t);
 	}
 	public int getIDTransazione() {
-		return idTransazione;
+		return associatedTransaction.getID();
 	}
 	public int getIDAccount(){
 		return account.getID();
 	}
 
 	@Override
-	public void setIDTransaction(int id){
-		idTransazione=id;
+	public void setTransaction(ITransazione transaction){
+		this.associatedTransaction=transaction;
 	}
 	@Override
 	public void setID(int idMovement){
