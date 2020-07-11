@@ -134,14 +134,17 @@ public class ControllerAddMovement implements ControllerFXML {
         try{
 
             controller.addMovement( IFactory.generateMovement(controller.generateIDMovement(transaction), descriptionMovement.getText(), movementTypeChoiceBox.getValue(),
-                    Double.parseDouble(amountMovement.getText()), accountChoiceBox.getValue(), lTagsAdded, transaction.getID()));
+                    Double.parseDouble(amountMovement.getText()), accountChoiceBox.getValue(), listTagTrans, transaction.getID()));
         }catch(Exception e){
 
         }finally {
             descriptionMovement.clear();
             movementTypeChoiceBox.setValue(null);
-            lTagsAdded.removeAll(lTagsAdded);
-            lTags.removeAll(lTags);
+            lTagsAdded.clear();
+            lTags.clear();
+            listTagTrans= new ArrayList<>();
+            listTagAddable.clear();
+            listTagAddable.addAll(controller.getTags());
             lTags.addAll(controller.getTags());
             amountMovement.clear();
         }
@@ -150,9 +153,9 @@ public class ControllerAddMovement implements ControllerFXML {
      * Questo metodo aggiornerà le due tabelle con i tag inseriti e quelli che non sono stati inseriti
      */
     private void updateTags(){
-        lTags.removeAll(lTags);
+        lTags.clear();
         lTags.addAll(listTagAddable);
-        lTagsAdded.removeAll(lTagsAdded);
+        lTagsAdded.clear();
         lTagsAdded.addAll(listTagTrans);
         tableAllTag.setItems(lTags);
         this.columnNameA.setCellValueFactory
@@ -208,12 +211,15 @@ public class ControllerAddMovement implements ControllerFXML {
         }catch(Exception e){
             e.printStackTrace();
         }finally {
-                descriptionMovement.clear();
-                movementTypeChoiceBox.setValue(null);
-                lTagsAdded.removeAll(lTagsAdded);
-                lTags.removeAll(lTags);
-                lTags.addAll(controller.getTags());
-                amountMovement.clear();
+            descriptionMovement.clear();
+            movementTypeChoiceBox.setValue(null);
+            lTagsAdded.clear();
+            lTags.clear();
+            listTagTrans= new ArrayList<>();
+            listTagAddable.clear();
+            listTagAddable.addAll(controller.getTags());
+            lTags.addAll(controller.getTags());
+            amountMovement.clear();
         }
     }
 }

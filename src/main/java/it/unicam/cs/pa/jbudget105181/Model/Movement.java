@@ -22,7 +22,7 @@ public class Movement implements IMovement{
 		this.idTransazione=idT;
 		
 	}
-	
+
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub

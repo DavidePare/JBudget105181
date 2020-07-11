@@ -27,7 +27,7 @@ public class ControllerViewMovement  implements ControllerFXML{
     /*
     ERRORE QUI
      */
-    @FXML private TableColumn<IMovement,String> columnIDAccount;
+    @FXML private TableColumn<IMovement,IAccount> columnIDAccount;
     @FXML private TableColumn<IMovement,Integer> columnIDMovement;
 
     @FXML private TableColumn<IMovement,Integer> columnIDTransaction;
@@ -45,11 +45,11 @@ public class ControllerViewMovement  implements ControllerFXML{
         showmovement();
     }
     private void showmovement(){
-        lMovement.removeAll(lMovement);
+        lMovement.clear();//removeAll(lMovement);
         lMovement.addAll(transaction.movements());
         tableMovement.setItems(lMovement);
-      /*  this.columnIDAccount.setCellValueFactory
-                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getAccount().getNameAccount()));*/
+        this.columnIDAccount.setCellValueFactory
+                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getAccount()));
         this.columnIDMovement.setCellValueFactory
                 (cellData -> new SimpleObjectProperty<>(cellData.getValue().getID()));
         this.columnIDTransaction.setCellValueFactory
@@ -62,6 +62,7 @@ public class ControllerViewMovement  implements ControllerFXML{
                 (cellData -> new SimpleObjectProperty<>(cellData.getValue().getAmount()));
         this.tableMovement.refresh();
     }
+
     public void viewTag(){
         try {
             if(tableMovement.getSelectionModel().getSelectedItem() != null) {

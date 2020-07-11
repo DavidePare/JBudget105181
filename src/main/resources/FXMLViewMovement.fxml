@@ -19,10 +19,10 @@
                      <columns>
                         <TableColumn fx:id="columnIDMovement" prefWidth="96.79999083280563" text="ID Movimento" />
                         <TableColumn fx:id="columnIDTransaction" prefWidth="101.5999755859375" text="ID Transazione" />
-                        <TableColumn fx:id="ColumnIDAccount" prefWidth="74.39988708496094" text="ID Account" />
+                        <TableColumn fx:id="columnIDAccount" prefWidth="105.59996032714844" text="Name Account" />
                         <TableColumn fx:id="columnType" prefWidth="87.99993896484375" text="Tipo" />
-                        <TableColumn fx:id="columnAmount" maxWidth="100.0" prefWidth="503.20001220703125" text="Amount" />
-                        <TableColumn fx:id="columnDescription" prefWidth="175.2000732421875" text="Descrizione" />
+                        <TableColumn fx:id="columnAmount" maxWidth="100.0" prefWidth="80.79998779296875" text="Amount" />
+                        <TableColumn fx:id="columnDescription" prefWidth="164.800048828125" text="Descrizione" />
                      </columns>
                   </TableView>
                </center>
