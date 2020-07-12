@@ -140,7 +140,6 @@ public class ControllerAddMovement implements ControllerFXML {
             messageAddMovement.setText("Successfull! Movement correct Added!");
             messageAddMovement.setTextFill(Color.GREEN);
         }catch(Exception e){
-            e.printStackTrace();
             messageAddMovement.setText("Wrong! Insert all Data!");
             messageAddMovement.setTextFill(Color.RED);
         }finally {

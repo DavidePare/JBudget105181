@@ -4,16 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class Budget/*<T extends IUtility>*/ implements IBudget{
+public class Budget<T extends BudgetInterface> implements IBudget<T>{
     private int id;
-   // private final Map<T, Double> budgetMap;
+    private final Map<T, Double> budgetMap;
     public Budget(){
-     //   this.budgetMap = new HashMap<>();
+       this.budgetMap = new HashMap<>();
     }
     public int getID(){
         return id;
     }
-  /*  @Override
+    @Override
     public void addBudgetType(T key, Double value){
         if(this.budgetMap.containsKey(key)){
             this.budgetMap.remove(key);
@@ -31,7 +31,7 @@ public class Budget/*<T extends IUtility>*/ implements IBudget{
     /**
      * Metodo responsabile di eliminare un tag dal BudgetBase.
      * @param key key da rimuovere.
-
+    */
     @Override
     public void remove(T key) {
         this.budgetMap.remove(key);
@@ -40,9 +40,9 @@ public class Budget/*<T extends IUtility>*/ implements IBudget{
     /**
      * Metodo responsabile di restituire una mappa contenente tag e valori associati.
      * @return Mappa di tag e double.
-
+    */
     @Override
     public Map<T, Double> getBudgetMap() {
         return this.budgetMap;
-    }*/
+    }
 }

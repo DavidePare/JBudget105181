@@ -3,11 +3,11 @@ package it.unicam.cs.pa.jbudget105181.Model;
 import java.util.Map;
 import java.util.Set;
 
-public interface IBudget<T extends IUtility> extends IUtility{
-   /* int getID();
+public interface IBudget<T extends BudgetInterface> extends BudgetInterface{
+    int getID();
     void addBudgetType(T key, Double value);
     Double getValue(T key);
     Set<T> getTags();
     void remove(T key);
-     Map<T, Double> getBudgetMap();*/
+    Map<T, Double> getBudgetMap();
 }
