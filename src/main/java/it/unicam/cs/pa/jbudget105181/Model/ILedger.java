@@ -1,11 +1,12 @@
 package it.unicam.cs.pa.jbudget105181.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 
-public interface ILedger{
+public interface ILedger extends Serializable {
 	void addTransazione(ITransazione c);
 	
 	ArrayList<ITransazione> getAllTransactions();

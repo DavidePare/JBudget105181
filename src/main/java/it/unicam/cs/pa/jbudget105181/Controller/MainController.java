@@ -3,6 +3,7 @@ package it.unicam.cs.pa.jbudget105181.Controller;
 import it.unicam.cs.pa.jbudget105181.Model.*;
 import javafx.scene.input.InputMethodTextRun;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Predicate;
@@ -137,5 +138,23 @@ public class MainController {
     public void addRateMovement(List<ITransazione> lTransaction, IMovement movement){
         ledger.addRateMovement(lTransaction,movement);
 
+    }
+
+    public void resetLedger(){
+        ledger = new Ledger();
+    }
+
+    public void read(Reader reader) throws IOException, ClassNotFoundException {
+        if(reader!=null) {
+            this.ledger = reader.read();
+            reader.close();
+        }
+    }
+
+    public void save(Writer writer) throws IOException {
+        if(writer!=null) {
+            writer.write(ledger);
+            writer.close();
+        }
     }
 }

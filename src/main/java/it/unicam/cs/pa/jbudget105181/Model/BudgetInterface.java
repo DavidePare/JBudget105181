@@ -1,4 +1,6 @@
 package it.unicam.cs.pa.jbudget105181.Model;
 
-public interface BudgetInterface {
+import java.io.Serializable;
+
+public interface BudgetInterface extends Serializable {
 }

@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -333,5 +334,45 @@ public class GUIController implements Initializable {
             dataTransactionNew.setValue(null);
             descriptionTransactionNew.clear();
         }
+    }
+
+    private Writer writer = null;
+
+    private void autoSave(){
+        try {
+            this.controller.save(this.writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void open(){
+        try {
+            String path = createFileChooser().showOpenDialog(new Stage()).getAbsolutePath();
+            this.controller.read(new TxtReader(path));
+            writer = new TxtWriter(path);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void save(){
+        try {
+            String path = createFileChooser().showSaveDialog(new Stage()).getAbsolutePath();
+            this.writer = new TxtWriter(path);
+            autoSave();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private FileChooser createFileChooser() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters()
+                .addAll(new FileChooser.ExtensionFilter("Txt Files", "*.txt"));
+        fileChooser.setInitialFileName("JBudget");
+        return fileChooser;
     }
 }
