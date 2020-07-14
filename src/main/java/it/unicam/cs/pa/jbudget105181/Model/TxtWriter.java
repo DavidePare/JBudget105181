@@ -4,7 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-public class TxtWriter implements Writer{
+public class TxtWriter implements IWriter {
 
     private ObjectOutputStream out;
     private final String path;

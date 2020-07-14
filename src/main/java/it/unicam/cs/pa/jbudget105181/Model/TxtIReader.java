@@ -4,11 +4,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-public class TxtReader implements Reader{
+public class TxtIReader implements IReader {
 
     private final ObjectInputStream in;
 
-    public TxtReader(String path) throws IOException {
+    public TxtIReader(String path) throws IOException {
         in = new ObjectInputStream(new FileInputStream(path));
     }
 

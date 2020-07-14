@@ -1,7 +1,6 @@
 package it.unicam.cs.pa.jbudget105181.Controller;
 
 import it.unicam.cs.pa.jbudget105181.Model.*;
-import javafx.scene.input.InputMethodTextRun;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -147,14 +146,14 @@ public class MainController {
         ledger = new Ledger();
     }
 
-    public void read(Reader reader) throws IOException, ClassNotFoundException {
-        if(reader!=null) {
-            this.ledger = reader.read();
-            reader.close();
+    public void read(IReader IReader) throws IOException, ClassNotFoundException {
+        if(IReader !=null) {
+            this.ledger = IReader.read();
+            IReader.close();
         }
     }
 
-    public void save(Writer writer) throws IOException {
+    public void save(IWriter writer) throws IOException {
         if(writer!=null) {
             writer.write(ledger);
             writer.close();

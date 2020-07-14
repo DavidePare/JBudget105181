@@ -5,12 +5,13 @@ import it.unicam.cs.pa.jbudget105181.Model.*;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -80,6 +81,8 @@ public class GUIController implements Initializable {
     @FXML private ChoiceBox<ITag> tagBudget;
     @FXML private Label resultReport;
 
+
+    @FXML private PieChart graphPieBudget; // eliminare
 
 
     @Override
@@ -357,7 +360,7 @@ public class GUIController implements Initializable {
         }
     }
 
-    private Writer writer = null;
+    private IWriter writer = null;
 
     private void autoSave(){
         try {
@@ -371,7 +374,7 @@ public class GUIController implements Initializable {
     public void open(){
         try {
             String path = createFileChooser().showOpenDialog(new Stage()).getAbsolutePath();
-            this.controller.read(new TxtReader(path));
+            this.controller.read(new TxtIReader(path));
             writer = new TxtWriter(path);
         }catch (Exception e){
             e.printStackTrace();
@@ -415,7 +418,7 @@ public class GUIController implements Initializable {
         updateBudget();
     }
     public void viewGraphBudget(){
-
+        graphPieBudget.setVisible(true);
     }
     private void updateBudget(){
         lBudget.clear();
@@ -431,7 +434,14 @@ public class GUIController implements Initializable {
     public void viewResult(){
         if(tableBudget.getSelectionModel().getSelectedItem()!= null){
             Double res=controller.getBudgetReport(tableBudget.getSelectionModel().getSelectedItem().getKey());
-            resultReport.setText("Ciao"+res);
+            if(res > 0){
+                resultReport.setTextFill(Color.GREEN);
+                resultReport.setText("You are yet in budget! You have :"+res);
+            }
+            else{
+                resultReport.setTextFill(Color.RED);
+                resultReport.setText("You are out of budget of :"+res);
+            }
         }
     }
 }
