@@ -1,7 +1,6 @@
 package it.unicam.cs.pa.jbudget105181.Model;
 
 import java.util.*;
-//import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 
@@ -11,11 +10,11 @@ public class Ledger implements ILedger{
 	 */
 	private ArrayList<ITransazione> allTransaction= new ArrayList<ITransazione>();
 	/*
-	 * Questa variabile conterr� tutti i tag usati sar� utile per stamparli a video nel caso l utente lo richieda
+	 * Questa variabile conterra tutti i tag usati sara utile per stamparli a video nel caso l utente lo richieda
 	 */
-	private List<ITag> tag= new ArrayList<ITag>(); 
-	private List<IAccount> listaAccount= new ArrayList<IAccount>(); 
-	
+	private List<ITag> tag= new ArrayList<ITag>();
+	private List<IAccount> listaAccount= new ArrayList<IAccount>();
+	private IBudget listaBudget= new Budget();
 	public Ledger() {
 		
 	}
@@ -208,8 +207,13 @@ public class Ledger implements ILedger{
 	public void addMovement(IMovement movement){
 		this.get(listaAccount,movement.getAccount().getID()).addMovement(movement);
 		this.get(allTransaction,movement.getIDTransazione()).addMovement(movement);
+		addMovementAtTag(movement);
 	}
-
+	private void addMovementAtTag(IMovement movement){
+		for(ITag tag:movement.tags()){
+			tag.addMovement(movement);
+		}
+	}
 	public void removeTransaction(ITransazione transazione){
 		for(IMovement movement : transazione.movements()){
 			IAccount account=movement.getAccount();
@@ -230,6 +234,17 @@ public class Ledger implements ILedger{
 			this.get(allTransaction,transaction.getID()).addMovement(mov);
 			transaction.addMovement(mov);
 			this.get(listaAccount,movement.getAccount().getID()).addMovement(mov);
+			addMovementAtTag(movement);
 		}
 	}
+	public void addBudgetLedger(ITag tag, Double value){
+		listaBudget.addBudgetType(tag,value);
+	}
+	public IBudget<ITag> getBudget(){
+		return listaBudget;
+	}
+	public void removeBudget(ITag budget){
+		listaBudget.remove(budget);
+	}
+
 }

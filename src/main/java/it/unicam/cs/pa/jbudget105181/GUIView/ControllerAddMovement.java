@@ -84,7 +84,7 @@ public class ControllerAddMovement implements ControllerFXML {
     public void initialize(URL location, ResourceBundle resources) {
         lTags = FXCollections.observableArrayList();
         lTagsAdded=FXCollections.observableArrayList();
-        listTagAddable = controller.getTags();//.stream().collect(Collectors.toList()); //TODO ricontrolla che non hai testato la nuova modifica dovrebbe funzionare
+        listTagAddable.addAll(controller.getTags());//.stream().collect(Collectors.toList()); //TODO ricontrolla che non hai testato la nuova modifica dovrebbe funzionare
         listTagTrans=new ArrayList<ITag>();
         if(!rated) saveButtonRated.setVisible(false);
         else saveButton.setVisible(false);

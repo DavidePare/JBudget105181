@@ -12,9 +12,10 @@ import java.util.stream.Collectors;
 public class MainController {
 
     private ILedger ledger;
-
+    private IBudgetReport reporter;
     public MainController() {
         this.ledger = new Ledger();
+        this.reporter=new BudgetReport(ledger);
     }
 
     public void addTag(ITag tag){
@@ -112,6 +113,7 @@ public class MainController {
      */
     public void addMovement(IMovement movimento){
         ledger.addMovement(movimento);
+
     }
     /*
      * metodo che rimuoverà la transazione
@@ -122,11 +124,11 @@ public class MainController {
     public void removeMovement(IMovement movimento){
         ledger.removeMovement(movimento);
     }
-    public void modifyTransactiond(int idTrans,ITransazione transazione, LocalDate data , String description){
+    public void modifyTransactiond(int idTrans,ITransazione transazione,String description){
         //ledger.getAllTransactions().stream().filter(p-> p.getID()== idTrans).peek(x-> x.setDescription(description)).forEach( t->
           //      t.setData(data));//collect(Collectors.toCollection());
         //transaction.get(1).setData(data);
-        transazione.setData(data);
+      //  transazione.setData(data);
         transazione.setDescription(description);
 
     }
@@ -156,5 +158,19 @@ public class MainController {
             writer.write(ledger);
             writer.close();
         }
+    }
+
+    public void addBudget(ITag tag, Double value){
+        this.ledger.addBudgetLedger(tag,value);
+    }
+    public IBudget<ITag> getBudgetTag(){
+        return this.ledger.getBudget();
+    }
+
+    public void removeBudget(ITag t){
+        this.ledger.removeBudget(t);
+    }
+    public Double getBudgetReport(ITag t){
+        return this.reporter.check(t);
     }
 }

@@ -34,4 +34,7 @@ public interface ILedger extends Serializable {
 
 
 	void addRateMovement(List<ITransazione> lTransaction, IMovement movement);
+	void addBudgetLedger(ITag tag, Double value);
+	IBudget<ITag> getBudget();
+	void removeBudget(ITag budget);
 }

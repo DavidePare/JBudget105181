@@ -5,6 +5,7 @@ import it.unicam.cs.pa.jbudget105181.Model.*;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class GUIController implements Initializable {
@@ -65,20 +67,38 @@ public class GUIController implements Initializable {
     private ObservableList<ITag> lTags;
     private ObservableList<ITransazione> lTransactions;
     private ObservableList<AccountType> typeAccMenu;
+
+    /* Budget Tag*/
+    @FXML private TextField budgetAmount;
+    private ObservableList<Map.Entry<ITag,Double>> lBudget;
+  /*  @FXML private TableView<IBudget> tableBudget;
+    @FXML private TableColumn<IBudget,String> columnBudgetTag;
+    @FXML private TableColumn<IBudget,Double> columnBudgetAmount;*/
+    @FXML private TableView<Map.Entry<ITag,Double>> tableBudget;
+    @FXML private TableColumn<Map.Entry<ITag,Double>,ITag> columnBudgetTag;
+    @FXML private TableColumn<Map.Entry<ITag,Double>,Double> columnBudgetAmount;
+    @FXML private ChoiceBox<ITag> tagBudget;
+    @FXML private Label resultReport;
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //controller = new MainController();
         lTags = FXCollections.observableArrayList();
         lTransactions = FXCollections.observableArrayList();
         lAccount = FXCollections.observableArrayList();
+        lBudget=  FXCollections.observableArrayList();
         typeAccMenu= FXCollections.observableArrayList();
         modifyAccButton.setDisable(true);
         modifyTransactionMenu.setExpanded(false);
         modifyTransactionButton.setDisable(false);
         inizializeTypeAccount();
+        inizializeBudgetTag();
         updateTags();
         updateTransaction();
         updateAccount();
+        updateBudget();
     }
     public GUIController(){
         controller = new MainController();
@@ -89,6 +109,9 @@ public class GUIController implements Initializable {
     private void inizializeTypeAccount(){
         typeAccMenu.addAll(AccountType.values());
         accountType.setItems(typeAccMenu);
+    }
+    private void inizializeBudgetTag(){
+        tagBudget.setItems(lTags);
     }
     public void openWindow(String title, String fileFXML,ControllerFXML controllerFXML){
         try {
@@ -313,7 +336,6 @@ public class GUIController implements Initializable {
         try {
             if(transTable.getSelectionModel().getSelectedItem() != null){
                 modifyTransactionMenu.setExpanded(true);
-                dataTransactionNew.setValue(transTable.getSelectionModel().getSelectedItem().getData());
                 descriptionTransactionNew.setText(transTable.getSelectionModel().getSelectedItem().getDescription());
                 idTransaction=transTable.getSelectionModel().getSelectedItem().getID();
                 modifyTransactionButton.setDisable(false);
@@ -325,13 +347,12 @@ public class GUIController implements Initializable {
     public void modifyTransaction(){
         try{
             controller.modifyTransactiond(idTransaction,transTable.getSelectionModel().getSelectedItem(),
-                    dataTransactionNew.getValue(),descriptionTransactionNew.getText());
+                    descriptionTransactionNew.getText());
             updateTransaction();
         }catch (Exception e){
 
         }finally{
             modifyTransactionMenu.setExpanded(false);
-            dataTransactionNew.setValue(null);
             descriptionTransactionNew.clear();
         }
     }
@@ -374,5 +395,43 @@ public class GUIController implements Initializable {
                 .addAll(new FileChooser.ExtensionFilter("Txt Files", "*.txt"));
         fileChooser.setInitialFileName("JBudget");
         return fileChooser;
+    }
+
+
+
+    public void addBudget(){
+        try{
+            if(tagBudget.getValue()!= null){
+                controller.addBudget(tagBudget.getValue(),Double.parseDouble(budgetAmount.getText()));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            updateBudget();
+        }
+    }
+    public void deleteBudget(){
+        controller.removeBudget(tableBudget.getSelectionModel().getSelectedItem().getKey());
+        updateBudget();
+    }
+    public void viewGraphBudget(){
+
+    }
+    private void updateBudget(){
+        lBudget.clear();
+        lBudget.addAll(controller.getBudgetTag().getBudgetMap().entrySet());
+        tableBudget.setItems(lBudget);
+        this.columnBudgetTag.setCellValueFactory
+                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getKey()));
+        this.columnBudgetAmount.setCellValueFactory
+                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue()));
+        tableBudget.refresh();
+    }
+
+    public void viewResult(){
+        if(tableBudget.getSelectionModel().getSelectedItem()!= null){
+            Double res=controller.getBudgetReport(tableBudget.getSelectionModel().getSelectedItem().getKey());
+            resultReport.setText("Ciao"+res);
+        }
     }
 }

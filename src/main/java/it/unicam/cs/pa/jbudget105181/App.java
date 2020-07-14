@@ -3,7 +3,6 @@ package it.unicam.cs.pa.jbudget105181;
 /*import java.util.Iterator;
 import java.util.List;*/
 
-import it.unicam.cs.pa.jbudget105181.Model.Ledger;
 import it.unicam.cs.pa.jbudget105181.GUIView.FXMLStart;
 import javafx.application.Application;
 
