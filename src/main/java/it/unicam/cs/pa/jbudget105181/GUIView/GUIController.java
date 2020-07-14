@@ -414,8 +414,10 @@ public class GUIController implements Initializable {
         }
     }
     public void deleteBudget(){
-        controller.removeBudget(tableBudget.getSelectionModel().getSelectedItem().getKey());
-        updateBudget();
+        if(tableBudget.getSelectionModel().getSelectedItem()!= null) {
+            controller.removeBudget(tableBudget.getSelectionModel().getSelectedItem().getKey());
+            updateBudget();
+        }
     }
     public void viewGraphBudget(){
         graphPieBudget.setVisible(true);
