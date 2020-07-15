@@ -1,13 +1,9 @@
 package it.unicam.cs.pa.jbudget105181.GUIView;
 
 import it.unicam.cs.pa.jbudget105181.Controller.MainController;
-import it.unicam.cs.pa.jbudget105181.Model.ITransazione;
-import it.unicam.cs.pa.jbudget105181.Model.Transazione;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class FXMLStart extends Application {

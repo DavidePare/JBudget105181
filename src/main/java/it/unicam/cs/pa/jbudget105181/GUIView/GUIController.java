@@ -2,6 +2,10 @@ package it.unicam.cs.pa.jbudget105181.GUIView;
 
 import it.unicam.cs.pa.jbudget105181.Controller.MainController;
 import it.unicam.cs.pa.jbudget105181.Model.*;
+import it.unicam.cs.pa.jbudget105181.Model.Account.AccountType;
+import it.unicam.cs.pa.jbudget105181.Model.Account.IAccount;
+import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
+import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -51,7 +55,7 @@ public class GUIController implements Initializable {
     @FXML private TableView<IAccount> accountTable;
     @FXML private TableColumn<IAccount,Integer> accountIDColumn;
     @FXML private TableColumn<IAccount,String> accountNameColumn;
-    @FXML private TableColumn<IAccount,AccountType> accountTypeColumn;
+    @FXML private TableColumn<IAccount, AccountType> accountTypeColumn;
     @FXML private TableColumn<IAccount,Double> accountAmountColumn;
     @FXML private TableColumn<IAccount,String> accountDescriptionColumn;
     @FXML private ChoiceBox<AccountType> accountType;
@@ -76,7 +80,7 @@ public class GUIController implements Initializable {
     @FXML private TableColumn<IBudget,String> columnBudgetTag;
     @FXML private TableColumn<IBudget,Double> columnBudgetAmount;*/
     @FXML private TableView<Map.Entry<ITag,Double>> tableBudget;
-    @FXML private TableColumn<Map.Entry<ITag,Double>,ITag> columnBudgetTag;
+    @FXML private TableColumn<Map.Entry<ITag,Double>, ITag> columnBudgetTag;
     @FXML private TableColumn<Map.Entry<ITag,Double>,Double> columnBudgetAmount;
     @FXML private ChoiceBox<ITag> tagBudget;
     @FXML private Label resultReport;
@@ -408,7 +412,7 @@ public class GUIController implements Initializable {
                 controller.addBudget(tagBudget.getValue(),Double.parseDouble(budgetAmount.getText()));
             }
         }catch(Exception e){
-            e.printStackTrace();
+            // TODO print messaggio di errore
         }finally{
             updateBudget();
         }

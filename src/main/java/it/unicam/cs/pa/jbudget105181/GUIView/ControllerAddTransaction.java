@@ -1,17 +1,13 @@
 package it.unicam.cs.pa.jbudget105181.GUIView;
 
 import it.unicam.cs.pa.jbudget105181.Controller.MainController;
-import it.unicam.cs.pa.jbudget105181.Model.IMovement;
-import it.unicam.cs.pa.jbudget105181.Model.ITag;
-import it.unicam.cs.pa.jbudget105181.Model.ITransazione;
-import javafx.application.Platform;
+import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
+import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;

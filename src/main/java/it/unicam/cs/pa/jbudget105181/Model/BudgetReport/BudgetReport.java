@@ -1,9 +1,9 @@
-package it.unicam.cs.pa.jbudget105181.Model;
+package it.unicam.cs.pa.jbudget105181.Model.BudgetReport;
 
-import java.util.HashMap;
-import java.util.Map;
+import it.unicam.cs.pa.jbudget105181.Model.Ledger.ILedger;
+import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
 
-public class BudgetReport implements IBudgetReport{
+public class BudgetReport implements IBudgetReport {
     /**
      * Ledger del BudgetReportBase.
      */

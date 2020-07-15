@@ -1,6 +1,12 @@
-package it.unicam.cs.pa.jbudget105181.Model;
+package it.unicam.cs.pa.jbudget105181.Model.Movement;
+import it.unicam.cs.pa.jbudget105181.Model.Account.IAccount;
+import it.unicam.cs.pa.jbudget105181.Model.IUtility;
+import it.unicam.cs.pa.jbudget105181.Model.Movement.MovementType;
+import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
+import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
+
 import java.util.List;
-public interface IMovement extends IUtility{
+public interface IMovement extends IUtility {
 
 	String getDescription();
 	double getAmount();

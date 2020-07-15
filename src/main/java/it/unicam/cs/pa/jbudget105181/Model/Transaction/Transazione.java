@@ -1,10 +1,15 @@
-package it.unicam.cs.pa.jbudget105181.Model;
+package it.unicam.cs.pa.jbudget105181.Model.Transaction;
+
+import it.unicam.cs.pa.jbudget105181.Model.Account.AccountType;
+import it.unicam.cs.pa.jbudget105181.Model.Movement.IMovement;
+import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
+import it.unicam.cs.pa.jbudget105181.Model.Movement.MovementType;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Transazione implements ITransazione{
+public class Transazione implements ITransazione {
 	private boolean pagata;
 	private int ID;
 	private ArrayList<IMovement> movimenti=new ArrayList<IMovement>();
@@ -12,7 +17,7 @@ public class Transazione implements ITransazione{
 	private LocalDate data;
 	private String description;
 	private double cost=0;
-	public Transazione(int ID,LocalDate data, List<ITag> tag,String description, boolean pagata) {
+	public Transazione(int ID, LocalDate data, List<ITag> tag, String description, boolean pagata) {
 		this.pagata=pagata;
 		this.ID=ID;
 		this.tag=tag;

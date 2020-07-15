@@ -1,8 +1,10 @@
-package it.unicam.cs.pa.jbudget105181.Model;
+package it.unicam.cs.pa.jbudget105181.Model.Tag;
+import it.unicam.cs.pa.jbudget105181.Model.Budget.BudgetInterface;
+import it.unicam.cs.pa.jbudget105181.Model.Movement.IMovement;
 
 import java.util.List;
 
-public interface ITag extends BudgetInterface{
+public interface ITag extends BudgetInterface {
 	String getDescription();
 	String getNome();
 	void addMovement(IMovement movement);

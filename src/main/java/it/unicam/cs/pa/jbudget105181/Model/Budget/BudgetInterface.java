@@ -1,4 +1,4 @@
-package it.unicam.cs.pa.jbudget105181.Model;
+package it.unicam.cs.pa.jbudget105181.Model.Budget;
 
 import java.io.Serializable;
 

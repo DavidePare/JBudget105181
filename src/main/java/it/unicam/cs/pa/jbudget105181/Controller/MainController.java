@@ -1,6 +1,18 @@
 package it.unicam.cs.pa.jbudget105181.Controller;
 
 import it.unicam.cs.pa.jbudget105181.Model.*;
+import it.unicam.cs.pa.jbudget105181.Model.Account.AccountType;
+import it.unicam.cs.pa.jbudget105181.Model.Account.IAccount;
+import it.unicam.cs.pa.jbudget105181.Model.Budget.IBudget;
+import it.unicam.cs.pa.jbudget105181.Model.BudgetReport.BudgetReport;
+import it.unicam.cs.pa.jbudget105181.Model.BudgetReport.IBudgetReport;
+import it.unicam.cs.pa.jbudget105181.Model.Ledger.ILedger;
+import it.unicam.cs.pa.jbudget105181.Model.Ledger.Ledger;
+
+import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
+import it.unicam.cs.pa.jbudget105181.Model.Tag.Tag;
+import it.unicam.cs.pa.jbudget105181.Model.Movement.IMovement;
+import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -102,7 +114,7 @@ public class MainController {
         ledger.get(ledger.getAccounts(),accID).setConto(value);*/
         ledger.modifyAccount(accID,name,description, type,value);
     }
-    public ITransazione addTransaction(LocalDate data,List<ITag> tag,String description,boolean pagata){
+    public ITransazione addTransaction(LocalDate data, List<ITag> tag, String description, boolean pagata){
         int id=generateIDTransaction();
         ledger.addTransazione(IFactory.generateTransaction(id,data,tag,description,pagata));
         return IFactory.generateTransaction(id,data,tag,description,pagata);

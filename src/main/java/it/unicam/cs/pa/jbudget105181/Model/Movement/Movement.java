@@ -1,8 +1,12 @@
-package it.unicam.cs.pa.jbudget105181.Model;
+package it.unicam.cs.pa.jbudget105181.Model.Movement;
+import it.unicam.cs.pa.jbudget105181.Model.Account.IAccount;
+import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
+import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
+
 import java.util.ArrayList;
 import java.util.List;
 //import java.util.Date;
-public class Movement implements IMovement{
+public class Movement implements IMovement {
 
 	private int ID=0;
 	private String descrizione="";
@@ -13,7 +17,7 @@ public class Movement implements IMovement{
 	private int idTransazione;
 	private ITransazione associatedTransaction;
 	
-	public Movement(int ID, String descrizione, MovementType type,double prezzo, IAccount account, List<ITag> tag, ITransazione transaction) {
+	public Movement(int ID, String descrizione, MovementType type, double prezzo, IAccount account, List<ITag> tag, ITransazione transaction) {
 		this.ID=ID;
 		this.descrizione=descrizione;
 		this.type=type;

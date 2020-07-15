@@ -1,10 +1,10 @@
-package it.unicam.cs.pa.jbudget105181.Model;
+package it.unicam.cs.pa.jbudget105181.Model.Budget;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class Budget<T extends BudgetInterface> implements IBudget<T>{
+public class Budget<T extends BudgetInterface> implements IBudget<T> {
     private int id;
     private final Map<T, Double> budgetMap;
     public Budget(){

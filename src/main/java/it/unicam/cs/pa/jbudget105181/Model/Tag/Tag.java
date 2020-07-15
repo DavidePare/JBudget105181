@@ -1,4 +1,7 @@
-package it.unicam.cs.pa.jbudget105181.Model;
+package it.unicam.cs.pa.jbudget105181.Model.Tag;
+
+import it.unicam.cs.pa.jbudget105181.Model.Movement.IMovement;
+import it.unicam.cs.pa.jbudget105181.Model.Movement.MovementType;
 
 import java.util.ArrayList;
 import java.util.List;

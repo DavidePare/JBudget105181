@@ -1,10 +1,19 @@
-package it.unicam.cs.pa.jbudget105181.Model;
+package it.unicam.cs.pa.jbudget105181.Model.Ledger;
+
+import it.unicam.cs.pa.jbudget105181.Model.*;
+import it.unicam.cs.pa.jbudget105181.Model.Account.AccountType;
+import it.unicam.cs.pa.jbudget105181.Model.Account.IAccount;
+import it.unicam.cs.pa.jbudget105181.Model.Budget.Budget;
+import it.unicam.cs.pa.jbudget105181.Model.Budget.IBudget;
+import it.unicam.cs.pa.jbudget105181.Model.Movement.IMovement;
+import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
+import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 
-public class Ledger implements ILedger{
+public class Ledger implements ILedger {
 	/*
 	 * Contiene tutte le transazioni e quindi di conseguenza ha accesso a tutti i movimenti
 	 */

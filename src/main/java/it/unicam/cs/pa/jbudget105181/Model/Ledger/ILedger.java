@@ -1,4 +1,12 @@
-package it.unicam.cs.pa.jbudget105181.Model;
+package it.unicam.cs.pa.jbudget105181.Model.Ledger;
+
+import it.unicam.cs.pa.jbudget105181.Model.Account.AccountType;
+import it.unicam.cs.pa.jbudget105181.Model.Account.IAccount;
+import it.unicam.cs.pa.jbudget105181.Model.Budget.IBudget;
+import it.unicam.cs.pa.jbudget105181.Model.Movement.IMovement;
+import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
+import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
+import it.unicam.cs.pa.jbudget105181.Model.IUtility;
 
 import java.io.Serializable;
 import java.util.ArrayList;

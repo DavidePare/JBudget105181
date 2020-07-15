@@ -1,9 +1,12 @@
-package it.unicam.cs.pa.jbudget105181.Model;
+package it.unicam.cs.pa.jbudget105181.Model.Account;
+
+import it.unicam.cs.pa.jbudget105181.Model.Movement.IMovement;
+import it.unicam.cs.pa.jbudget105181.Model.IUtility;
 
 import java.util.List;
 import java.util.function.Predicate;
 
-public interface IAccount extends IUtility{
+public interface IAccount extends IUtility {
 	String getNameAccount();
 	String getDescriptionAccount();
 	double getOpeningBalance();

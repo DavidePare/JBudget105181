@@ -1,4 +1,7 @@
-package it.unicam.cs.pa.jbudget105181.Model;
+package it.unicam.cs.pa.jbudget105181.Model.Account;
+
+import it.unicam.cs.pa.jbudget105181.Model.Movement.IMovement;
+import it.unicam.cs.pa.jbudget105181.Model.Movement.MovementType;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
