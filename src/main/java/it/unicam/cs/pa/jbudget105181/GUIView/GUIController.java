@@ -4,6 +4,7 @@ import it.unicam.cs.pa.jbudget105181.Controller.MainController;
 import it.unicam.cs.pa.jbudget105181.Model.*;
 import it.unicam.cs.pa.jbudget105181.Model.Account.AccountType;
 import it.unicam.cs.pa.jbudget105181.Model.Account.IAccount;
+import it.unicam.cs.pa.jbudget105181.Model.Store.IWriter;
 import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
 import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
 import javafx.beans.property.SimpleObjectProperty;

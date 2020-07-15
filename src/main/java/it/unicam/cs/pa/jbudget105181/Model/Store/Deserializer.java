@@ -1,5 +1,6 @@
 package it.unicam.cs.pa.jbudget105181.Model.Store;
 
+import com.google.gson.Gson;
 import it.unicam.cs.pa.jbudget105181.Model.Ledger.ILedger;
 
 public class Deserializer {
@@ -7,5 +8,9 @@ public class Deserializer {
     public Deserializer(ILedger ledger){
         this.ledger=ledger;
     }
+    public void deserializerLedger(){
+        Gson json=new Gson();
+        String response=  json.toJson(ledger);
 
+    }
 }

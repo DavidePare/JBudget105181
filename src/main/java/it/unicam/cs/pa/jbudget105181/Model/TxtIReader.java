@@ -1,6 +1,7 @@
 package it.unicam.cs.pa.jbudget105181.Model;
 
 import it.unicam.cs.pa.jbudget105181.Model.Ledger.ILedger;
+import it.unicam.cs.pa.jbudget105181.Model.Store.IReader;
 
 import java.io.FileInputStream;
 import java.io.IOException;

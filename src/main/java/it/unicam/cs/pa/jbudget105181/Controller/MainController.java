@@ -9,8 +9,10 @@ import it.unicam.cs.pa.jbudget105181.Model.BudgetReport.IBudgetReport;
 import it.unicam.cs.pa.jbudget105181.Model.Ledger.ILedger;
 import it.unicam.cs.pa.jbudget105181.Model.Ledger.Ledger;
 
+import it.unicam.cs.pa.jbudget105181.Model.Store.Deserializer;
+import it.unicam.cs.pa.jbudget105181.Model.Store.IReader;
+import it.unicam.cs.pa.jbudget105181.Model.Store.IWriter;
 import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
-import it.unicam.cs.pa.jbudget105181.Model.Tag.Tag;
 import it.unicam.cs.pa.jbudget105181.Model.Movement.IMovement;
 import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
 
@@ -166,10 +168,12 @@ public class MainController {
     }
 
     public void save(IWriter writer) throws IOException {
-        if(writer!=null) {
+        Deserializer d= new Deserializer(ledger);
+        d.deserializerLedger();
+       /* if(writer!=null) {
             writer.write(ledger);
             writer.close();
-        }
+        }*/
     }
 
     public void addBudget(ITag tag, Double value){
