@@ -17,35 +17,100 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
-
+/**
+ * classe che ha la responsabilità di fare da controller alla AddTransaction.
+ */
 public class ControllerAddTransaction implements ControllerFXML{
+    /**
+     * controller
+     */
     private MainController controller;
+    /**
+     * data della transazione
+     */
     @FXML private DatePicker transactionDate;
+    /**
+     * bottone per transazione rateizzata
+     */
     @FXML private RadioButton rateButton;
+    /**
+     * bottone per la transazione rateizzata
+     */
     @FXML private RadioButton instantTransaction;
+    /**
+     * textField per dettare il distanziamento temporale tra le transazioni
+     */
     @FXML private TextField numweekTransaction;
+    /**
+     * label per il distanziamento temporale tra le transazioni
+     */
     @FXML private Label numweeklabel;
+    /**
+     * bottone per tornare indietro
+     */
     @FXML private Button backButton;
+    /**
+     * bottone per salvare la transazione
+     */
     @FXML private Button saveButton;
+    /**
+     * choiceBox per inserire il numero di transazioni rateizzate
+     */
     @FXML private ChoiceBox<Integer> numberOfTransaction;
-
-
+    /**
+     * tabella contenente tutti i tag
+     */
     @FXML private TableView<ITag> tableAllTag;
+    /**
+     * tabella contenente tutti i tag aggiunti
+     */
     @FXML private TableView<ITag> tableAddedTag;
-
+    /**
+     * colonna nome tag della tabella A
+     */
     @FXML private TableColumn<ITag,String> columnNameA;
+    /**
+     * colonna descrizione tag della tabella A
+     */
     @FXML private TableColumn<ITag,String> columnDescriptionA;
-
+    /**
+     * colonna nome tag della tabella B
+     */
     @FXML private TableColumn<ITag,String> columnNameB;
+    /**
+     * colonna descrizione tag della tabella B
+     */
     @FXML private TableColumn<ITag,String> columnDescriptionB;
-
+    /**
+     * lista di tutti i tag
+     */
     @FXML private ObservableList<ITag> lTags;
+    /**
+     * lista dei tag aggiunti
+     */
     @FXML private ObservableList<ITag> lTagsAdded;
-
+    /**
+     * label per i messaggi di errore
+     */
     @FXML private Label errorText;
+    /**
+     * area di testo per la descrizione della transazione
+     */
     @FXML private TextArea descriptionTransaction;
+    /**
+     * lista di tutti i tag che possono essere aggiunti
+     */
     private List<ITag> listTagAddable=new ArrayList<>();
+    /**
+     * lista dei tag della transazione
+     */
     private List<ITag> listTagTrans;
+
+    /**
+     * metodo che ha il compito di inizializzare le variabili
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initializevisible();
@@ -57,11 +122,17 @@ public class ControllerAddTransaction implements ControllerFXML{
         instantTransaction.fire();
         updateTags();
     }
+
+    /**
+     * costruttore di ControllerAddTransaction
+     * @param controller
+     */
     public ControllerAddTransaction(MainController controller) {
         this.controller = controller;
     }
-    /*
-     * Metodo che setta le visibilità iniziali
+
+    /**
+     * metodo che imposta le visibilità iniziali
      */
     private void initializevisible(){
         numweeklabel.setVisible(false);
@@ -69,17 +140,30 @@ public class ControllerAddTransaction implements ControllerFXML{
         numberOfTransaction.setVisible(false);
         errorText.setVisible(false);
     }
+
+    /**
+     * metodo per impostare la visibilità a true delle variabili
+     * riguardanti del range temporale
+     */
     public void activeNumWeek(){
         numweeklabel.setVisible(true);
         numweekTransaction.setVisible(true);
         numberOfTransaction.setVisible(true);
     }
 
+    /**
+     * metodo per impostare la visibilità a false delle variabili
+     * riguardanti del range temporale
+     */
     public void deactiveNumWeek(){
         numweeklabel.setVisible(false);
         numweekTransaction.setVisible(false);
         numberOfTransaction.setVisible(false);
     }
+
+    /**
+     * metodo per aggiungere una nuova transazione
+     */
     public void saveNewTransaction(){
         try{
             if(transactionDate.getValue() != null){
@@ -104,8 +188,8 @@ public class ControllerAddTransaction implements ControllerFXML{
 
         }
     }
-    /*
-     * Metodo per non duplicare il codice usato sia da save che da delete per tornare alla pagina principale.
+    /**
+     * metodo per ritornare alla pagina di Home
      */
     private void returnHome() throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();
@@ -117,6 +201,8 @@ public class ControllerAddTransaction implements ControllerFXML{
         stage.setScene(new Scene(loader.load(), 640, 400));
         stage.show();
     }
+
+
     public void backButtonAction(){
         try {
             returnHome();
@@ -124,8 +210,8 @@ public class ControllerAddTransaction implements ControllerFXML{
         }
     }
 
-    /*
-     * Metodo che sposta un tag dalla lista dei tag da aggiungere e lo inserisce nei tag che possono essere aggiunti
+    /**
+     * metodo per rimuovere i tag dalla lista dei tag della transazione
      */
     public void leaveTag(){
         if(tableAddedTag.getSelectionModel().getSelectedItem() != null){
@@ -138,6 +224,10 @@ public class ControllerAddTransaction implements ControllerFXML{
             }
         }
     }
+
+    /**
+     * metodo per aggiungere i tag dalla lista dei tag della transazione
+     */
     public void addTag(){
         if(tableAllTag.getSelectionModel().getSelectedItem() != null){
             try {
@@ -149,6 +239,10 @@ public class ControllerAddTransaction implements ControllerFXML{
             }
         }
     }
+
+    /**
+     * metodo per aggiornare la tabella dei tag
+     */
     private void updateTags(){
         lTags.removeAll(lTags);
         lTags.addAll(listTagAddable);
@@ -168,6 +262,12 @@ public class ControllerAddTransaction implements ControllerFXML{
         this.tableAllTag.refresh();
     }
 
+    /**
+     * Metodo per aprire una nuova finestra
+     * @param title
+     * @param fileFXML
+     * @param controllerFXML
+     */
     public void openWindow(String title, String fileFXML,ControllerFXML controllerFXML){
         try {
             Stage stage = (Stage) backButton.getScene().getWindow();

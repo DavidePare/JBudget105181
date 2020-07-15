@@ -27,69 +27,191 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+/**
+ * classe che ha la responsabilità di controllo principale della GUI View
+ */
 public class GUIController implements Initializable {
 
-
-  //  private GeneratorID<> generatore;
+    /**
+     * controller dell' MVC
+     */
     private MainController controller;
+    /**
+     * text field per il nome del tag
+     */
     @FXML private TextField tagName;
+    /**
+     * text field per la descrizione del tag
+     */
     @FXML private TextField tagDescription;
+    /**
+     * tabella dei tag
+     */
     @FXML private TableView<ITag> tagTable;
+    /**
+     * colonna del nome del tag
+     */
     @FXML private TableColumn<ITag,String> tagNameColumn;
+    /**
+     * colonna della descrizione del tag
+     */
     @FXML private TableColumn<ITag,String> tagDescriptionColumn;
-
-
-
+    /**
+     * tabella delle transazioni
+     */
     @FXML private TableView<ITransazione> transTable;
+    /**
+     * colonna ID della transazione
+     */
     @FXML private TableColumn<ITransazione,Integer> transIDColumn;
+    /**
+     * colonna amount della transazione
+     */
     @FXML private TableColumn<ITransazione,Double> transAmountColumn;
+    /**
+     * colonna numero movimenti della transazione
+     */
     @FXML private TableColumn<ITransazione,Integer> transNumMovColumn;
+    /**
+     * colonna data della transazione
+     */
     @FXML private TableColumn<ITransazione, LocalDate> transDateColumn;
+    /**
+     * colonna descrizione della transazione
+     */
     @FXML private TableColumn<ITransazione, String> transDescriptionColumn;
-
-
+    /**
+     * label per messaggi di fallimento tag
+     */
     @FXML private Label FailedOperationTag;
-
+    /**
+     * text field per il nome dell'account
+     */
     @FXML private TextField nameAccount;
+    /**
+     * text field per il bilancio dell'account
+     */
     @FXML private TextField balanceAccount;
+    /**
+     * text field per la descrizione dell'account
+     */
     @FXML private TextField descriptionAccount;
+    /**
+     * tabella degli account
+     */
     @FXML private TableView<IAccount> accountTable;
+    /**
+     * colonna ID della transazione
+     */
     @FXML private TableColumn<IAccount,Integer> accountIDColumn;
+    /**
+     * colonna nome della transazione
+     */
     @FXML private TableColumn<IAccount,String> accountNameColumn;
+    /**
+     * colonna tipo di account della transazione
+     */
     @FXML private TableColumn<IAccount, AccountType> accountTypeColumn;
+    /**
+     * colonna amount della transazione
+     */
     @FXML private TableColumn<IAccount,Double> accountAmountColumn;
+    /**
+     * colonna descrzione della transazione
+     */
     @FXML private TableColumn<IAccount,String> accountDescriptionColumn;
+    /**
+     * choice box per il tipo di account
+     */
     @FXML private ChoiceBox<AccountType> accountType;
+    /**
+     * bottone per modificare l'account
+     */
     @FXML private Button modifyAccButton;
+    /**
+     * bottone per aggiungere un movimento
+     */
     @FXML private Button buttonAddMovement;
-
+    /**
+     * titled pane per modificare la transazione
+     */
     @FXML private TitledPane modifyTransactionMenu;
+    /**
+     * nuova data transazione
+     */
     @FXML private DatePicker dataTransactionNew;
+    /**
+     * nuova descrizione transazione
+     */
     @FXML private TextArea descriptionTransactionNew;
+    /**
+     * bottone per modificare la transazione
+     */
     @FXML private Button modifyTransactionButton;
+    /**
+     * ID transazione
+     */
     private int idTransaction=-1;
+    /**
+     * ID account
+     */
     private int idAcc=-1;
+    /**
+     * lista degli account
+     */
     private ObservableList<IAccount> lAccount;
+    /**
+     * lista dei tag
+     */
     private ObservableList<ITag> lTags;
+    /**
+     * lista delle transazioni
+     */
     private ObservableList<ITransazione> lTransactions;
+    /**
+     * tipo di account
+     */
     private ObservableList<AccountType> typeAccMenu;
-
-    /* Budget Tag*/
+    /**
+     * text field per l'amount del budget
+     */
     @FXML private TextField budgetAmount;
+    /**
+     * lista dei budget
+     */
     private ObservableList<Map.Entry<ITag,Double>> lBudget;
   /*  @FXML private TableView<IBudget> tableBudget;
     @FXML private TableColumn<IBudget,String> columnBudgetTag;
     @FXML private TableColumn<IBudget,Double> columnBudgetAmount;*/
+    /**
+     * tabella di budget
+     */
     @FXML private TableView<Map.Entry<ITag,Double>> tableBudget;
+    /**
+     * colonna tag del budget
+     */
     @FXML private TableColumn<Map.Entry<ITag,Double>, ITag> columnBudgetTag;
+    /**
+     * colonna amount del budget
+     */
     @FXML private TableColumn<Map.Entry<ITag,Double>,Double> columnBudgetAmount;
+    /**
+     * choice box tag
+     */
     @FXML private ChoiceBox<ITag> tagBudget;
+    /**
+     * label per report
+     */
     @FXML private Label resultReport;
 
 
     @FXML private PieChart graphPieBudget; // eliminare
 
-
+    /**
+     * metodo per inizializzare le variabili
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //controller = new MainController();
@@ -108,19 +230,43 @@ public class GUIController implements Initializable {
         updateAccount();
         updateBudget();
     }
+
+    /**
+     * costruttore di GUIController
+     */
     public GUIController(){
-        controller = new MainController();
+        controller = new MainController(); // TODO doppio costruttore
     }
+
+    /**
+     * costruttore di GUIController
+     * @param controller
+     */
     public GUIController(MainController controller){
         this.controller=controller;
     }
+
+    /**
+     * metodo per impostare i tipi di account
+     */
     private void inizializeTypeAccount(){
         typeAccMenu.addAll(AccountType.values());
         accountType.setItems(typeAccMenu);
     }
+
+    /**
+     * metodo per impostare i tag
+     */
     private void inizializeBudgetTag(){
         tagBudget.setItems(lTags);
     }
+
+    /**
+     * Metodo per aprire una nuova finestra
+     * @param title
+     * @param fileFXML
+     * @param controllerFXML
+     */
     public void openWindow(String title, String fileFXML,ControllerFXML controllerFXML){
         try {
             //Stage stage = new Stage();
@@ -139,6 +285,9 @@ public class GUIController implements Initializable {
         }
     }
 
+    /**
+     * metodo per aggiornare la tabella degli account
+     */
     private void updateAccount(){
         lAccount.removeAll(lAccount);
         lAccount.addAll(controller.getAccount());
@@ -157,10 +306,16 @@ public class GUIController implements Initializable {
         this.accountTable.refresh();
     }
 
+    /**
+     * metodo per aprire la finisetra ed aggiungere una transazione
+     */
     public void addTransaction(){
         openWindow("Add Transaction", "/FXMLAddTransaction.fxml", new ControllerAddTransaction(controller));
     }
 
+    /**
+     * metodo per aggiungere la transazione
+     */
     public void addAccount(){
         try{
             if(controller.alreadyExistNameAccount(nameAccount.getText()) && accountType.getValue()!=null){
@@ -176,6 +331,10 @@ public class GUIController implements Initializable {
             updateAccount();
         }
     }
+
+    /**
+     * metodo per selezionare un account
+     */
     public void selectAccount(){
         IAccount account =accountTable.getSelectionModel().getSelectedItem();
         if(account != null && !accountTable.getItems().isEmpty()){
@@ -187,6 +346,10 @@ public class GUIController implements Initializable {
             modifyAccButton.setDisable(false);
         }
     }
+
+    /**
+     * metodo per modificare un account
+     */
     public void modifyAccount(){
         if(!accountTable.getItems().isEmpty()){
             //IAccount newAcc= new Account(idAcc,nameAccount.getText(),descriptionAccount.getText(),accountType.getValue(),Double.valueOf(balanceAccount.getText()));
@@ -210,7 +373,10 @@ public class GUIController implements Initializable {
         }
 
     }
-    
+
+    /**
+     * metodo per eliminare un account
+     */
     public void deleteAccount(){
        // try {
             IAccount account = accountTable.getSelectionModel().getSelectedItem();
@@ -230,8 +396,8 @@ public class GUIController implements Initializable {
    //     }
     }
 
-    /*
-     * Nel caso è stata selezionata una transazione ed esiste almeno un account è possibile aggiungere un movimento
+    /**
+     * metodo per aprire la finestra ed aggiungere un movimento
      */
     public void addMovement() {
 
@@ -241,6 +407,9 @@ public class GUIController implements Initializable {
         }
     }
 
+    /**
+     * metodo per aggiorane la tabella delle transazioni
+     */
     private void updateTransaction(){
         lTransactions.removeAll(lTransactions);
         lTransactions.addAll(controller.getTransaction());
@@ -259,6 +428,9 @@ public class GUIController implements Initializable {
         this.transTable.refresh();
     }
 
+    /**
+     * metodo per eliminare un tag
+     */
     public void deleteTag() {
         FailedOperationTag.setText("");
         ITag tag = tagTable.getSelectionModel().getSelectedItem();
@@ -268,6 +440,9 @@ public class GUIController implements Initializable {
         }
     }
 
+    /**
+     * metodo per aggiungere un tag
+     */
     public void addTag() {
         try{
             FailedOperationTag.setText("");
@@ -284,6 +459,9 @@ public class GUIController implements Initializable {
         }
     }
 
+    /**
+     * metodo per aggiornare la tabella dei tag
+     */
     private void updateTags(){
         lTags.removeAll(lTags);
         lTags.addAll(controller.getTags());
@@ -294,6 +472,10 @@ public class GUIController implements Initializable {
                 (cellData -> new SimpleObjectProperty<>(cellData.getValue().getDescription()));
         this.tagTable.refresh();
     }
+
+    /**
+     * metodo per visualizzare i tag della transazione
+     */
     public void viewTagsTransaction(){
         try{
             if(transTable.getSelectionModel().getSelectedItem() != null) {
@@ -310,6 +492,9 @@ public class GUIController implements Initializable {
         }
     }
 
+    /**
+     * metodo per rimuovere una transazione
+     */
     public void removeTransaction(){
         if(transTable.getSelectionModel().getSelectedItem() != null){
             controller.removeTransaction(transTable.getSelectionModel().getSelectedItem());
@@ -317,8 +502,8 @@ public class GUIController implements Initializable {
             updateAccount();
         }
     }
-    /*
-     * Aprirà una finestra dove sarranno mostrati tutti i movimenti associati alla transazione selezionata.
+    /**
+     * metodo per aprire una finestra e visualizzare tutti i movimenti associati alla transazione
      */
     public void viewMovementTransaction(){
         try{
@@ -340,6 +525,9 @@ public class GUIController implements Initializable {
         }
     }
 
+    /**
+     * metodo per selezionare una transazione
+     */
     public void selectTransaction(){
         try {
             if(transTable.getSelectionModel().getSelectedItem() != null){
@@ -352,6 +540,10 @@ public class GUIController implements Initializable {
 
         }
     }
+
+    /**
+     * metodo per modificare una transazione
+     */
     public void modifyTransaction(){
         try{
             controller.modifyTransactiond(idTransaction,transTable.getSelectionModel().getSelectedItem(),
@@ -365,8 +557,14 @@ public class GUIController implements Initializable {
         }
     }
 
+    /**
+     * writer
+     */
     private IWriter writer = null;
 
+    /**
+     * metodo per salvare su file
+     */
     private void autoSave(){
         try {
             this.controller.save(this.writer);
@@ -375,6 +573,9 @@ public class GUIController implements Initializable {
         }
     }
 
+    /**
+     * metodo per aprire un file
+     */
     @FXML
     public void open(){
         try {
@@ -386,6 +587,9 @@ public class GUIController implements Initializable {
         }
     }
 
+    /**
+     * metodo per salvare un file
+     */
     @FXML
     public void save(){
         try {
@@ -405,8 +609,9 @@ public class GUIController implements Initializable {
         return fileChooser;
     }
 
-
-
+    /**
+     * metodo per aggiungere un budget
+     */
     public void addBudget(){
         try{
             if(tagBudget.getValue()!= null){
@@ -418,15 +623,27 @@ public class GUIController implements Initializable {
             updateBudget();
         }
     }
+
+    /**
+     * metodo per eliminare un budget
+     */
     public void deleteBudget(){
         if(tableBudget.getSelectionModel().getSelectedItem()!= null) {
             controller.removeBudget(tableBudget.getSelectionModel().getSelectedItem().getKey());
             updateBudget();
         }
     }
+
+    /**
+     * metodo per impostare la visibilità del grafico
+     */
     public void viewGraphBudget(){
         graphPieBudget.setVisible(true);
     }
+
+    /**
+     * metodo per aggiornare la tabella dei budget
+     */
     private void updateBudget(){
         lBudget.clear();
         lBudget.addAll(controller.getBudgetTag().getBudgetMap().entrySet());
@@ -438,6 +655,9 @@ public class GUIController implements Initializable {
         tableBudget.refresh();
     }
 
+    /**
+     * metodo per visualizzare il report
+     */
     public void viewResult(){
         if(tableBudget.getSelectionModel().getSelectedItem()!= null){
             Double res=controller.getBudgetReport(tableBudget.getSelectionModel().getSelectedItem().getKey());

@@ -26,65 +26,113 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * classe che ha la responsabilità di fare da controller alla AddMovement.
+ */
 public class ControllerAddMovement implements ControllerFXML {
 
-    /*
+    /**
      *  variabile che verifica se un movimento è rateizzazto cioè deve essere inserito su più transazioni
      */
     private MainController controller;
-    /*
+    /**
      * Riferimento della transazione alla quale viene aggiunto il movimento
      */
     private ITransazione transaction;
-
+    /**
+     * variabile per verificare se stiamo trattando un movimento rateizzato
+     */
     private boolean rated=false;
-
+    /**
+     * lista delle transazioni
+     */
     private List<ITransazione> listTransaction=new ArrayList<ITransazione>();
-    /*
+    /**
      * TextArea per prendere in input la descrizione dell'account
      */
     @FXML private TextArea descriptionMovement;
-    /*
+    /**
      * TextBox per prendere in input il valore della transazione
      */
     @FXML private TextField amountMovement;
-    /*
+    /**
      * ChoiceBox che fa scegliere all'utente l'account al quale fa riferimento il movimento
      */
     @FXML private ChoiceBox<IAccount> accountChoiceBox;
-    /*
+    /**
      * ChoiceBox che fa scegliere il tipo di movimento se CREDIT o DEBIT
      */
     @FXML private ChoiceBox<MovementType> movementTypeChoiceBox;
-    /*
+    /**
      * Bottone per tornare indietro
      */
     @FXML private Button backButton;
+    /**
+     * label per messaggi
+     */
     @FXML private Label messageAddMovement;
+    /**
+     * tabella di tutti i tag disponibili (tabella A)
+     */
     @FXML private TableView<ITag> tableAllTag;
+    /**
+     * tabella dei tag aggiunti (tabella B)
+     */
     @FXML private TableView<ITag> tableAddedTag;
-
+    /**
+     * colonna nome tag della tabella A
+     */
     @FXML private TableColumn<ITag,String> columnNameA;
+    /**
+     * colonna nome tag della descrizione A
+     */
     @FXML private TableColumn<ITag,String> columnDescriptionA;
-
+    /**
+     * colonna nome tag della nome B
+     */
     @FXML private TableColumn<ITag,String> columnNameB;
+    /**
+     * colonna nome tag della descrizione B
+     */
     @FXML private TableColumn<ITag,String> columnDescriptionB;
+    /**
+     * lista di tag
+     */
     @FXML private ObservableList<ITag> lTags;
+    /**
+     * lista di tag aggiunti
+     */
     @FXML private ObservableList<ITag> lTagsAdded;
+    /**
+     * lista di tutti i tag che possono essere aggiunti
+     */
     private List<ITag> listTagAddable=new ArrayList<>();
+    /**
+     * lista dei tag della transazione
+     */
     private List<ITag> listTagTrans;
-    /*
-     * Lista che mostrerà nella choiceBox tutti i nomi degli account associabili a un movimento
+    /**
+     * lista che mostrerà nella choiceBox tutti i nomi degli account associabili a un movimento
      */
     private ObservableList<IAccount> allAccount;
-    /*
-     * Lista che mostrerà nella choiceBox i tipi di movimento
+    /**
+     * lista che mostrerà nella choiceBox i tipi di movimento
      */
     private ObservableList<MovementType> typeMovement;
-
+    /**
+     * bottone per salvare il movimento rateizzato
+     */
     @FXML private Button saveButtonRated;
+    /**
+     * bottone per salvare la transazione istantanea
+     */
     @FXML private Button saveButton;
 
+    /**
+     * metodo che ha il compito di inizializzare le variabili
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         lTags = FXCollections.observableArrayList();
@@ -97,31 +145,57 @@ public class ControllerAddMovement implements ControllerFXML {
         inizializzateAccountList();
         updateTags();
     }
+
+    /**
+     * metodo per impostare i tipi di movimento
+     */
     private void inizializzateTypeMovement(){
         typeMovement=FXCollections.observableArrayList();
         typeMovement.addAll(MovementType.values());
         movementTypeChoiceBox.setItems(typeMovement);
     }
+
+    /**
+     * metodo per impostare gli account
+     */
     private void inizializzateAccountList(){
         allAccount=FXCollections.observableArrayList();
         allAccount.addAll(controller.getAccount());
         accountChoiceBox.setItems(allAccount);
     }
-    public ControllerAddMovement(MainController controller) {
+
+    /**
+     * costruttore di ControllerAddMovement
+     * @param controller
+     */
+    public ControllerAddMovement(MainController controller) { // TODO DA RIVEDERE
         this.controller = controller;
     }
-    public ControllerAddMovement(MainController controller, ITransazione transazione){
+
+    /**
+     * costruttore di ControllerAddMovement
+     * @param controller
+     * @param transazione
+     */
+    public ControllerAddMovement(MainController controller, ITransazione transazione){ // TODO DA RIVEDERE
         this.transaction=transazione;
         this.controller=controller;
     }
+
+    /**
+     * costruttore di ControllerAddMovement
+     * @param controller
+     * @param lTransaction
+     * @param rated
+     */
     public ControllerAddMovement(MainController controller, List<ITransazione> lTransaction,boolean rated){
         this.listTransaction=lTransaction;
         this.controller=controller;
         this.rated=rated;
     }
 
-    /*
-     * Metodo che permetterà di tornare indietro senza attuare alcuna modifica
+    /**
+     * metodo che permetterà di tornare indietro senza attuare alcuna modifica
      */
     public void backButtonAction(){
         try {
@@ -137,6 +211,10 @@ public class ControllerAddMovement implements ControllerFXML {
 
         }
     }
+
+    /**
+     * metodo per aggiungere un movimento
+     */
     public void saveNewMovement(){
         try{
 
@@ -159,8 +237,8 @@ public class ControllerAddMovement implements ControllerFXML {
             amountMovement.clear();
         }
     }
-    /*
-     * Questo metodo aggiornerà le due tabelle con i tag inseriti e quelli che non sono stati inseriti
+    /**
+     * metodo per aggiungere le due tabelle dei tag
      */
     private void updateTags(){
         lTags.clear();
@@ -181,8 +259,8 @@ public class ControllerAddMovement implements ControllerFXML {
         this.tableAddedTag.refresh();
         this.tableAllTag.refresh();
     }
-    /*
-     * Metodo che serve per rimuovere un tag dalla lista dei tag che l'utente vuole inserire alla creazione del movimento.
+    /**
+     * metodo per rimuovere un tag dalla lista dei tag del movimento
      */
     public void leaveTag(){
         if(tableAddedTag.getSelectionModel().getSelectedItem() != null){
@@ -196,9 +274,8 @@ public class ControllerAddMovement implements ControllerFXML {
             }
         }
     }
-    /*
-     * Metodo che nel aggiunge tag dalla lista dei tag aggiunti e li rimuove dalla lista dei tag aggiungibili,
-     * Mette il tag nella tabella di sinistra e lo rimuove a quella di destra
+    /**
+     * metodo per aggiungere tag alla lista dei tag relativi al movimento
      */
     public void addTag(){
         if(tableAllTag.getSelectionModel().getSelectedItem() != null){
@@ -212,7 +289,9 @@ public class ControllerAddMovement implements ControllerFXML {
         }
     }
 
-
+    /**
+     * metodo per aggiungere un movimento della transazione rateizzata
+     */
     public void saveRatedMovement(){
         try{
             IMovement mov = new Movement(-1, descriptionMovement.getText(), movementTypeChoiceBox.getValue(),

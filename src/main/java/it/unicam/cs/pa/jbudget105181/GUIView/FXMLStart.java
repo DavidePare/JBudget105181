@@ -6,7 +6,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * classe che ha la responsabilità di far partire lo stage della GUIView.
+ */
 public class FXMLStart extends Application {
+
+    /**
+     * Metodo da cui far partire lo stage delle GUI View
+     * @param stage
+     * @throws Exception
+     */
     @Override
     public void start(Stage stage) throws Exception {
         //Parent root = FXMLLoader.load(getClass().getResource("/FXMLHome.fxml"));

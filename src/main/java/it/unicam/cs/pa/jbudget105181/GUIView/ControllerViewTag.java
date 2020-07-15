@@ -13,27 +13,68 @@ import javafx.scene.control.TableView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * classe che ha la responsabilità di fare da controller alla  ViewTag.
+ */
 public class ControllerViewTag  implements ControllerFXML{
+    /**
+     * lista di tag
+     */
     private ObservableList<ITag> lTags;
+    /**
+     * transazione
+     */
     private ITransazione transaction;
+    /**
+     * movimento
+     */
     private IMovement movement;
+    /**
+     * tabella dei tag
+     */
     @FXML private TableView<ITag> tableTags;
+    /**
+     * colonna del nome del tag
+     */
     @FXML private TableColumn<ITag,String> columnName;
+    /**
+     * colonna della descrizione del tag
+     */
     @FXML private TableColumn<ITag,String> columnDescription;
-    public ControllerViewTag(IMovement movement){
+
+    /**
+     * costruttore di ControllerViewTag passatogli il movimento
+     * @param movement
+     */
+    public ControllerViewTag(IMovement movement){ // TODO doppio costruttore
         this.movement=movement;
         this.transaction=null;
     }
+
+    /**
+     * costruttore di ControllerViewTag passatogli la transazione
+     * @param transaction
+     */
     public ControllerViewTag(ITransazione transaction){
         this.transaction=transaction;
         this.movement=null;
     }
+
+    /**
+     * metdo per inizializzare le variabili
+     * @param location
+     * @param resources
+     */
     public void initialize(URL location, ResourceBundle resources){
         lTags = FXCollections.observableArrayList();
         if(transaction!= null) lTags.addAll(transaction.tags());
         else lTags.addAll(movement.tags());
         showtags();
     }
+
+    /**
+     * metodo per aggiornare e mostrare la tabella dei tag
+     */
     private void showtags(){
         tableTags.setItems(lTags);
         this.columnName.setCellValueFactory

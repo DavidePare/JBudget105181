@@ -19,31 +19,74 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * classe che ha la responsabilità di fare da controller alla  ViewMovement.
+ */
 public class ControllerViewMovement  implements ControllerFXML{
+    /**
+     * lista dei moviementi
+     */
     private ObservableList<IMovement> lMovement;
+    /**
+     * controller
+     */
     private MainController controller;
+    /**
+     * transazione del movimento
+     */
     private ITransazione transaction;
+    /**
+     * tabella dei movimenti
+     */
     @FXML private TableView<IMovement> tableMovement;
-    /*
-    ERRORE QUI
+    /**
+     * colonna ID account
      */
     @FXML private TableColumn<IMovement,IAccount> columnIDAccount;
+    /**
+     * colonna ID movimnento
+     */
     @FXML private TableColumn<IMovement,Integer> columnIDMovement;
-
+    /**
+     * colonna ID transazione
+     */
     @FXML private TableColumn<IMovement,Integer> columnIDTransaction;
-
+    /**
+     * colonna tipo di movimento
+     */
     @FXML private TableColumn<IMovement, MovementType> columnType;
+    /**
+     * colonna amount movimento
+     */
     @FXML private TableColumn<IMovement,Double> columnAmount;
+    /**
+     * colonna descrizione movimento
+     */
     @FXML private TableColumn<IMovement,String> columnDescription;
 
+    /**
+     * costruttore ControllerViewMovement
+     * @param transaction
+     * @param controller
+     */
     public ControllerViewMovement(ITransazione transaction, MainController controller){
         this.transaction=transaction;
         this.controller=controller;
     }
+
+    /**
+     * metodo per inizializzare le variabili
+     * @param location
+     * @param resources
+     */
     public void initialize(URL location, ResourceBundle resources){
         lMovement = FXCollections.observableArrayList();
         showmovement();
     }
+
+    /**
+     * metodo per aggiornare e mostrare la tabella dei movimenti
+     */
     private void showmovement(){
         lMovement.clear();//removeAll(lMovement);
         lMovement.addAll(transaction.movements());
@@ -63,6 +106,9 @@ public class ControllerViewMovement  implements ControllerFXML{
         this.tableMovement.refresh();
     }
 
+    /**
+     * metodo per mostrare i tag di un movimento
+     */
     public void viewTag(){
         try {
             if(tableMovement.getSelectionModel().getSelectedItem() != null) {
@@ -78,6 +124,10 @@ public class ControllerViewMovement  implements ControllerFXML{
 
         }
     }
+
+    /**
+     * metodo per rimuovere un movimento
+     */
     public void deleteMovement(){
         if(tableMovement.getSelectionModel().getSelectedItem() != null) {
             controller.removeMovement(tableMovement.getSelectionModel().getSelectedItem());
@@ -85,6 +135,10 @@ public class ControllerViewMovement  implements ControllerFXML{
             showmovement();
         }
     }
+
+    /**
+     * metodo per modificare un movimento
+     */
     public void modifyMovement(){
 
     }

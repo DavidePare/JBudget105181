@@ -3,8 +3,9 @@ package it.unicam.cs.pa.jbudget105181.GUIView;
 import javafx.fxml.Initializable;
 
 import java.io.Serializable;
-/*
-Create a module of controller
+/**
+ * Interfaccia che ha la responsabilità di fare da controller alla GUI View e di interagire
+ * con il controller dell'MVC.
  */
 public interface ControllerFXML extends Initializable {
 }
