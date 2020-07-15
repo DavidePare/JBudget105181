@@ -211,7 +211,7 @@ public class ControllerAddMovement implements ControllerFXML {
     public void saveRatedMovement(){
         try{
             IMovement mov = new Movement(-1, descriptionMovement.getText(), movementTypeChoiceBox.getValue(),
-                    Double.parseDouble(amountMovement.getText()), accountChoiceBox.getValue(), lTagsAdded, null);
+                    Double.parseDouble(amountMovement.getText()), accountChoiceBox.getValue(), listTagTrans, null);
             controller.addRateMovement(listTransaction,mov);
             messageAddMovement.setText("Successfull! Movement correct Added!");
             messageAddMovement.setTextFill(Color.GREEN);
