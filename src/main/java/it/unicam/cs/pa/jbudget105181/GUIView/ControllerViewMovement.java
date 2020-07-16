@@ -88,7 +88,7 @@ public class ControllerViewMovement  implements ControllerFXML{
      * metodo per aggiornare e mostrare la tabella dei movimenti
      */
     private void showmovement(){
-        lMovement.clear();//removeAll(lMovement);
+        lMovement.clear();
         lMovement.addAll(transaction.movements());
         tableMovement.setItems(lMovement);
         this.columnIDAccount.setCellValueFactory
@@ -134,12 +134,5 @@ public class ControllerViewMovement  implements ControllerFXML{
             lMovement.remove(tableMovement.getSelectionModel().getSelectedItem());
             showmovement();
         }
-    }
-
-    /**
-     * metodo per modificare un movimento
-     */
-    public void modifyMovement(){
-
     }
 }
