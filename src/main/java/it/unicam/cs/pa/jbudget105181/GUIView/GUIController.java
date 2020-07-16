@@ -5,6 +5,7 @@ import it.unicam.cs.pa.jbudget105181.Model.*;
 import it.unicam.cs.pa.jbudget105181.Model.Account.AccountType;
 import it.unicam.cs.pa.jbudget105181.Model.Account.IAccount;
 import it.unicam.cs.pa.jbudget105181.Model.Store.IWriter;
+import it.unicam.cs.pa.jbudget105181.Model.Store.JsonWriter;
 import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
 import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
 import javafx.beans.property.SimpleObjectProperty;
@@ -594,7 +595,9 @@ public class GUIController implements Initializable {
     public void save(){
         try {
             String path = createFileChooser().showSaveDialog(new Stage()).getAbsolutePath();
-            this.writer = new TxtWriter(path);
+            this.writer = new JsonWriter(path);
+            this.controller.save(writer);
+
             autoSave();
         }catch (Exception e){
             e.printStackTrace();
@@ -604,7 +607,7 @@ public class GUIController implements Initializable {
     private FileChooser createFileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters()
-                .addAll(new FileChooser.ExtensionFilter("Txt Files", "*.txt"));
+                .addAll(new FileChooser.ExtensionFilter("Json File", "*.json"));
         fileChooser.setInitialFileName("JBudget");
         return fileChooser;
     }

@@ -9,7 +9,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -24,7 +23,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="NEVER">
       <menus>
@@ -32,205 +31,202 @@
           <items>
             <MenuItem mnemonicParsing="false" text="New" />
             <MenuItem mnemonicParsing="false" onAction="#open" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Close" />
             <MenuItem mnemonicParsing="false" onAction="#save" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-         <center>
-            <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-              <tabs>
-                <Tab text="Account">
-                  <content>
-                    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="421.0" prefWidth="680.0">
-                           <children>
-                              <TableView fx:id="accountTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="680.0">
-                                <columns>
-                                  <TableColumn fx:id="accountIDColumn" prefWidth="75.0" text="ID" />
-                                    <TableColumn fx:id="accountNameColumn" prefWidth="75.0" text="Name" />
-                                    <TableColumn fx:id="accountTypeColumn" prefWidth="75.0" text="Type" />
-                                  <TableColumn fx:id="accountAmountColumn" prefWidth="75.0" text="Amount" />
-                                    <TableColumn fx:id="accountDescriptionColumn" prefWidth="180.79998779296875" text="Description" />
-                                </columns>
-                                 <padding>
-                                    <Insets top="35.0" />
-                                 </padding>
-                              </TableView>
-                              <AnchorPane prefHeight="62.0" prefWidth="640.0">
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+         <children>
+            <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+               <center>
+                  <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                    <tabs>
+                      <Tab text="Account">
+                        <content>
+                          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                                  <children>
+                                    <TableView fx:id="accountTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="680.0">
+                                      <columns>
+                                        <TableColumn fx:id="accountIDColumn" prefWidth="75.0" text="ID" />
+                                          <TableColumn fx:id="accountNameColumn" prefWidth="75.0" text="Name" />
+                                          <TableColumn fx:id="accountTypeColumn" prefWidth="75.0" text="Type" />
+                                        <TableColumn fx:id="accountAmountColumn" prefWidth="75.0" text="Amount" />
+                                          <TableColumn fx:id="accountDescriptionColumn" prefWidth="180.79998779296875" text="Description" />
+                                      </columns>
+                                       <padding>
+                                          <Insets top="35.0" />
+                                       </padding>
+                                    </TableView>
+                                    <AnchorPane prefHeight="62.0" prefWidth="640.0">
+                                       <children>
+                                          <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="680.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="103.39998779296872" minWidth="10.0" prefWidth="96.99996337890622" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="89.60002441406255" minWidth="10.0" prefWidth="66.60003662109375" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="89.5999755859375" minWidth="10.0" prefWidth="83.20001220703125" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#addAccount" prefHeight="26.0" prefWidth="92.0" text="Add" GridPane.columnIndex="4" />
+                                                <ChoiceBox fx:id="accountType" prefWidth="150.0" GridPane.columnIndex="3" />
+                                                <TextField fx:id="descriptionAccount" promptText="Description" GridPane.columnIndex="1" />
+                                                <TextField fx:id="balanceAccount" promptText="Balance" GridPane.columnIndex="2" />
+                                                <TextField fx:id="nameAccount" promptText="Name" />
+                                                <Button mnemonicParsing="false" onAction="#deleteAccount" prefHeight="26.0" prefWidth="92.0" text="Delete" GridPane.columnIndex="5" />
+                                             </children>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <Button fx:id="modifyAccButton" layoutX="410.0" layoutY="346.0" mnemonicParsing="false" onAction="#modifyAccount" prefHeight="26.0" prefWidth="118.0" text="Modify" />
+                                    <Button layoutX="528.0" layoutY="346.0" mnemonicParsing="false" onAction="#selectAccount" prefHeight="26.0" prefWidth="102.0" text="Select" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="Transazioni">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="680.0">
+                                 <children>
+                                    <TableView fx:id="transTable" layoutX="-3.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#selectTransaction" onMouseClicked="#selectTransaction" prefHeight="297.0" prefWidth="670.0">
+                                       <columns>
+                                          <TableColumn fx:id="transIDColumn" prefWidth="75.0" text="ID" />
+                                          <TableColumn fx:id="transAmountColumn" prefWidth="75.0" text="Amount" />
+                                          <TableColumn fx:id="transNumMovColumn" prefWidth="156.0" text="Number Of Movement" />
+                                          <TableColumn fx:id="transDateColumn" minWidth="0.0" prefWidth="64.79998779296875" text="Date" />
+                                          <TableColumn fx:id="transDescriptionColumn" minWidth="0.0" prefWidth="170.39996337890625" text="Description" />
+                                       </columns>
+                                    </TableView>
+                                    <ButtonBar layoutX="-2.0" layoutY="298.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="680.0">
+                                      <buttons>
+                                        <Button fx:id="buttonAddMovement" mnemonicParsing="false" onAction="#addMovement" prefHeight="26.0" prefWidth="317.0" text="Add Movement" />
+                                          <Button mnemonicParsing="false" onAction="#removeTransaction" text="Remove" />
+                                          <Button fx:id="addTransactionButton" mnemonicParsing="false" onAction="#addTransaction" text="Add Transaction" />
+                                      </buttons>
+                                    </ButtonBar>
+                                    <ButtonBar layoutY="345.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="680.0">
+                                       <buttons>
+                                          <Button mnemonicParsing="false" onAction="#viewTagsTransaction" prefHeight="26.0" prefWidth="141.0" text="View Tags" />
+                                          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#viewMovementTransaction" prefHeight="26.0" prefWidth="578.0" text="View Movements" />
+                                       </buttons>
+                                    </ButtonBar>
+                                  <TitledPane fx:id="modifyTransactionMenu" animated="false" layoutX="3.0" layoutY="387.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Modify">
+                                       <content>
+                                          <GridPane prefHeight="46.0" prefWidth="675.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <TextArea fx:id="descriptionTransactionNew" prefHeight="200.0" prefWidth="131.0" GridPane.columnIndex="1" />
+                                                <Label prefHeight="18.0" prefWidth="136.0" text="New Description" />
+                                                <Button fx:id="modifyTransactionButton" mnemonicParsing="false" onAction="#modifyTransaction" prefHeight="26.0" prefWidth="222.0" text="Modify" GridPane.columnIndex="2" />
+                                             </children>
+                                          </GridPane>
+                                       </content>
+                                    </TitledPane>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                        <Tab text="Tag">
+                           <content>
+                              <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="tagTable" layoutY="51.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="295.0" prefWidth="680.0">
+                                       <columns>
+                                          <TableColumn fx:id="tagNameColumn" prefWidth="149.5999755859375" text="Nome" />
+                                          <TableColumn fx:id="tagDescriptionColumn" prefWidth="319.199951171875" text="Descrizione" />
+                                       </columns>
+                                    </TableView>
                                     <GridPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="38.0" prefWidth="640.0">
-                                      <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="103.39998779296872" minWidth="10.0" prefWidth="96.99996337890622" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="89.60002441406255" minWidth="10.0" prefWidth="66.60003662109375" />
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="89.5999755859375" minWidth="10.0" prefWidth="83.20001220703125" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
                                        <children>
-                                          <Button mnemonicParsing="false" onAction="#addAccount" prefHeight="26.0" prefWidth="92.0" text="Add" GridPane.columnIndex="4" />
-                                          <ChoiceBox fx:id="accountType" prefWidth="150.0" GridPane.columnIndex="3" />
-                                          <TextField fx:id="descriptionAccount" promptText="Description" GridPane.columnIndex="1" />
-                                          <TextField fx:id="balanceAccount" promptText="Balance" GridPane.columnIndex="2" />
-                                          <TextField fx:id="nameAccount" promptText="Name" />
-                                          <Button mnemonicParsing="false" onAction="#deleteAccount" prefHeight="26.0" prefWidth="92.0" text="Delete" GridPane.columnIndex="5" />
+                                          <Button mnemonicParsing="false" onAction="#deleteTag" prefHeight="26.0" prefWidth="118.0" text="Delete" GridPane.columnIndex="3" />
+                                          <Button mnemonicParsing="false" onAction="#addTag" prefHeight="26.0" prefWidth="92.0" text="Add" GridPane.columnIndex="2" />
+                                          <TextField fx:id="tagDescription" prefHeight="26.0" prefWidth="291.0" promptText="Description" GridPane.columnIndex="1" />
+                                          <TextField fx:id="tagName" promptText="Name" />
                                        </children>
                                        <opaqueInsets>
                                           <Insets />
                                        </opaqueInsets>
                                     </GridPane>
+                                    <Label fx:id="FailedOperationTag" layoutX="14.0" layoutY="29.0" prefHeight="18.0" prefWidth="388.0" textFill="RED" />
                                  </children>
                               </AnchorPane>
-                              <Button fx:id="modifyAccButton" layoutX="410.0" layoutY="346.0" mnemonicParsing="false" onAction="#modifyAccount" prefHeight="26.0" prefWidth="118.0" text="Modify" />
-                              <Button layoutX="528.0" layoutY="346.0" mnemonicParsing="false" onAction="#selectAccount" prefHeight="26.0" prefWidth="102.0" text="Select" />
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-                <Tab text="Transazioni">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="680.0">
-                           <children>
-                              <TableView fx:id="transTable" layoutX="-3.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyPressed="#selectTransaction" onMouseClicked="#selectTransaction" prefHeight="297.0" prefWidth="670.0">
-                                 <columns>
-                                    <TableColumn fx:id="transIDColumn" prefWidth="75.0" text="ID" />
-                                    <TableColumn fx:id="transAmountColumn" prefWidth="75.0" text="Amount" />
-                                    <TableColumn fx:id="transNumMovColumn" prefWidth="156.0" text="Number Of Movement" />
-                                    <TableColumn fx:id="transDateColumn" minWidth="0.0" prefWidth="64.79998779296875" text="Date" />
-                                    <TableColumn fx:id="transDescriptionColumn" minWidth="0.0" prefWidth="170.39996337890625" text="Description" />
-                                 </columns>
-                              </TableView>
-                              <ButtonBar layoutX="-2.0" layoutY="298.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="680.0">
-                                <buttons>
-                                  <Button fx:id="buttonAddMovement" mnemonicParsing="false" onAction="#addMovement" prefHeight="26.0" prefWidth="317.0" text="Add Movement" />
-                                    <Button mnemonicParsing="false" onAction="#removeTransaction" text="Remove" />
-                                    <Button fx:id="addTransactionButton" mnemonicParsing="false" onAction="#addTransaction" text="Add Transaction" />
-                                </buttons>
-                              </ButtonBar>
-                              <ButtonBar layoutY="345.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="680.0">
-                                 <buttons>
-                                    <Button mnemonicParsing="false" onAction="#viewTagsTransaction" prefHeight="26.0" prefWidth="141.0" text="View Tags" />
-                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#viewMovementTransaction" prefHeight="26.0" prefWidth="578.0" text="View Movements" />
-                                 </buttons>
-                              </ButtonBar>
-                            <TitledPane fx:id="modifyTransactionMenu" animated="false" layoutX="3.0" layoutY="387.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Modify">
-                                 <content>
-                                    <GridPane prefHeight="46.0" prefWidth="675.0">
-                                      <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                       <children>
-                                          <TextArea fx:id="descriptionTransactionNew" prefHeight="200.0" prefWidth="131.0" GridPane.columnIndex="1" />
-                                          <Label prefHeight="18.0" prefWidth="136.0" text="New Description" />
-                                          <Button fx:id="modifyTransactionButton" mnemonicParsing="false" onAction="#modifyTransaction" prefHeight="26.0" prefWidth="222.0" text="Modify" GridPane.columnIndex="2" />
-                                       </children>
-                                    </GridPane>
-                                 </content>
-                              </TitledPane>
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-                  <Tab text="Tag">
-                     <content>
-                        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <TableView fx:id="tagTable" layoutY="51.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="295.0" prefWidth="680.0">
-                                 <columns>
-                                    <TableColumn fx:id="tagNameColumn" prefWidth="149.5999755859375" text="Nome" />
-                                    <TableColumn fx:id="tagDescriptionColumn" prefWidth="319.199951171875" text="Descrizione" />
-                                 </columns>
-                              </TableView>
-                              <GridPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="38.0" prefWidth="640.0">
-                                 <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="89.60002441406255" minWidth="10.0" prefWidth="66.60003662109375" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="89.5999755859375" minWidth="10.0" prefWidth="83.20001220703125" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                 </rowConstraints>
+                           </content>
+                        </Tab>
+                        <Tab text="Budget">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#deleteTag" prefHeight="26.0" prefWidth="118.0" text="Delete" GridPane.columnIndex="3" />
-                                    <Button mnemonicParsing="false" onAction="#addTag" prefHeight="26.0" prefWidth="92.0" text="Add" GridPane.columnIndex="2" />
-                                    <TextField fx:id="tagDescription" prefHeight="26.0" prefWidth="291.0" promptText="Description" GridPane.columnIndex="1" />
-                                    <TextField fx:id="tagName" promptText="Name" />
+                                    <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="461.0" prefWidth="680.0">
+                                       <left>
+                                          <TableView fx:id="tableBudget" onKeyPressed="#viewResult" onMouseClicked="#viewResult" prefHeight="431.0" prefWidth="194.0" BorderPane.alignment="CENTER">
+                                            <columns>
+                                              <TableColumn fx:id="columnBudgetTag" prefWidth="95.20001220703125" text="Tag" />
+                                              <TableColumn fx:id="columnBudgetAmount" prefWidth="97.59998931884766" text="Amount" />
+                                            </columns>
+                                          </TableView>
+                                       </left>
+                                       <top>
+                                          <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#addBudget" prefHeight="26.0" prefWidth="137.0" text="Add Budget" GridPane.columnIndex="2" />
+                                                <Button mnemonicParsing="false" onAction="#deleteBudget" prefHeight="26.0" prefWidth="134.0" text="Delete" GridPane.columnIndex="3" />
+                                                <ChoiceBox fx:id="tagBudget" prefWidth="150.0" />
+                                                <TextField fx:id="budgetAmount" GridPane.columnIndex="1" />
+                                                <Button mnemonicParsing="false" onAction="#viewGraphBudget" prefHeight="26.0" prefWidth="138.0" text="View Graph" GridPane.columnIndex="4" />
+                                             </children>
+                                          </GridPane>
+                                       </top>
+                                       <center>
+                                          <Label fx:id="resultReport" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="431.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+                                       </center>
+                                       <right>
+                                          <PieChart fx:id="graphPieBudget" prefHeight="298.0" prefWidth="279.0" title="Graph " BorderPane.alignment="CENTER" />
+                                       </right>
+                                    </BorderPane>
                                  </children>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                              </GridPane>
-                              <Label fx:id="FailedOperationTag" layoutX="14.0" layoutY="29.0" prefHeight="18.0" prefWidth="388.0" textFill="RED" />
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab text="Budget">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="461.0" prefWidth="680.0">
-                                 <left>
-                                    <TableView fx:id="tableBudget" onKeyPressed="#viewResult" onMouseClicked="#viewResult" prefHeight="431.0" prefWidth="194.0" BorderPane.alignment="CENTER">
-                                      <columns>
-                                        <TableColumn fx:id="columnBudgetTag" prefWidth="95.20001220703125" text="Tag" />
-                                        <TableColumn fx:id="columnBudgetAmount" prefWidth="97.59998931884766" text="Amount" />
-                                      </columns>
-                                    </TableView>
-                                 </left>
-                                 <top>
-                                    <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
-                                      <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                       <children>
-                                          <Button mnemonicParsing="false" onAction="#addBudget" prefHeight="26.0" prefWidth="137.0" text="Add Budget" GridPane.columnIndex="2" />
-                                          <Button mnemonicParsing="false" onAction="#deleteBudget" prefHeight="26.0" prefWidth="134.0" text="Delete" GridPane.columnIndex="3" />
-                                          <ChoiceBox fx:id="tagBudget" prefWidth="150.0" />
-                                          <TextField fx:id="budgetAmount" GridPane.columnIndex="1" />
-                                          <Button mnemonicParsing="false" onAction="#viewGraphBudget" prefHeight="26.0" prefWidth="138.0" text="View Graph" GridPane.columnIndex="4" />
-                                       </children>
-                                    </GridPane>
-                                 </top>
-                                 <center>
-                                    <Label fx:id="resultReport" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="431.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
-                                 </center>
-                                 <right>
-                                    <PieChart fx:id="graphPieBudget" prefHeight="298.0" prefWidth="279.0" title="Graph " BorderPane.alignment="CENTER" />
-                                 </right>
-                              </BorderPane>
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </Tab>
-              </tabs>
-            </TabPane>
-         </center></BorderPane>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
   </children>
 </VBox>

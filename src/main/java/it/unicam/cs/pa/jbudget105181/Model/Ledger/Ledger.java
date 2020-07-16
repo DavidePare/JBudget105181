@@ -27,6 +27,12 @@ public class Ledger implements ILedger {
 	public Ledger() {
 		
 	}
+	public Ledger(ILedger ledger){
+		this.allTransaction.addAll(ledger.getAllTransactions());
+		this.listaAccount.addAll(ledger.getAccounts());
+		this.listaBudget=ledger.getBudget();
+		this.tag.addAll(ledger.getTags());
+	}
 	
 	@Override
 	public void addTransazione(ITransazione c) {

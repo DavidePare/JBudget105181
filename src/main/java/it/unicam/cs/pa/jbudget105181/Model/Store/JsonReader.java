@@ -30,8 +30,7 @@ public class JsonReader implements IReader{
         if(path.contains(".json")){
             this.path=path;
             this.in= new InputStreamReader(new FileInputStream(path));
-
-            //this.gson = new GsonBuilder().registerTypeAdapter(Ledger.class,new Deserializer()).create();
+         //   this.gson = new GsonBuilder().registerTypeAdapter(Ledger.class,new Deserializer()).create();
         }
 
     }
