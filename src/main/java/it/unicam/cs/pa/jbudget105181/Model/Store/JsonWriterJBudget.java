@@ -32,6 +32,7 @@ public class JsonWriterJBudget implements IWriter{
         this.path = path;
         this.gson= new GsonBuilder().setPrettyPrinting().create();
         String js=gson.toJson(object);
+
      /*   this.gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter
                 (Ledger.class,new SerializerDeserializer()).create();*/
 
