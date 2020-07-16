@@ -45,4 +45,9 @@ public interface ILedger extends Serializable {
 	void addBudgetLedger(ITag tag, Double value);
 	IBudget<ITag> getBudget();
 	void removeBudget(ITag budget);
+
+
+	void addTags(List<ITag> tags);
+	void addAccounts(List<IAccount> accountList);
+	void addTransactions(List<ITransazione> transazionelist);
 }

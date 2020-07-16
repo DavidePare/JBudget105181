@@ -261,5 +261,14 @@ public class Ledger implements ILedger {
 	public void removeBudget(ITag budget){
 		listaBudget.remove(budget);
 	}
+	public void addTags(List<ITag> tags){
+		this.tag.addAll(tags);
+	}
+	public void addAccounts(List<IAccount> accountList){
+		listaAccount.addAll(accountList);
+	}
+	public void addTransactions(List<ITransazione> transazionelist){
+		allTransaction.addAll(transazionelist);
+	}
 
 }
