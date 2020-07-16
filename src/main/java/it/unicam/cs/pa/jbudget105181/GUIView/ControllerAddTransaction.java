@@ -1,6 +1,6 @@
 package it.unicam.cs.pa.jbudget105181.GUIView;
 
-import it.unicam.cs.pa.jbudget105181.Controller.MainController;
+import it.unicam.cs.pa.jbudget105181.Controller.IController;
 import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
 import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
 import javafx.beans.property.SimpleObjectProperty;
@@ -24,7 +24,7 @@ public class ControllerAddTransaction implements ControllerFXML{
     /**
      * controller
      */
-    private MainController controller;
+    private IController controller;
     /**
      * data della transazione
      */
@@ -127,7 +127,7 @@ public class ControllerAddTransaction implements ControllerFXML{
      * costruttore di ControllerAddTransaction
      * @param controller
      */
-    public ControllerAddTransaction(MainController controller) {
+    public ControllerAddTransaction(IController controller) {
         this.controller = controller;
     }
 

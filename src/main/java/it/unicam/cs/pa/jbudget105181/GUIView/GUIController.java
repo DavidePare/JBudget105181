@@ -1,5 +1,6 @@
 package it.unicam.cs.pa.jbudget105181.GUIView;
 
+import it.unicam.cs.pa.jbudget105181.Controller.IController;
 import it.unicam.cs.pa.jbudget105181.Controller.MainController;
 import it.unicam.cs.pa.jbudget105181.Model.*;
 import it.unicam.cs.pa.jbudget105181.Model.Account.AccountType;
@@ -36,7 +37,7 @@ public class GUIController implements Initializable {
     /**
      * controller dell' MVC
      */
-    private MainController controller;
+    private IController controller;
     /**
      * text field per il nome del tag
      */
@@ -243,7 +244,7 @@ public class GUIController implements Initializable {
      * costruttore di GUIController
      * @param controller
      */
-    public GUIController(MainController controller){
+    public GUIController(IController controller){
         this.controller=controller;
     }
 

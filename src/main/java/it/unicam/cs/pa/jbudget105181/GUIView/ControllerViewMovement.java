@@ -1,6 +1,6 @@
 package it.unicam.cs.pa.jbudget105181.GUIView;
 
-import it.unicam.cs.pa.jbudget105181.Controller.MainController;
+import it.unicam.cs.pa.jbudget105181.Controller.IController;
 import it.unicam.cs.pa.jbudget105181.Model.Account.IAccount;
 import it.unicam.cs.pa.jbudget105181.Model.Movement.IMovement;
 import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
@@ -30,7 +30,7 @@ public class ControllerViewMovement  implements ControllerFXML{
     /**
      * controller
      */
-    private MainController controller;
+    private IController controller;
     /**
      * transazione del movimento
      */
@@ -69,7 +69,7 @@ public class ControllerViewMovement  implements ControllerFXML{
      * @param transaction
      * @param controller
      */
-    public ControllerViewMovement(ITransazione transaction, MainController controller){
+    public ControllerViewMovement(ITransazione transaction, IController controller){
         this.transaction=transaction;
         this.controller=controller;
     }

@@ -1,6 +1,6 @@
 package it.unicam.cs.pa.jbudget105181.GUIView;
 
-import it.unicam.cs.pa.jbudget105181.Controller.MainController;
+import it.unicam.cs.pa.jbudget105181.Controller.IController;
 import it.unicam.cs.pa.jbudget105181.Model.*;
 import it.unicam.cs.pa.jbudget105181.Model.Account.IAccount;
 import it.unicam.cs.pa.jbudget105181.Model.Movement.IMovement;
@@ -34,7 +34,7 @@ public class ControllerAddMovement implements ControllerFXML {
     /**
      *  variabile che verifica se un movimento è rateizzazto cioè deve essere inserito su più transazioni
      */
-    private MainController controller;
+    private IController controller;
     /**
      * Riferimento della transazione alla quale viene aggiunto il movimento
      */
@@ -168,7 +168,7 @@ public class ControllerAddMovement implements ControllerFXML {
      * costruttore di ControllerAddMovement
      * @param controller
      */
-    public ControllerAddMovement(MainController controller) { // TODO DA RIVEDERE
+    public ControllerAddMovement(IController controller) { // TODO DA RIVEDERE
         this.controller = controller;
     }
 
@@ -177,7 +177,7 @@ public class ControllerAddMovement implements ControllerFXML {
      * @param controller
      * @param transazione
      */
-    public ControllerAddMovement(MainController controller, ITransazione transazione){ // TODO DA RIVEDERE
+    public ControllerAddMovement(IController controller, ITransazione transazione){ // TODO DA RIVEDERE
         this.transaction=transazione;
         this.controller=controller;
     }
@@ -188,7 +188,7 @@ public class ControllerAddMovement implements ControllerFXML {
      * @param lTransaction
      * @param rated
      */
-    public ControllerAddMovement(MainController controller, List<ITransazione> lTransaction,boolean rated){
+    public ControllerAddMovement(IController controller, List<ITransazione> lTransaction,boolean rated){
         this.listTransaction=lTransaction;
         this.controller=controller;
         this.rated=rated;
