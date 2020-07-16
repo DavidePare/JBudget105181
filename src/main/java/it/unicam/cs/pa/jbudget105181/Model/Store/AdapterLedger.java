@@ -9,9 +9,9 @@ import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
 import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
 
 import java.lang.reflect.Type;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Set;
 
 
 public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<ILedger>{
@@ -73,7 +73,9 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
     public JsonElement serializeTransazione(ITransazione src, JsonSerializationContext context) {
         JsonObject jo = new JsonObject();
         jo.add("ID", context.serialize(src.getID()));
-        jo.add("Date", context.serialize(src.getData(), LocalDateTime.class));
+        jo.add("Date", context.serialize(src.getData(), LocalDate.class));
+      //  jo.add("Date", context.serialize(src.getData(), LocalDateTime.class));
+      //  jo.add("Date",new JsonPrimitive(src.getData().format(DateTimeFormatter.ISO_LOCAL_DATE)));
         jo.add("TotalAmounts", context.serialize(src.getTotalAmount()));
         jo.add("Movements", movementsSerializer(src.movements(),context));
         jo.add("Description", context.serialize(src.getDescription()));
