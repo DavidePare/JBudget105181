@@ -6,7 +6,7 @@ import it.unicam.cs.pa.jbudget105181.Model.*;
 import it.unicam.cs.pa.jbudget105181.Model.Account.AccountType;
 import it.unicam.cs.pa.jbudget105181.Model.Account.IAccount;
 import it.unicam.cs.pa.jbudget105181.Model.Store.IWriter;
-import it.unicam.cs.pa.jbudget105181.Model.Store.JsonWriter;
+import it.unicam.cs.pa.jbudget105181.Model.Store.JsonWriterJBudget;
 import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
 import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
 import javafx.beans.property.SimpleObjectProperty;
@@ -596,7 +596,7 @@ public class GUIController implements Initializable {
     public void save(){
         try {
             String path = createFileChooser().showSaveDialog(new Stage()).getAbsolutePath();
-            this.writer = new JsonWriter(path);
+            this.writer = new JsonWriterJBudget(path);
             this.controller.save(writer);
 
             autoSave();

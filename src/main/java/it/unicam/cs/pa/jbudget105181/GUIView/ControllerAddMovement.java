@@ -135,17 +135,28 @@ public class ControllerAddMovement implements ControllerFXML {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        lTags = FXCollections.observableArrayList();
-        lTagsAdded=FXCollections.observableArrayList();
-        listTagAddable.addAll(controller.getTags());//.stream().collect(Collectors.toList()); //TODO ricontrolla che non hai testato la nuova modifica dovrebbe funzionare
-        listTagTrans=new ArrayList<ITag>();
-        if(!rated) saveButtonRated.setVisible(false);
-        else saveButton.setVisible(false);
+        inizializzateSpecificButton();
+        inizializzateTags();
         inizializzateTypeMovement();
         inizializzateAccountList();
         updateTags();
     }
-
+    /**
+     * metodo che ha la responsabilità di stabilire se attivare il bottone per attivare i movimenti rateizzati o normali
+     */
+    private void inizializzateSpecificButton(){
+        if(!rated) saveButtonRated.setVisible(false);
+        else saveButton.setVisible(false);
+    }
+    /**
+     * metodo che inizializza le due tabelle per linserimento dei tag nei movimenti, associa i valori alle due liste
+     */
+    private void inizializzateTags(){
+        lTags = FXCollections.observableArrayList();
+        lTagsAdded=FXCollections.observableArrayList();
+        listTagAddable.addAll(controller.getTags());
+        listTagTrans=new ArrayList<ITag>();
+    }
     /**
      * metodo per impostare i tipi di movimento
      */
@@ -203,7 +214,6 @@ public class ControllerAddMovement implements ControllerFXML {
             stage.hide();
             FXMLLoader loader =new FXMLLoader(getClass().getResource("/FXMLHome.fxml"));
             loader.setController(new GUIController(controller));
-
             stage.setTitle("JBudget");
             stage.setScene(new Scene(loader.load(), 640, 400));
             stage.show();
@@ -220,44 +230,40 @@ public class ControllerAddMovement implements ControllerFXML {
 
             controller.addMovement( IFactory.generateMovement(controller.generateIDMovement(transaction), descriptionMovement.getText(), movementTypeChoiceBox.getValue(),
                     Double.parseDouble(amountMovement.getText()), accountChoiceBox.getValue(), listTagTrans, transaction));
-            messageAddMovement.setText("Successfull! Movement correct Added!");
-            messageAddMovement.setTextFill(Color.GREEN);
+            setSuccessfullAddMovement();
         }catch(Exception e){
-            messageAddMovement.setText("Wrong! Insert all Data!");
-            messageAddMovement.setTextFill(Color.RED);
+            setWrongAddMovement();
         }finally {
-            descriptionMovement.clear();
-            movementTypeChoiceBox.setValue(null);
-            lTagsAdded.clear();
-            lTags.clear();
-            listTagTrans= new ArrayList<>();
-            listTagAddable.clear();
-            listTagAddable.addAll(controller.getTags());
-            lTags.addAll(controller.getTags());
-            amountMovement.clear();
+            movementWindowRefresh();
         }
     }
     /**
-     * metodo per aggiungere le due tabelle dei tag
+     * metodo per aggiornare le due tabelle dei tag
      */
     private void updateTags(){
-        lTags.clear();
-        lTags.addAll(listTagAddable);
-        lTagsAdded.clear();
-        lTagsAdded.addAll(listTagTrans);
-        tableAllTag.setItems(lTags);
-        this.columnNameA.setCellValueFactory
-                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getNome()));
-        this.columnDescriptionA.setCellValueFactory
-                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getDescription()));
+        updateATable(columnNameA,columnDescriptionA,tableAllTag,lTags,listTagAddable);
+        updateATable(columnNameB,columnDescriptionB,tableAddedTag,lTagsAdded,listTagTrans);
+    }
 
-        tableAddedTag.setItems(lTagsAdded);
-        this.columnNameB.setCellValueFactory
+    /**
+     *
+     * @param columnName nome colonna da aggiornare
+     * @param columnDescription nome colonna da aggiornare
+     * @param table tabella a cui si fa riferimento
+     * @param listToupdate observable lista di riferimento
+     * @param listTag lista contenente i dati
+     * Metodo che ha la responsabilità di aggiornare una tabella per tag.
+     */
+    private void updateATable(TableColumn<ITag,String> columnName ,TableColumn<ITag,String> columnDescription,
+                              TableView<ITag> table, ObservableList<ITag> listToupdate,List<ITag> listTag){
+        listToupdate.clear();
+        listToupdate.addAll(listTag);
+        table.setItems(listToupdate);
+        columnName.setCellValueFactory
                 (cellData -> new SimpleObjectProperty<>(cellData.getValue().getNome()));
-        this.columnDescriptionB.setCellValueFactory
+        columnDescription.setCellValueFactory
                 (cellData -> new SimpleObjectProperty<>(cellData.getValue().getDescription()));
-        this.tableAddedTag.refresh();
-        this.tableAllTag.refresh();
+        table.refresh();
     }
     /**
      * metodo per rimuovere un tag dalla lista dei tag del movimento
@@ -285,6 +291,7 @@ public class ControllerAddMovement implements ControllerFXML {
                 listTagAddable.remove(tag);
                 updateTags();
             }catch(Exception e){
+
             }
         }
     }
@@ -297,21 +304,43 @@ public class ControllerAddMovement implements ControllerFXML {
             IMovement mov = new Movement(-1, descriptionMovement.getText(), movementTypeChoiceBox.getValue(),
                     Double.parseDouble(amountMovement.getText()), accountChoiceBox.getValue(), listTagTrans, null);
             controller.addRateMovement(listTransaction,mov);
-            messageAddMovement.setText("Successfull! Movement correct Added!");
-            messageAddMovement.setTextFill(Color.GREEN);
+            setSuccessfullAddMovement();
         }catch(Exception e){
-            messageAddMovement.setText("Wrong! Insert all Data!");
-            messageAddMovement.setTextFill(Color.RED);
+            setWrongAddMovement();
         }finally {
-            descriptionMovement.clear();
-            movementTypeChoiceBox.setValue(null);
-            lTagsAdded.clear();
-            lTags.clear();
-            listTagTrans= new ArrayList<>();
-            listTagAddable.clear();
-            listTagAddable.addAll(controller.getTags());
-            lTags.addAll(controller.getTags());
-            amountMovement.clear();
+            movementWindowRefresh();
         }
+    }
+
+    /**
+     * metodo che ha la responsabilità di stampare a video il corretto inserimento del movimento
+     */
+    private void setSuccessfullAddMovement(){
+        messageAddMovement.setText("Successfull! Movement correct Added!");
+        messageAddMovement.setTextFill(Color.GREEN);
+    }
+
+    /**
+     * metodo che ha la responsabilità di dire all'utente che il movimento non è stato aggiunto per un errore
+     */
+    private void setWrongAddMovement(){
+
+        messageAddMovement.setText("Wrong! Insert all Data!");
+        messageAddMovement.setTextFill(Color.RED);
+    }
+    /**
+     * metodo con la responsabilità di aggiornare la pagina resettando tutti i valori permettendo all'utente di inserire
+     * nuovi dati
+     */
+    private void movementWindowRefresh(){
+        descriptionMovement.clear();
+        movementTypeChoiceBox.setValue(null);
+        lTagsAdded.clear();
+        lTags.clear();
+        listTagTrans= new ArrayList<>();
+        listTagAddable.clear();
+        listTagAddable.addAll(controller.getTags());
+        lTags.addAll(controller.getTags());
+        amountMovement.clear();
     }
 }

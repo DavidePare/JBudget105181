@@ -155,7 +155,9 @@ public class MainController implements IController {
     public void removeTransaction(ITransazione transazione){
         ledger.removeTransaction(transazione);
     }
-
+    /**
+     * metodo che rimuoverà il movimento
+     */
     @Override
     public void removeMovement(IMovement movimento){
         ledger.removeMovement(movimento);

@@ -9,35 +9,38 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
          <children>
             <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-               <center>
-                  <TableView fx:id="tableMovement" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="640.0" BorderPane.alignment="CENTER">
-                     <columns>
-                        <TableColumn fx:id="columnIDMovement" prefWidth="96.79999083280563" text="ID Movimento" />
-                        <TableColumn fx:id="columnIDTransaction" prefWidth="101.5999755859375" text="ID Transazione" />
-                        <TableColumn fx:id="columnIDAccount" prefWidth="105.59996032714844" text="Name Account" />
-                        <TableColumn fx:id="columnType" prefWidth="87.99993896484375" text="Tipo" />
-                        <TableColumn fx:id="columnAmount" maxWidth="100.0" prefWidth="80.79998779296875" text="Amount" />
-                        <TableColumn fx:id="columnDescription" prefWidth="164.800048828125" text="Descrizione" />
-                     </columns>
-                  </TableView>
-               </center>
                <top>
                   <Label text="Tag Associated" BorderPane.alignment="CENTER" />
                </top>
                <bottom>
-                  <ButtonBar prefHeight="40.0" prefWidth="640.0" BorderPane.alignment="CENTER">
+                  <ButtonBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
                      <buttons>
                         <Button mnemonicParsing="false" onAction="#viewTag" prefHeight="25.0" prefWidth="266.0" text="View Tag" />
                         <Button layoutX="971.0" layoutY="18.0" mnemonicParsing="false" onAction="#deleteMovement" text="Delete" />
-                        <Button layoutX="971.0" layoutY="18.0" mnemonicParsing="false" onAction="#modifyMovement" text="Modify" />
                      </buttons>
                   </ButtonBar>
                </bottom>
+               <center>
+                  <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+                     <children>
+                        <TableView fx:id="tableMovement" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                           <columns>
+                              <TableColumn fx:id="columnIDMovement" prefWidth="96.79999083280563" text="ID Movimento" />
+                              <TableColumn fx:id="columnIDTransaction" prefWidth="101.5999755859375" text="ID Transazione" />
+                              <TableColumn fx:id="columnIDAccount" prefWidth="105.59996032714844" text="Name Account" />
+                              <TableColumn fx:id="columnType" prefWidth="87.99993896484375" text="Tipo" />
+                              <TableColumn fx:id="columnAmount" maxWidth="100.0" prefWidth="80.79998779296875" text="Amount" />
+                              <TableColumn fx:id="columnDescription" prefWidth="164.800048828125" text="Descrizione" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </center>
             </BorderPane>
          </children>
       </AnchorPane>
