@@ -114,11 +114,8 @@ public class ControllerAddTransaction implements ControllerFXML{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initializevisible();
+        inizializateTag();
         numberOfTransaction.setItems(FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10,11,12,18,24));
-        lTags = FXCollections.observableArrayList();
-        lTagsAdded=FXCollections.observableArrayList();
-        listTagAddable = controller.getTags().parallelStream().collect(Collectors.toList());
-        listTagTrans=new ArrayList<ITag>();
         instantTransaction.fire();
         updateTags();
     }
@@ -130,7 +127,15 @@ public class ControllerAddTransaction implements ControllerFXML{
     public ControllerAddTransaction(IController controller) {
         this.controller = controller;
     }
-
+    /**
+     * Metodo che ha lo scopo di inizializzare le liste dei tag
+     */
+    private void inizializateTag(){
+        lTags = FXCollections.observableArrayList();
+        lTagsAdded=FXCollections.observableArrayList();
+        listTagAddable = controller.getTags().parallelStream().collect(Collectors.toList());
+        listTagTrans=new ArrayList<ITag>();
+    }
     /**
      * metodo che imposta le visibilità iniziali
      */
@@ -168,15 +173,7 @@ public class ControllerAddTransaction implements ControllerFXML{
         try{
             if(transactionDate.getValue() != null){
                 if(numweekTransaction.isVisible()){
-                    if(!controller.getAccount().isEmpty()) {
-                        LocalDate data = transactionDate.getValue();
-                        List<ITransazione> listTransactionRated= new ArrayList<ITransazione>();
-                        for (int x = 0; x < numberOfTransaction.getValue(); x++) {
-                            listTransactionRated.add(controller.addTransaction(data, listTagTrans, descriptionTransaction.getText(), transactionDate.getValue().isBefore(LocalDate.now())));
-                            data = data.plusDays(Long.parseLong(numweekTransaction.getText()));
-                        }
-                        openWindow("Add Movement", "/FXMLAddMovement.fxml", new ControllerAddMovement(controller, listTransactionRated,true));
-                    }else errorText.setVisible(true);
+                    addRatedTransaction();
                 }else{
                     controller.addTransaction(transactionDate.getValue(),listTagTrans,descriptionTransaction.getText(),transactionDate.getValue().isBefore(LocalDate.now()));
                 }
@@ -185,8 +182,23 @@ public class ControllerAddTransaction implements ControllerFXML{
                 errorText.setVisible(true);
             }
         }catch(Exception e){
-
+            errorText.setVisible(true);
         }
+    }
+
+    /**
+     * metodo che crea transazioni programmate per ogni tot giorni
+     */
+    private void addRatedTransaction(){
+        if(!controller.getAccount().isEmpty() && Long.valueOf(numweekTransaction.getText())!= null) {
+            LocalDate data = transactionDate.getValue();
+            List<ITransazione> listTransactionRated= new ArrayList<ITransazione>();
+            for (int x = 0; x < numberOfTransaction.getValue(); x++) {
+                listTransactionRated.add(controller.addTransaction(data, listTagTrans, descriptionTransaction.getText(), transactionDate.getValue().isBefore(LocalDate.now())));
+                data = data.plusDays(Long.parseLong(numweekTransaction.getText()));
+            }
+            openWindow("Add Movement", "/FXMLAddMovement.fxml", new ControllerAddMovement(controller, listTransactionRated,true));
+        }else errorText.setVisible(true);
     }
     /**
      * metodo per ritornare alla pagina di Home
@@ -202,7 +214,9 @@ public class ControllerAddTransaction implements ControllerFXML{
         stage.show();
     }
 
-
+    /**
+     * esegue l'operazione del bottone back
+     */
     public void backButtonAction(){
         try {
             returnHome();
@@ -244,23 +258,31 @@ public class ControllerAddTransaction implements ControllerFXML{
      * metodo per aggiornare la tabella dei tag
      */
     private void updateTags(){
-        lTags.removeAll(lTags);
-        lTags.addAll(listTagAddable);
-        lTagsAdded.removeAll(lTagsAdded);
-        lTagsAdded.addAll(listTagTrans);
-        tableAllTag.setItems(lTags);
-        this.columnNameA.setCellValueFactory
-                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getNome()));
-        this.columnDescriptionA.setCellValueFactory
-                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getDescription()));
-        tableAddedTag.setItems(lTagsAdded);
-        this.columnNameB.setCellValueFactory
-                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getNome()));
-        this.columnDescriptionB.setCellValueFactory
-                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getDescription()));
-        this.tableAddedTag.refresh();
-        this.tableAllTag.refresh();
+        updateATable(columnNameA,columnDescriptionA,tableAllTag,lTags,listTagAddable);
+        updateATable(columnNameB,columnDescriptionB,tableAddedTag,lTagsAdded,listTagTrans);
     }
+
+    /**
+     *
+     * @param columnName nome colonna da aggiornare
+     * @param columnDescription nome colonna da aggiornare
+     * @param table tabella a cui si fa riferimento
+     * @param listToupdate observable lista di riferimento
+     * @param listTag lista contenente i dati
+     * Metodo che ha la responsabilità di aggiornare una tabella per tag.
+     */
+    private void updateATable(TableColumn<ITag,String> columnName ,TableColumn<ITag,String> columnDescription,
+                              TableView<ITag> table, ObservableList<ITag> listToupdate,List<ITag> listTag){
+        listToupdate.clear();
+        listToupdate.addAll(listTag);
+        table.setItems(listToupdate);
+        columnName.setCellValueFactory
+                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getNome()));
+        columnDescription.setCellValueFactory
+                (cellData -> new SimpleObjectProperty<>(cellData.getValue().getDescription()));
+        table.refresh();
+    }
+
 
     /**
      * Metodo per aprire una nuova finestra
