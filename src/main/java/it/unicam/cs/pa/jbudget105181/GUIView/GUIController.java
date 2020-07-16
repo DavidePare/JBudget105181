@@ -216,7 +216,6 @@ public class GUIController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //controller = new MainController();
         lTags = FXCollections.observableArrayList();
         lTransactions = FXCollections.observableArrayList();
         lAccount = FXCollections.observableArrayList();
