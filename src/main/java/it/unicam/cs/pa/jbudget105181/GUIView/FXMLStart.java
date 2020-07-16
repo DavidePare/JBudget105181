@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * classe che ha la responsabilità di far partire lo stage della GUIView.
+ * classe che ha la responsabilita' di far partire lo stage della GUIView.
  */
 public class FXMLStart extends Application {
 

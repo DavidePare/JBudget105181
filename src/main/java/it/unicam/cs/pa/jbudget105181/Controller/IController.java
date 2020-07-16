@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * interfaccia che ha la responsabilità di fare da Controller del modello
+ * interfaccia che ha la responsabilita' di fare da Controller del modello
  * MVC e deve coordinare le varie componenti e funzionalità dell'applicazione.
  */
 public interface IController {

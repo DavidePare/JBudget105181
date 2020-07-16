@@ -2,10 +2,15 @@ package it.unicam.cs.pa.jbudget105181.Model.BudgetReport;
 
 import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
 
+/**
+ * interfaccia che ha la responsabilita' di gestire un budget report,
+ * cioe' un strumento che preso un budget e un ledger ne stipula la differenza tra il budget aspettatosi
+ * dall'utente e quello reale.
+ */
 public interface IBudgetReport {
+
     /**
-     * Metodo responsabile di restituire per ogni tag comuni a ledger e budget la differenza tra
-     * la differenza tra il saldo dei movimenti e il valore associato ad ogni tag nel budget.
+     * metodo responsabile di restituire per ogni tag il report
      * @return Ledger del BudgetReport.
      */
     Double check(ITag tag);

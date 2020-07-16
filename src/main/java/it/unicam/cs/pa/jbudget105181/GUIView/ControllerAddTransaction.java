@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 /**
- * classe che ha la responsabilità di fare da controller alla AddTransaction.
+ * classe che ha la responsabilita' di fare da controller alla AddTransaction.
  */
 public class ControllerAddTransaction implements ControllerFXML{
     /**

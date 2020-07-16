@@ -20,7 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * classe che ha la responsabilità di fare da controller alla  ViewMovement.
+ * classe che ha la responsabilita' di fare da controller alla  ViewMovement.
  */
 public class ControllerViewMovement  implements ControllerFXML{
     /**

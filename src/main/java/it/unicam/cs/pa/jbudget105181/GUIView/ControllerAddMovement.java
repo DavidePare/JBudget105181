@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * classe che ha la responsabilità di fare da controller alla AddMovement.
+ * classe che ha la responsabilita' di fare da controller alla AddMovement.
  */
 public class ControllerAddMovement implements ControllerFXML {
 

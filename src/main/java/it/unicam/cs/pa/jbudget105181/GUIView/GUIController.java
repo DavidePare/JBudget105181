@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
- * classe che ha la responsabilità di controllo principale della GUI View
+ * classe che ha la responsabilita' di controllo principale della GUI View
  */
 public class GUIController implements Initializable {
 
