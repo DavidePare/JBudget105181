@@ -30,11 +30,11 @@ public class JsonWriterJBudget implements IWriter{
     //    writer.name("transaction").value(object.getAllTransactions());
 
         this.path = path;
-        this.gson= new GsonBuilder().setPrettyPrinting().create();
-        String js=gson.toJson(object);
+        //this.gson= new GsonBuilder().setPrettyPrinting().create();
 
-     /*   this.gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter
-                (Ledger.class,new SerializerDeserializer()).create();*/
+        this.gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter
+                (Ledger.class,new AdapterLedger()).create();
+        gson.toJson(object);
 
     }
 
