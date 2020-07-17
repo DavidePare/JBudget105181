@@ -2,6 +2,7 @@ package it.unicam.cs.pa.jbudget105181.Model.Store;
 
 import com.google.gson.*;
 import it.unicam.cs.pa.jbudget105181.Model.Account.Account;
+import it.unicam.cs.pa.jbudget105181.Model.Account.AccountType;
 import it.unicam.cs.pa.jbudget105181.Model.Account.IAccount;
 import it.unicam.cs.pa.jbudget105181.Model.IFactory;
 import it.unicam.cs.pa.jbudget105181.Model.Ledger.ILedger;
@@ -196,8 +197,14 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
      * @return
      */
     private IAccount accountDeserialize(JsonElement json, JsonDeserializationContext context){
-        return null;
-      //  return IFactory.generateAccount();
+        JsonObject jo =json.getAsJsonObject();
+        int id=jo.get("ID").getAsInt();
+        String name = jo.get("Name").getAsString();
+        String description = jo.get("Description").getAsString();
+        AccountType type=AccountType.ASSETS;
+        //AccountType type = jo.get("Type");
+        Double amount=jo.get("Opening Balance").getAsDouble();
+        return IFactory.generateAccount(id,name,description,type,amount);
     }
     /**
      * Metodo che deserializza i tag letti dal file json
