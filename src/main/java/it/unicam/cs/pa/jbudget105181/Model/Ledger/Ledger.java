@@ -26,7 +26,6 @@ public class Ledger implements ILedger {
 	private List<IAccount> listaAccount= new ArrayList<IAccount>();
 	private IBudget listaBudget= new Budget();
 	public Ledger() {
-		
 	}
 	public Ledger(ILedger ledger){
 		this.allTransaction.addAll(ledger.getAllTransactions());
@@ -269,5 +268,9 @@ public class Ledger implements ILedger {
 		return tag.stream().filter(t-> (t.getNome().compareTo(name)==0) && (t.getDescription().compareTo(description)==0)).collect(Collectors.toList()).get(0);
 
 	}
+	/*
+	public void setBuget(IBudget budget){
+		this.listaBudget=budget;
+	}*/
 
 }
