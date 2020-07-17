@@ -4,6 +4,7 @@ import com.google.gson.*;
 import it.unicam.cs.pa.jbudget105181.Model.Account.AccountType;
 import it.unicam.cs.pa.jbudget105181.Model.Account.IAccount;
 import it.unicam.cs.pa.jbudget105181.Model.Budget.Budget;
+import it.unicam.cs.pa.jbudget105181.Model.Budget.IBudget;
 import it.unicam.cs.pa.jbudget105181.Model.IFactory;
 import it.unicam.cs.pa.jbudget105181.Model.Ledger.ILedger;
 import it.unicam.cs.pa.jbudget105181.Model.Ledger.Ledger;
@@ -41,7 +42,7 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
     public ILedger deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         this.ledger=new Ledger();
         ledger.addTags(tagsDeserialize(json.getAsJsonObject().get("Tags"), context));
-        ledger.setBudget(new Budget());
+        ledger.setBudget(deserializeBudget(json.getAsJsonObject().get("Budget"),context));
         ledger.addAccounts(accountsDeserialize(json.getAsJsonObject().get("Accounts"),context));
         ledger.addTransactions(transactionsDeserialize(json.getAsJsonObject().get("Transactions"),context));
         return ledger;
@@ -60,8 +61,38 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
         jo.add("Tags",tagsSerializer(src.getTags(), context));
         jo.add("Accounts", accountsSerializer(src.getAccounts(),context));
         jo.add("Transactions", transactionsSerializer(src.getAllTransactions(),context));
+        jo.add("Budget",serializeBudget(src.getBudget(),context));
         return jo;
     }
+
+    public IBudget<ITag> deserializeBudget(JsonElement json, JsonDeserializationContext context) throws JsonParseException {
+        IBudget<ITag> budget = new Budget<>();
+        for(JsonElement je : json.getAsJsonArray()) {
+            String tagName = context.deserialize(je.getAsJsonObject().get("TagName"),String.class);
+            String tagDescription = context.deserialize(je.getAsJsonObject().get("TagDescription"),String.class);
+            double value = context.deserialize(je.getAsJsonObject().get("Value"),Double.class);
+            ITag tag = this.ledger.getTags().stream()
+                    .filter(t->t.getNome().equals(tagName))
+                    .filter(t->t.getDescription().equals(tagDescription))
+                    .findAny()
+                    .get();
+            budget.addBudgetType(tag,value);
+        }
+        return budget;
+    }
+
+    public JsonElement serializeBudget(IBudget<ITag> src, JsonSerializationContext context) {
+        JsonArray ja = new JsonArray();
+        for(ITag t : src.getBudgetMap().keySet()) {
+            JsonObject jo = new JsonObject();
+            jo.add("TagName", context.serialize(t.getNome()));
+            jo.add("TagDescription", context.serialize(t.getDescription()));
+            jo.add("Value",context.serialize(src.getValue(t)));
+            ja.add(jo);
+        }
+        return ja;
+    }
+
     /**
      * serializzazione dei tag
      * @param src
