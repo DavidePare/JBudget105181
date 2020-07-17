@@ -10,22 +10,31 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * classe che ha la responsabilita' di leggere da un file json
+ */
 public class JsonReader implements IReader{
 
     /**
-     * Variabile utile per leggere da un file.
+     * variabile per leggere da un file.
      */
     private InputStreamReader in;
-    /*
+
+    /**
      * Path associato al file da dove avviene la lettura
      */
     private String path;
 
-    /*
-     * Variabile con la responsabilità di convertire un file gson in unLedger
+    /**
+     * variabile per convertire un file json in un Ledger
      */
     private Gson gson;
 
+    /**
+     * costruttore di JsonReader
+     * @param path
+     * @throws FileNotFoundException
+     */
     public JsonReader(String path) throws FileNotFoundException {
         if(path.contains(".json")){
             this.path=path;
@@ -34,6 +43,13 @@ public class JsonReader implements IReader{
         }
 
     }
+
+    /**
+     * metodo per leggere un Ledger
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     @Override
     public ILedger read() throws IOException, ClassNotFoundException {
         ILedger report = this.gson.fromJson(in,Ledger.class);
@@ -42,6 +58,10 @@ public class JsonReader implements IReader{
         return report;
     }
 
+    /**
+     * metodo per chiudere le variabili istanziate per leggere
+     * @throws IOException
+     */
     @Override
     public void close() throws IOException {
         in.close();

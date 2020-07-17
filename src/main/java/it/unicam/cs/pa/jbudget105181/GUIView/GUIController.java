@@ -575,9 +575,34 @@ public class GUIController implements Initializable {
         }
     }
 
+    /*
+    @FXML
+    public void load() {
+        try {
+            String path = createFileChooser().showOpenDialog(new Stage()).getAbsolutePath();
+            this.controller.read(new TxtReader(path));
+            refreshTransaction();
+        } catch (Exception e) {
+            logger.warning("Error in Load");
+            notificationHome.setText("Error in Load");
+        }
+    }
+     */
+
     /**
      * metodo per aprire un file
      */
+
+    /*public void refreshTransaction(){
+        try {
+            refreshTransaction();
+            lTags.removeAll(lTags);
+            lTags.addAll(controller.getTags());
+            //tagChoice.setItems(lTags);
+        }catch (Exception e){
+        }
+    }*/
+
     @FXML
     public void open(){
         try {
@@ -603,14 +628,13 @@ public class GUIController implements Initializable {
             String path = createFileChooser().showSaveDialog(new Stage()).getAbsolutePath();
             this.writer = new JsonWriterJBudget(path);
             this.controller.save(writer);
-
             autoSave();
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    private FileChooser createFileChooser() {
+   private FileChooser createFileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters()
                 .addAll(new FileChooser.ExtensionFilter("Json File", "*.json"));

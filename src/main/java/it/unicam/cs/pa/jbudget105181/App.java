@@ -6,8 +6,15 @@ import java.util.List;*/
 import it.unicam.cs.pa.jbudget105181.GUIView.FXMLStart;
 import javafx.application.Application;
 
+/**
+ * classe che ha la responsabilita' di far partire il programma
+ */
 public class App {
-	
+
+	/**
+	 * etodo main da cui viene lanciata la GUI View
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		//Generare vista
 		// Apertura vista

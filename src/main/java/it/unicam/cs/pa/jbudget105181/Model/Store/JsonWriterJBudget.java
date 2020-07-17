@@ -9,13 +9,39 @@ import it.unicam.cs.pa.jbudget105181.Model.Ledger.Ledger;
 
 import java.io.*;
 
+/**
+ * classe che ha la responsabilita' di scrivere su un file json
+ */
 public class JsonWriterJBudget implements IWriter{
+
+    /**
+     * Path associato al file da dove avviene la lettura
+     */
     private String path;
+
+    /**
+     * variabile per convertire un file json in un Ledger
+     */
     private Gson gson;
+
+    /**
+     * variabile per leggere da un file.
+     */
     private OutputStreamWriter out;
+
+    /**
+     * costruttore di JsonWriterJBudget
+     * @param path
+     */
     public JsonWriterJBudget(String path){
         this.path=path;
     }
+
+    /**
+     * metodo per scrivere un Ledger
+     * @param object
+     * @throws IOException
+     */
     @Override
     public void write(ILedger object) throws IOException {
         if(!path.contains(".json"))
@@ -28,6 +54,10 @@ public class JsonWriterJBudget implements IWriter{
         out.flush();
     }
 
+    /**
+     * metodo per chiudere le variabili istanziate per scrivere
+     * @throws IOException
+     */
     @Override
     public void close() throws IOException {
         out.close();
