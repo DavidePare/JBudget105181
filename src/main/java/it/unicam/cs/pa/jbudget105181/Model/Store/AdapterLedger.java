@@ -30,7 +30,6 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
         ledger.addTags(tagsDeserialize(json.getAsJsonObject().get("Tags"), context));
         ledger.addAccounts(accountsDeserialize(json.getAsJsonObject().get("Accounts"),context));
         ledger.addTransactions(transactionsDeserialize(json.getAsJsonObject().get("Transactions"),context));
-      //  ledger.update();
         return ledger;
     }
 
@@ -147,12 +146,13 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
     public ITransazione transactionsDeserializeElement(JsonElement json,JsonDeserializationContext context) throws JsonParseException{
         JsonObject jo = json.getAsJsonObject();
         int id=jo.get("ID").getAsInt();
-        LocalDate data = context.deserialize(jo.get("Data"), LocalDate.class);
+        LocalDate data = context.deserialize(jo.get("Data"), LocalDate.class);// TODO
         String description= jo.get("Description").getAsString();
-        boolean pagata=jo.get("Paid").getAsBoolean();
+        boolean pagata=jo.get("Pagata").getAsBoolean();
         List<ITag> tagList = new ArrayList<>(tagsDeserialize(jo.get("Tag"), context));
         ITransazione trans = IFactory.generateTransaction(id,data,tagList,description,pagata);
-        trans.addMovementList(movementsDeserialize(json,context,trans));
+        trans.addMovementList(movementsDeserialize(json.getAsJsonObject().get("Movements"),context,trans));
+        trans.adjustTotalCost();
         return trans;
 
 
@@ -171,7 +171,7 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
         MovementType type = MovementType.valueOf(jo.get("Type").getAsString());
         Double amount = jo.get("Amount").getAsDouble();
         String description = jo.get("Description").getAsString();
-        List<ITag> tag = tagsDeserialize(jo,context);
+        List<ITag> tag = tagsDeserialize(jo.getAsJsonObject().get("Tag"),context);
         int IDAccount=jo.get("ID Account").getAsInt();
         return IFactory.generateMovement(ID,description,type,amount,ledger.getAccountForID(IDAccount),tag,t);
     }
@@ -201,9 +201,9 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
         int id=jo.get("ID").getAsInt();
         String name = jo.get("Name").getAsString();
         String description = jo.get("Description").getAsString();
-        AccountType type=AccountType.ASSETS;
+        AccountType type = AccountType.valueOf(jo.get("Type").getAsString());
         //AccountType type = jo.get("Type");
-        Double amount=jo.get("Opening Balance").getAsDouble();
+        Double amount=jo.get("OpeningBalance").getAsDouble();
         return IFactory.generateAccount(id,name,description,type,amount);
     }
     /**

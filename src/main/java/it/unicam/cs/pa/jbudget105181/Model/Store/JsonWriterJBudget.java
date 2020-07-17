@@ -7,39 +7,29 @@ import com.google.gson.stream.JsonWriter;
 import it.unicam.cs.pa.jbudget105181.Model.Ledger.ILedger;
 import it.unicam.cs.pa.jbudget105181.Model.Ledger.Ledger;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 
 public class JsonWriterJBudget implements IWriter{
     private String path;
     private Gson gson;
+    private OutputStreamWriter out;
     public JsonWriterJBudget(String path){
         this.path=path;
     }
     @Override
     public void write(ILedger object) throws IOException {
-
         if(!path.contains(".json"))
             path = path+".json";
-      //  JsonWriter writer = new JsonWriter(new FileWriter(path));
-        //set indentation for pretty print
-     //   writer.setIndent("\t");
-        //start writing
-     //   writer.beginObject(); //{
-    //    writer.name("transaction").value(object.getAllTransactions());
-
-        this.path = path;
-        //this.gson= new GsonBuilder().setPrettyPrinting().create();
-
+        this.out= new OutputStreamWriter(new FileOutputStream(path));
         this.gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapter
                 (Ledger.class,new AdapterLedger()).create();
-        gson.toJson(object);
-
+        String write=gson.toJson(object);
+        out.write(write);
+        out.flush();
     }
 
     @Override
     public void close() throws IOException {
-
+        out.close();
     }
 }

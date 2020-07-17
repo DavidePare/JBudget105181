@@ -36,10 +36,10 @@ public class JsonReader implements IReader{
     }
     @Override
     public ILedger read() throws IOException, ClassNotFoundException {
-        if(this.gson.fromJson(in,Ledger.class) == null) {
+        ILedger report = this.gson.fromJson(in,Ledger.class);
+        if(report == null)
             throw new NullPointerException();
-        }
-        return this.gson.fromJson(in, Ledger.class);
+        return report;
     }
 
     @Override

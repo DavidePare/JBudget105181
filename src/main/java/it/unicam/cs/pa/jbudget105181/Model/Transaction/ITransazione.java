@@ -27,4 +27,5 @@ public interface ITransazione extends IUtility {
 	void setDescription(String description);
 	void addMovementList(List<IMovement> lMovent);
 	void setPagata(boolean pagata);
+	void adjustTotalCost();
 }
