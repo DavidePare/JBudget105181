@@ -46,6 +46,7 @@ public class Tag implements ITag {
 	}
 	public Double getAmount(){
 		Double total=0.0;
+		if(movements.isEmpty()) return total;
 		for(IMovement x : movements){
 			if(x.getTipo().equals(MovementType.CREDIT)){
 				total+= x.getAmount();

@@ -268,9 +268,9 @@ public class Ledger implements ILedger {
 		return tag.stream().filter(t-> (t.getNome().compareTo(name)==0) && (t.getDescription().compareTo(description)==0)).collect(Collectors.toList()).get(0);
 
 	}
-	/*
-	public void setBuget(IBudget budget){
+
+	public void setBudget(IBudget budget){
 		this.listaBudget=budget;
-	}*/
+	}
 
 }

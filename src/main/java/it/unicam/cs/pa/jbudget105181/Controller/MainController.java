@@ -194,6 +194,7 @@ public class MainController implements IController {
     public void read(IReader IReader) throws IOException, ClassNotFoundException {
         if(IReader !=null) {
             this.ledger = IReader.read();
+            this.reporter= new BudgetReport(ledger);
             IReader.close();
         }
     }

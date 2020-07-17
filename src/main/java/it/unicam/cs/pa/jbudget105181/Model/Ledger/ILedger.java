@@ -190,4 +190,5 @@ public interface ILedger extends Serializable {
 	 */
 	void addTransactions(List<ITransazione> transazionelist);
 	ITag getATag(String name, String description);
+	void setBudget(IBudget budget);
 }

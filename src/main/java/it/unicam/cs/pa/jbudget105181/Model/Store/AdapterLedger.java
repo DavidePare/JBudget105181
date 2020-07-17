@@ -4,6 +4,8 @@ import com.google.gson.*;
 import it.unicam.cs.pa.jbudget105181.Model.Account.Account;
 import it.unicam.cs.pa.jbudget105181.Model.Account.AccountType;
 import it.unicam.cs.pa.jbudget105181.Model.Account.IAccount;
+import it.unicam.cs.pa.jbudget105181.Model.Budget.Budget;
+import it.unicam.cs.pa.jbudget105181.Model.Budget.IBudget;
 import it.unicam.cs.pa.jbudget105181.Model.IFactory;
 import it.unicam.cs.pa.jbudget105181.Model.Ledger.ILedger;
 import it.unicam.cs.pa.jbudget105181.Model.Ledger.Ledger;
@@ -14,6 +16,7 @@ import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
 import it.unicam.cs.pa.jbudget105181.Model.Tag.Tag;
 import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
 import javafx.scene.input.InputMethodTextRun;
+import netscape.javascript.JSObject;
 
 import java.lang.reflect.Type;
 import java.time.LocalDate;
@@ -22,29 +25,45 @@ import java.util.*;
 
 
 public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<ILedger>{
+    /**
+     * ledger a cui avverrà la deserializzazione del file json
+     */
     private ILedger ledger;
 
+    /**
+     * Deserializzatore del file json richiamerà tutte le funzioni di deserializzazione per la corretta lettura del file
+     * json richiamando i successivi deserializzatori
+     * @param json
+     * @param typeOfT
+     * @param context
+     * @return ritorno del ledger
+     * @throws JsonParseException
+     */
     @Override
     public ILedger deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         this.ledger=new Ledger();
         ledger.addTags(tagsDeserialize(json.getAsJsonObject().get("Tags"), context));
-       // ledger
+        ledger.setBudget(new Budget());
         ledger.addAccounts(accountsDeserialize(json.getAsJsonObject().get("Accounts"),context));
         ledger.addTransactions(transactionsDeserialize(json.getAsJsonObject().get("Transactions"),context));
         return ledger;
     }
 
+    /**
+     * Serializzatore del ledger per creare il file gson da salvare sul file
+     * @param src
+     * @param typeOfSrc
+     * @param context
+     * @return ritorna il jsonObject completo
+     */
     @Override
     public JsonElement serialize(ILedger src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject jo = new JsonObject();
         jo.add("Tags",tagsSerializer(src.getTags(), context));
-        jo.add("Budget",context.serialize(src.getBudget()));
         jo.add("Accounts", accountsSerializer(src.getAccounts(),context));
         jo.add("Transactions", transactionsSerializer(src.getAllTransactions(),context));
         return jo;
     }
-
-
     /**
      * serializzazione dei tag
      * @param src
@@ -58,10 +77,10 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
     }
 
     /**
-     * Serializzatore delle transazioni
+     * Serializzatore della lista delle transazioni
      * @param src
      * @param context
-     * @return
+     * @return riotrna un array di elementi contenente tutte le transazioni presenti
      */
     private JsonElement transactionsSerializer(List<ITransazione> src, JsonSerializationContext context){
         JsonArray ja = new JsonArray();
@@ -73,7 +92,7 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
      * Serializzatore degli account
      * @param src
      * @param context
-     * @return
+     * @return array json contenente tutti gli account serializzati
      */
     private JsonElement accountsSerializer(List<IAccount> src, JsonSerializationContext context) {
         JsonArray ja = new JsonArray();
@@ -85,7 +104,7 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
      * Serializzatore di un tag
      * @param src
      * @param context
-     * @return
+     * @return tag serializzato
      */
     public JsonElement tagSerializer(ITag src, JsonSerializationContext context) {
         JsonObject jo = new JsonObject();
@@ -94,6 +113,12 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
         return jo;
     }
 
+    /**
+     * Serielizzatore di un account da salvare dentro il file json.
+     * @param src
+     * @param context
+     * @return account serializzato
+     */
     public JsonElement serializeAccount(IAccount src, JsonSerializationContext context) {
         JsonObject jo = new JsonObject();
         jo.add("ID", context.serialize(src.getID()));
@@ -104,6 +129,12 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
         return jo;
     }
 
+    /**
+     * Serializzatore di una transazione da salvare dentro il file json.
+     * @param src
+     * @param context
+     * @return transazione serializzata
+     */
     public JsonElement serializeTransazione(ITransazione src, JsonSerializationContext context) {
         JsonObject jo = new JsonObject();
         jo.add("ID", context.serialize(src.getID()));
@@ -115,12 +146,24 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
         return jo;
     }
 
+    /**
+     * Serializzatore di una lista di movimenti
+     * @param src
+     * @param context
+     * @return lista di movimenti serializzati
+     */
     private JsonElement movementsSerializer(List<IMovement> src, JsonSerializationContext context){
         JsonArray ja = new JsonArray();
         src.parallelStream().forEach(m->ja.add(serializeMovement(m,context)));
         return ja;
     }
 
+    /**
+     * Serializzatore di un movimento
+     * @param src
+     * @param context
+     * @return movimento serializzato
+     */
     public JsonElement serializeMovement(IMovement src, JsonSerializationContext context) {
         JsonObject jo = new JsonObject();
         jo.add("ID", context.serialize(src.getID()));
@@ -144,6 +187,12 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
         return transactions;
     }
 
+    /**
+     * Deserializzatore dei tag per i movimenti e le transazioni
+     * @param json
+     * @param context
+     * @return lista di tag del movimento o della transazione
+     */
     private List<ITag> tagsDeserializerMovementAndTransaction(JsonElement json, JsonDeserializationContext context){
         List<ITag> tags= new ArrayList<>();
         for(JsonElement je : json.getAsJsonArray()) {
@@ -157,6 +206,13 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
         return tags;
     }
 
+    /**
+     * Deserializzatore di un elemento delle transazioni
+     * @param json
+     * @param context
+     * @return transazione deserializzata
+     * @throws JsonParseException
+     */
     public ITransazione transactionsDeserializeElement(JsonElement json,JsonDeserializationContext context) throws JsonParseException{
         JsonObject jo = json.getAsJsonObject();
         int id=jo.get("ID").getAsInt();
@@ -174,6 +230,14 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
 
 
     }
+
+    /**
+     * Deserializzazione dei movimenti
+     * @param json
+     * @param context
+     * @param t
+     * @return ritorna la lista dei movimenti deserializzati
+     */
     private List<IMovement> movementsDeserialize(JsonElement json, JsonDeserializationContext context, ITransazione t) {
         List<IMovement> movements = new ArrayList<>();
         for (JsonElement je : json.getAsJsonArray()) {
@@ -182,6 +246,13 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
         return movements;
     }
 
+    /**
+     * Deserializzatore di un movimento
+     * @param json
+     * @param context
+     * @param t
+     * @return movimento deserializzato
+     */
     private IMovement movementDeserialize(JsonElement json, JsonDeserializationContext context,ITransazione t){
         JsonObject jo =json.getAsJsonObject();
         int ID = jo.get("ID").getAsInt();
@@ -207,7 +278,7 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
      * Metodo responsabile della deserializzazione di un JsonElemant in una serie di Account.
      * @param json JsonElement da deserializzare.
      * @param context
-     * @return Serie di Accounts deserializzati.
+     * @return Lista di Accounts deserializzati.
      */
     private List<IAccount> accountsDeserialize(JsonElement json, JsonDeserializationContext context){
         List<IAccount> accounts = new ArrayList<>();
@@ -217,10 +288,10 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
     }
 
     /**
-     *
+     * Metodo di deserializzazioni di un'account
      * @param json
      * @param context
-     * @return
+     * @return account generato e inserito nel nuovo ledger
      */
     private IAccount accountDeserialize(JsonElement json, JsonDeserializationContext context){
         JsonObject jo =json.getAsJsonObject();
