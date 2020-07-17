@@ -98,4 +98,10 @@ public interface IAccount extends IUtility {
 	 * dell'account
 	 */
 	void recalculateConto();
+
+
+	/**
+	 *
+	 */
+	void addMovementDeserialized(IMovement mov);
 }

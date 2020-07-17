@@ -142,4 +142,39 @@ public class Account implements IAccount {
 	public String toString() {
 		return name;
 	}
+
+	public void refreshConto(){
+		for(IMovement mov : movimenti){
+			if(!mov.getTransaction().getPagata() && !mov.getTransaction().getData().isAfter(LocalDate.now())) {
+				if (type.equals(AccountType.ASSETS)) {
+					if (mov.getTipo().equals(MovementType.CREDIT))
+						conto += mov.getAmount();
+					else
+						conto -= mov.getAmount();
+				} else {
+					if (mov.getTipo().equals(MovementType.CREDIT))
+						conto -= mov.getAmount();
+					else
+						conto += mov.getAmount();
+				}
+			}
+		}
+	}
+	public void addMovementDeserialized(IMovement mov){
+		movimenti.add(mov);
+		if(!mov.getTransaction().getData().isAfter(LocalDate.now()) && !mov.getTransaction().getPagata()) {
+			if(type.equals(AccountType.ASSETS)) {
+				if(mov.getTipo().equals(MovementType.CREDIT))
+					conto+=mov.getAmount();
+				else
+					conto-=mov.getAmount();
+			}else {
+				if(mov.getTipo().equals(MovementType.CREDIT))
+					conto-=mov.getAmount();
+				else
+					conto+=mov.getAmount();
+			}
+			mov.getTransaction().setPagata(true);
+		}
+	}
 }

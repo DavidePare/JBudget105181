@@ -146,7 +146,7 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
     public ITransazione transactionsDeserializeElement(JsonElement json,JsonDeserializationContext context) throws JsonParseException{
         JsonObject jo = json.getAsJsonObject();
         int id=jo.get("ID").getAsInt();
-        LocalDate data = context.deserialize(jo.get("Data"), LocalDate.class);// TODO
+        LocalDate data = context.deserialize(jo.get("Date"), LocalDate.class);
         String description= jo.get("Description").getAsString();
         boolean pagata=jo.get("Pagata").getAsBoolean();
         List<ITag> tagList = new ArrayList<>(tagsDeserialize(jo.get("Tag"), context));
@@ -172,8 +172,11 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
         Double amount = jo.get("Amount").getAsDouble();
         String description = jo.get("Description").getAsString();
         List<ITag> tag = tagsDeserialize(jo.getAsJsonObject().get("Tag"),context);
+
         int IDAccount=jo.get("ID Account").getAsInt();
-        return IFactory.generateMovement(ID,description,type,amount,ledger.getAccountForID(IDAccount),tag,t);
+        IMovement mov= IFactory.generateMovement(ID,description,type,amount,ledger.getAccountForID(IDAccount),tag,t);
+        ledger.getAccountForID(IDAccount).addMovementDeserialized(mov);
+        return mov;
     }
 
 

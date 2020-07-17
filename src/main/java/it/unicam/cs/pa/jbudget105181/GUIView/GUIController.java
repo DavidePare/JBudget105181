@@ -586,6 +586,11 @@ public class GUIController implements Initializable {
             writer = new JsonWriterJBudget(path);
         }catch (Exception e){
             e.printStackTrace();
+        }finally{
+            updateTags();
+            updateAccount();
+            updateBudget();
+            updateTransaction();
         }
     }
 
