@@ -1,4 +1,4 @@
-package it.unicam.cs.pa.jbudget105181.Model;
+package it.unicam.cs.pa.jbudget105181.Model.Store;
 
 import it.unicam.cs.pa.jbudget105181.Model.Ledger.ILedger;
 import it.unicam.cs.pa.jbudget105181.Model.Store.IWriter;

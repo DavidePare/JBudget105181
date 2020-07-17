@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 /**
  * classe che ha la responsabilita' di leggere da un file json
  */
-public class JsonReader implements IReader{
+public class JsonReaderJBudget implements IReader{
 
     /**
      * variabile per leggere da un file.
@@ -35,7 +35,7 @@ public class JsonReader implements IReader{
      * @param path
      * @throws FileNotFoundException
      */
-    public JsonReader(String path) throws FileNotFoundException {
+    public JsonReaderJBudget(String path) throws FileNotFoundException {
         if(path.contains(".json")){
             this.path=path;
             this.in= new InputStreamReader(new FileInputStream(path));

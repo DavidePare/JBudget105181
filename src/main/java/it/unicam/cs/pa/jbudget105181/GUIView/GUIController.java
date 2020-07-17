@@ -6,7 +6,7 @@ import it.unicam.cs.pa.jbudget105181.Model.*;
 import it.unicam.cs.pa.jbudget105181.Model.Account.AccountType;
 import it.unicam.cs.pa.jbudget105181.Model.Account.IAccount;
 import it.unicam.cs.pa.jbudget105181.Model.Store.IWriter;
-import it.unicam.cs.pa.jbudget105181.Model.Store.JsonReader;
+import it.unicam.cs.pa.jbudget105181.Model.Store.JsonReaderJBudget;
 import it.unicam.cs.pa.jbudget105181.Model.Store.JsonWriterJBudget;
 import it.unicam.cs.pa.jbudget105181.Model.Tag.ITag;
 import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
@@ -607,10 +607,10 @@ public class GUIController implements Initializable {
     public void open(){
         try {
             String path = createFileChooser().showOpenDialog(new Stage()).getAbsolutePath();
-            this.controller.read(new JsonReader(path));
+            this.controller.read(new JsonReaderJBudget(path));
             writer = new JsonWriterJBudget(path);
         }catch (Exception e){
-            e.printStackTrace();
+          //  e.printStackTrace();
         }finally{
             updateTags();
             updateAccount();
