@@ -50,4 +50,5 @@ public interface ILedger extends Serializable {
 	void addTags(List<ITag> tags);
 	void addAccounts(List<IAccount> accountList);
 	void addTransactions(List<ITransazione> transazionelist);
+	ITag getATag(String name, String description);
 }

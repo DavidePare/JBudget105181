@@ -12,6 +12,7 @@ import it.unicam.cs.pa.jbudget105181.Model.Transaction.ITransazione;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Ledger implements ILedger {
 	/*
@@ -171,15 +172,9 @@ public class Ledger implements ILedger {
 		return null;
 	}
 	public IAccount getAccountForID(int id) {
-		int i=0;
-		while(i<listaAccount.size()) {
-			if(listaAccount.get(i).getID() == id) {
-				return listaAccount.get(i);
-			}
-			i++;
-		}
-		return null;
+		return this.get(listaAccount,id);
 	}
+
 	public void removeAccount(IAccount account){
 		List<IAccount> app= new ArrayList<>();
 		listaAccount.stream().filter(t-> t.getID() == account.getID()).forEach(t -> app.add(t));
@@ -269,6 +264,10 @@ public class Ledger implements ILedger {
 	}
 	public void addTransactions(List<ITransazione> transazionelist){
 		allTransaction.addAll(transazionelist);
+	}
+	public ITag getATag(String name, String description){
+		return tag.stream().filter(t-> (t.getNome().compareTo(name)==0) && (t.getDescription().compareTo(description)==0)).collect(Collectors.toList()).get(0);
+
 	}
 
 }

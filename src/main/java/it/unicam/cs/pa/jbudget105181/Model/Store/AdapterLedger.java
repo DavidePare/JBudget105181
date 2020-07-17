@@ -52,7 +52,7 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
      */
     private JsonElement tagsSerializer(List<ITag> src, JsonSerializationContext context){
         JsonArray ja = new JsonArray();
-        src.parallelStream().forEach(t->ja.add(tagSerializer(t, context)));
+        src.stream().forEach(t->ja.add(tagSerializer(t, context)));
         return ja;
     }
 
@@ -64,7 +64,7 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
      */
     private JsonElement transactionsSerializer(List<ITransazione> src, JsonSerializationContext context){
         JsonArray ja = new JsonArray();
-        src.parallelStream().forEach(t->ja.add(serializeTransazione(t,context)));
+        src.stream().forEach(t->ja.add(serializeTransazione(t,context)));
         return ja;
     }
 
@@ -76,7 +76,7 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
      */
     private JsonElement accountsSerializer(List<IAccount> src, JsonSerializationContext context) {
         JsonArray ja = new JsonArray();
-        src.parallelStream().forEach(a->ja.add(serializeAccount(a,context)));
+        src.stream().forEach(a->ja.add(serializeAccount(a,context)));
         return ja;
     }
 
@@ -143,13 +143,29 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
         return transactions;
     }
 
+    private List<ITag> tagsDeserializerMovementAndTransaction(JsonElement json, JsonDeserializationContext context){
+        List<ITag> tags= new ArrayList<>();
+        for(JsonElement je : json.getAsJsonArray()) {
+            tags = new ArrayList<>();
+            JsonObject jsonObj = je.getAsJsonObject();
+            String name = jsonObj.get("Name").getAsString();
+            String description = jsonObj.get("Description").getAsString();
+            if(ledger.getATag(name,description)!= null)
+                tags.add(ledger.getATag(name,description));
+        }
+        return tags;
+    }
+
     public ITransazione transactionsDeserializeElement(JsonElement json,JsonDeserializationContext context) throws JsonParseException{
         JsonObject jo = json.getAsJsonObject();
         int id=jo.get("ID").getAsInt();
         LocalDate data = context.deserialize(jo.get("Date"), LocalDate.class);
         String description= jo.get("Description").getAsString();
         boolean pagata=jo.get("Pagata").getAsBoolean();
-        List<ITag> tagList = new ArrayList<>(tagsDeserialize(jo.get("Tag"), context));
+        List<ITag> tagList=new ArrayList<>();
+        if(tagsDeserializerMovementAndTransaction(jo.get("Tag"), context) != null){
+            tagList.addAll(tagsDeserializerMovementAndTransaction(jo.get("Tag"), context));
+        }
         ITransazione trans = IFactory.generateTransaction(id,data,tagList,description,pagata);
         trans.addMovementList(movementsDeserialize(json.getAsJsonObject().get("Movements"),context,trans));
         trans.adjustTotalCost();
@@ -171,10 +187,13 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
         MovementType type = MovementType.valueOf(jo.get("Type").getAsString());
         Double amount = jo.get("Amount").getAsDouble();
         String description = jo.get("Description").getAsString();
-        List<ITag> tag = tagsDeserialize(jo.getAsJsonObject().get("Tag"),context);
-
+        List<ITag> tag = new ArrayList<>();
+        if(tagsDeserializerMovementAndTransaction(jo.get("Tag"), context) != null){
+            tag.addAll(tagsDeserializerMovementAndTransaction(jo.get("Tag"), context));
+        }
         int IDAccount=jo.get("ID Account").getAsInt();
-        IMovement mov= IFactory.generateMovement(ID,description,type,amount,ledger.getAccountForID(IDAccount),tag,t);
+        IAccount a=ledger.getAccountForID(IDAccount);
+        IMovement mov= IFactory.generateMovement(ID,description,type,amount,a,tag,t);
         ledger.getAccountForID(IDAccount).addMovementDeserialized(mov);
         return mov;
     }

@@ -11,11 +11,12 @@ import java.util.function.Predicate;
 public class Account implements IAccount {
 	private String name;
 	private String description;
-	private int ID;
+	private final int ID;
 	private AccountType type;
-	private List<IMovement> movimenti= new ArrayList<IMovement>();
+	private List<IMovement> movimenti;
 	private Double conto;
 	public Account(int ID,String name, String description, AccountType type,Double conto) {
+		this.movimenti = new ArrayList<IMovement>();
 		this.name=name;
 		this.description=description;
 		this.type=type;
