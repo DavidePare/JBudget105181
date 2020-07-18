@@ -194,7 +194,7 @@ public class ControllerAddTransaction implements ControllerFXML{
             LocalDate data = transactionDate.getValue();
             List<ITransazione> listTransactionRated= new ArrayList<ITransazione>();
             for (int x = 0; x < numberOfTransaction.getValue(); x++) {
-                listTransactionRated.add(controller.addTransaction(data, listTagTrans, descriptionTransaction.getText(), transactionDate.getValue().isBefore(LocalDate.now())));
+                listTransactionRated.add(controller.addTransaction(data, listTagTrans, descriptionTransaction.getText(), !data.isAfter(LocalDate.now())));
                 data = data.plusDays(Long.parseLong(numweekTransaction.getText()));
             }
             openWindow("Add Movement", "/FXMLAddMovement.fxml", new ControllerAddMovement(controller, listTransactionRated,true));

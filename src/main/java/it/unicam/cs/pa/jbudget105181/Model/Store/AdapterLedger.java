@@ -196,7 +196,7 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
      */
     private JsonElement movementsSerializer(List<IMovement> src, JsonSerializationContext context){
         JsonArray ja = new JsonArray();
-        src.parallelStream().forEach(m->ja.add(serializeMovement(m,context)));
+        src.stream().forEach(m->ja.add(serializeMovement(m,context)));
         return ja;
     }
 
