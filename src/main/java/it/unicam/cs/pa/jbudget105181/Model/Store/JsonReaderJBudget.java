@@ -45,7 +45,7 @@ public class JsonReaderJBudget implements IReader{
     }
 
     /**
-     * metodo per leggere un Ledger
+     * metodo per leggere un Ledger da un file json
      * @return
      * @throws IOException
      * @throws ClassNotFoundException

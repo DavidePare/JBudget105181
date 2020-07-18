@@ -38,7 +38,7 @@ public class JsonWriterJBudget implements IWriter{
     }
 
     /**
-     * metodo per scrivere un Ledger
+     * metodo per scrivere un Ledger in un file json
      * @param object
      * @throws IOException
      */
