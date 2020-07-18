@@ -183,9 +183,8 @@ public class GUIController implements Initializable {
      * lista dei budget
      */
     private ObservableList<Map.Entry<ITag,Double>> lBudget;
-  /*  @FXML private TableView<IBudget> tableBudget;
-    @FXML private TableColumn<IBudget,String> columnBudgetTag;
-    @FXML private TableColumn<IBudget,Double> columnBudgetAmount;*/
+
+    @FXML private Label errorAccountLabel;
     /**
      * tabella di budget
      */
@@ -208,7 +207,6 @@ public class GUIController implements Initializable {
     @FXML private Label resultReport;
 
 
-    @FXML private PieChart graphPieBudget; // eliminare
 
     /**
      * metodo per inizializzare le variabili
@@ -217,20 +215,14 @@ public class GUIController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        lTags = FXCollections.observableArrayList();
-        lTransactions = FXCollections.observableArrayList();
-        lAccount = FXCollections.observableArrayList();
-        lBudget=  FXCollections.observableArrayList();
-        typeAccMenu= FXCollections.observableArrayList();
+        inizializeList();
         modifyAccButton.setDisable(true);
         modifyTransactionMenu.setExpanded(false);
         modifyTransactionButton.setDisable(false);
+        errorAccountLabel.setVisible(false);
         inizializeTypeAccount();
         inizializeBudgetTag();
-        updateTags();
-        updateTransaction();
-        updateAccount();
-        updateBudget();
+        refreshList();
     }
 
     /**
@@ -257,6 +249,16 @@ public class GUIController implements Initializable {
     }
 
     /**
+     * metodo che ha la responsabilita' di inizializzare tutte le liste;
+     */
+    private void inizializeList(){
+        lTags = FXCollections.observableArrayList();
+        lTransactions = FXCollections.observableArrayList();
+        lAccount = FXCollections.observableArrayList();
+        lBudget=  FXCollections.observableArrayList();
+        typeAccMenu= FXCollections.observableArrayList();
+    }
+    /**
      * metodo per impostare i tag
      */
     private void inizializeBudgetTag(){
@@ -271,13 +273,9 @@ public class GUIController implements Initializable {
      */
     public void openWindow(String title, String fileFXML,ControllerFXML controllerFXML){
         try {
-            //Stage stage = new Stage();
-
-            //Invece di modifyAccButton sarebbe meglio aggiungere un qualcosa di più specifico
             Stage stage = (Stage) modifyAccButton.getScene().getWindow();
             stage.hide();
             stage.setTitle(title);
-            //stage.initModality(Modality.APPLICATION_MODAL);
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fileFXML));
             loader.setController(controllerFXML);
             stage.setScene(new Scene(loader.load(), 800, 400));
@@ -320,18 +318,31 @@ public class GUIController implements Initializable {
      */
     public void addAccount(){
         try{
+            errorAccountLabel.setVisible(false);
             if(controller.alreadyExistNameAccount(nameAccount.getText()) && accountType.getValue()!=null){
                 controller.addAccount(IFactory.generateAccount(controller.generateIDAccount(),nameAccount.getText(),descriptionAccount.getText(),accountType.getValue(),Double.valueOf(balanceAccount.getText())));
             }
+            else{
+                errorAccountLabel.setText("This account already exits change name!");
+                errorAccountLabel.setVisible(true);
+            }
         }catch(Exception e){
+            setErrorAccountLabel();
         }finally{
-            modifyAccButton.setDisable(true);
-            nameAccount.clear();
-            balanceAccount.clear();
-            accountType.setValue(null);
-            descriptionAccount.clear();
-            updateAccount();
+            clearAccountOption();
         }
+    }
+
+    /**
+     * metodo che ha la responsabilita' di ripulire i campi di inserimento dell'account
+     */
+    private void clearAccountOption(){
+        modifyAccButton.setDisable(true);
+        nameAccount.clear();
+        balanceAccount.clear();
+        accountType.setValue(null);
+        descriptionAccount.clear();
+        updateAccount();
     }
 
     /**
@@ -354,22 +365,15 @@ public class GUIController implements Initializable {
      */
     public void modifyAccount(){
         if(!accountTable.getItems().isEmpty()){
-            //IAccount newAcc= new Account(idAcc,nameAccount.getText(),descriptionAccount.getText(),accountType.getValue(),Double.valueOf(balanceAccount.getText()));
             try{
-              /*  IAccount account= new Account(idAcc,nameAccount.getText(),descriptionAccount.getText(),accountType.getValue(),Double.valueOf(balanceAccount.getText()));
-                controller.removeAccount(t-> t.getID()==idAcc);
-                controller.addAccount(account);*/
+
+                errorAccountLabel.setVisible(false);
                 controller.modifyAccount(idAcc,nameAccount.getText(),descriptionAccount.getText(),
                         accountType.getValue(),Double.valueOf(balanceAccount.getText()));
             }catch(Exception e){
-
+                setErrorAccountLabel();
             }finally{
-                modifyAccButton.setDisable(true);
-                nameAccount.clear();
-                balanceAccount.clear();
-                accountType.setValue(null);
-                descriptionAccount.clear();
-                updateAccount();
+                clearAccountOption();
             }
 
         }
@@ -380,29 +384,32 @@ public class GUIController implements Initializable {
      * metodo per eliminare un account
      */
     public void deleteAccount(){
-       // try {
+        try {
+            errorAccountLabel.setVisible(false);
             IAccount account = accountTable.getSelectionModel().getSelectedItem();
             if (account != null && !accountTable.getItems().isEmpty()) {
                 controller.removeAccount(account);
                 updateAccount();
                 modifyAccButton.setDisable(true);
             }
-    /*    }catch(Exception e){
-        }finally{
-            modifyAccButton.setDisable(true);
-            nameAccount.clear();
-            balanceAccount.clear();
-            accountType.setValue(null);
-            descriptionAccount.clear();*/
-     //       updateAccount();
-   //     }
+        }catch(Exception e){
+            setErrorAccountLabel();
+        }finally {
+            clearAccountOption();
+        }
     }
 
+    /**
+     * inserisce messaggio di errore in caso di eccezione sull'account
+     */
+    private void setErrorAccountLabel(){
+        errorAccountLabel.setText("Wrong data inserted!");
+        errorAccountLabel.setVisible(true);
+    }
     /**
      * metodo per aprire la finestra ed aggiungere un movimento
      */
     public void addMovement() {
-
         ITransazione transaction = transTable.getSelectionModel().getSelectedItem();
         if(transaction != null && !controller.getAccount().isEmpty()) {
             openWindow("Add Movement", "/FXMLAddMovement.fxml", new ControllerAddMovement(controller,transaction));
@@ -439,6 +446,7 @@ public class GUIController implements Initializable {
         if(!tagTable.getItems().isEmpty() && tag != null) {
             controller.removeTag(tag);
             updateTags();
+            updateBudget();
         }
     }
 
@@ -575,34 +583,10 @@ public class GUIController implements Initializable {
         }
     }
 
-    /*
-    @FXML
-    public void load() {
-        try {
-            String path = createFileChooser().showOpenDialog(new Stage()).getAbsolutePath();
-            this.controller.read(new TxtReader(path));
-            refreshTransaction();
-        } catch (Exception e) {
-            logger.warning("Error in Load");
-            notificationHome.setText("Error in Load");
-        }
-    }
-     */
 
     /**
      * metodo per aprire un file
      */
-
-    /*public void refreshTransaction(){
-        try {
-            refreshTransaction();
-            lTags.removeAll(lTags);
-            lTags.addAll(controller.getTags());
-            //tagChoice.setItems(lTags);
-        }catch (Exception e){
-        }
-    }*/
-
     @FXML
     public void open(){
         try {
@@ -610,12 +594,9 @@ public class GUIController implements Initializable {
             this.controller.read(new JsonReaderJBudget(path));
             writer = new JsonWriterJBudget(path);
         }catch (Exception e){
-          //  e.printStackTrace();
+
         }finally{
-            updateTags();
-            updateAccount();
-            updateBudget();
-            updateTransaction();
+            refreshList();
         }
     }
 
@@ -651,9 +632,12 @@ public class GUIController implements Initializable {
                 controller.addBudget(tagBudget.getValue(),Double.parseDouble(budgetAmount.getText()));
             }
         }catch(Exception e){
-            // TODO print messaggio di errore
+            resultReport.setTextFill(Color.RED);
+            resultReport.setText("Error: Data Incorrectly!");
         }finally{
             updateBudget();
+            tagBudget.setValue(null);
+            budgetAmount.clear();
         }
     }
 
@@ -667,12 +651,6 @@ public class GUIController implements Initializable {
         }
     }
 
-    /**
-     * metodo per impostare la visibilità del grafico
-     */
-    public void viewGraphBudget(){
-        graphPieBudget.setVisible(true);
-    }
 
     /**
      * metodo per aggiornare la tabella dei budget
@@ -703,5 +681,16 @@ public class GUIController implements Initializable {
                 resultReport.setText("You are out of budget of :"+res);
             }
         }
+    }
+
+
+    /**
+     * Aggiorna tutte le tabelle
+     */
+    public void refreshList(){
+        updateBudget();
+        updateTransaction();
+        updateAccount();
+        updateTags();
     }
 }

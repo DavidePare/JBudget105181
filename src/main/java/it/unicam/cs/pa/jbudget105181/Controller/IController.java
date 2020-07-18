@@ -34,11 +34,6 @@ public interface IController {
     List<ITag> getTags();
 
     /**
-     * metodo per generare l'ID
-     */
-    void generateID(); // TODO a cosa ti serve?
-
-    /**
      * metodo per aggiungere un account
      * @param account
      */
@@ -50,11 +45,7 @@ public interface IController {
      */
     void removeAccount(IAccount account);
 
-    /**
-     * metodo per rimuovere un account passato un predicate
-     * @param p
-     */
-    void removeAccount(Predicate<IAccount> p); // TODO non lo utilizzi
+
 
     /**
      * metodo per rimuovere un tag

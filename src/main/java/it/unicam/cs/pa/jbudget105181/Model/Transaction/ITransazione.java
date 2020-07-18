@@ -17,94 +17,93 @@ public interface ITransazione extends IUtility {
 
 	/**
 	 * metodo per ritornare i movimenti della transazione
-	 * @return
+	 * @return lista movimenti
 	 */
 	ArrayList<IMovement> movements();
 
 	/**
 	 * metodi per ritornare i tag della transazione
-	 * @return
+	 * @return lista tag
 	 */
 	List<ITag> tags();
 
 	/**
 	 * metodo per aggiungere un tag
-	 * @param nuovoTag
+	 * @param nuovoTag aggiunta tag
 	 */
 	void addTag(ITag nuovoTag);
 
 	/**
 	 * metodo per rimuovere un tag
-	 * @param eliminatag
-	 * @return
+	 * @param eliminatag tag da rimuovere
+	 * @return se si o no
 	 */
 	boolean removeTag(ITag eliminatag);
 
 	/**
 	 * metodo per ritornare a data della transazione
-	 * @return
+	 * @return data
 	 */
 	LocalDate getData();
 
 	/**
 	 * metodo per impostare la data della transazione
-	 * @param datanuova
+	 * @param dataNuova imposta nuova data
 	 */
-	void setData(LocalDate datanuova);
+	void setData(LocalDate dataNuova);
 
 	/**
 	 * metodo per ottenere il total amount della transazione
-	 * @return
+	 * @return valore transazione
 	 */
 	double getTotalAmount();
-//	ArrayList<LocalDate> getDate();
 
 	/**
 	 * metodo per aggiungere un movimento
-	 * @param addMov
+	 * @param addMov movimento da aggiungere
 	 */
 	void addMovement(IMovement addMov);
 
 	/**
 	 * metodo per rimuovere un movimento
-	 * @param m
+	 * @param m mov da rimuovere
 	 */
 	void removeMovement(IMovement m);
 
 	/**
 	 * metodo per verifivare se la transazione e' stata effettuata
-	 * @return
+	 * @return se la transazione è stata pagata
 	 */
 	boolean getPagata();
 
 	/**
 	 * metodo per ottenere il numero di movimenti della transazione
-	 * @return
+	 * @return numero movimenti associait
 	 */
 	int getNumMov();
 
 	/**
 	 * metodo per ottenere la descrizione della transazione
-	 * @return
+	 * @return descrizione
 	 */
 	String getDescription();
 
 	/**
 	 * metodo per impostare la descrizione della transazione
-	 * @param description
+	 * @param description nuova descrizione
 	 */
 	void setDescription(String description);
 
 	/**
 	 * metodo per aggiungere una lista di movimenti
-	 * @param lMovent
+	 * @param lMovent lista movimenti
 	 */
 	void addMovementList(List<IMovement> lMovent);
 
 	/**
 	 * metodo per impostare la variabile che verifica
 	 * se la transazione e' stata effetuata
-	 * @param pagata
+	 * @param pagata nuova impostazione
 	 */
 	void setPagata(boolean pagata);
 

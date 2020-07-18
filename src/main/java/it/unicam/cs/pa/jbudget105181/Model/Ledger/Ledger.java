@@ -71,7 +71,8 @@ public class Ledger implements ILedger {
 	@Override
 	
 	public boolean removeTag(Predicate <ITag> p) {
-		List<ITag> app= new ArrayList<>(); 
+		List<ITag> app= new ArrayList<>();
+		removeBudget(tag.stream().filter(p).findAny().get());
 		tag.stream().filter(p).forEach(t -> app.add(t));
 		removeTagTransaction(app);
 		if(tag.removeAll(app))
@@ -122,6 +123,7 @@ public class Ledger implements ILedger {
 		List<ITransazione> transazione=new ArrayList<>(); 
 		allTransaction.stream().filter(t-> t.getID()==id).forEach(t-> transazione.add(t));
 		Iterator<IMovement> iteratore= transazione.get(0).movements().iterator();
+
 		while(iteratore.hasNext()) {
 			IMovement app=iteratore.next();
 			if(app.getID() == idMov) {
@@ -212,6 +214,7 @@ public class Ledger implements ILedger {
 	public void removeMovement(IMovement movement){
 		this.get(allTransaction,movement.getIDTransazione()).removeMovement(movement);
 		this.get(listaAccount,movement.getAccount().getID()).removeMovementAccount(movement);
+		tag.stream().filter(p-> movement.tags().contains(p)).forEach(p-> p.deleteMovement(movement));
 	}
 
 

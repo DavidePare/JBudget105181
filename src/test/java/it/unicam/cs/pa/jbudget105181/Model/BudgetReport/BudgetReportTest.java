@@ -57,7 +57,7 @@ class BudgetReportTest {
         ledger.addBudgetLedger(sport,100.0);
         ledger.addBudgetLedger(sport2,8.0);
         budgetReport= new BudgetReport(ledger);
-        assertEquals(budgetReport.check(sport),58.0);
-        assertEquals(budgetReport.check(sport2),16.0);
+        assertEquals(budgetReport.check(sport),142.0);
+        assertEquals(budgetReport.check(sport2),0.0);
     }
 }

@@ -10,7 +10,7 @@ public interface IUtility extends BudgetInterface {
 
     /**
      * metodo per ritornare l'ID dell'oggetto
-     * @return
+     * @return id associato
      */
     int getID();
 }

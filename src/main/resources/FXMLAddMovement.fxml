@@ -61,7 +61,7 @@
       </AnchorPane>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <left>
-            <TableView fx:id="tableAllTag" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableAllTag" prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
                <columns>
                   <TableColumn fx:id="columnNameA" prefWidth="75.0" text="Name" />
                   <TableColumn fx:id="columnDescriptionA" prefWidth="75.0" text="Description" />
@@ -69,7 +69,7 @@
             </TableView>
          </left>
          <right>
-            <TableView fx:id="tableAddedTag" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableAddedTag" prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
                <columns>
                   <TableColumn fx:id="columnNameB" prefWidth="75.0" text="Name" />
                   <TableColumn fx:id="columnDescriptionB" prefWidth="75.0" text="Description" />
@@ -81,11 +81,11 @@
                <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <Button layoutX="78.0" layoutY="-3.0" mnemonicParsing="false" onAction="#addTag" prefHeight="86.0" prefWidth="110.0">
+                        <Button layoutX="78.0" layoutY="-3.0" mnemonicParsing="false" onAction="#addTag" prefHeight="86.0" prefWidth="110.0" style="-fx-background-color: #00FF00;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <graphic>
-                              <ImageView fitHeight="81.0" fitWidth="113.0">
+                              <ImageView fitHeight="69.0" fitWidth="87.0">
                                  <image>
-                                    <Image url="@freccia.png" />
+                                    <Image url="@frecciaR.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>
@@ -93,11 +93,11 @@
                   </AnchorPane>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <Button layoutX="79.0" layoutY="-3.0" mnemonicParsing="false" onAction="#leaveTag" prefHeight="86.0" prefWidth="110.0">
+                        <Button layoutX="79.0" layoutY="-3.0" mnemonicParsing="false" onAction="#leaveTag" prefHeight="86.0" prefWidth="110.0" style="-fx-background-color: #FF0000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <graphic>
-                              <ImageView fitHeight="81.0" fitWidth="113.0" nodeOrientation="RIGHT_TO_LEFT">
+                              <ImageView fitHeight="69.0" fitWidth="95.0" nodeOrientation="RIGHT_TO_LEFT">
                                  <image>
-                                    <Image url="@freccia.png" />
+                                    <Image url="@frecciaL.png" />
                                  </image>
                               </ImageView>
                            </graphic>

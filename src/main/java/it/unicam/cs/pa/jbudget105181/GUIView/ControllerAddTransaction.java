@@ -17,6 +17,9 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static java.lang.Double.NaN;
+
 /**
  * classe che ha la responsabilita' di fare da controller alla AddTransaction.
  */
@@ -173,6 +176,7 @@ public class ControllerAddTransaction implements ControllerFXML{
         try{
             if(transactionDate.getValue() != null){
                 if(numweekTransaction.isVisible()){
+                    Double.parseDouble(numweekTransaction.getText());
                     addRatedTransaction();
                 }else{
                     controller.addTransaction(transactionDate.getValue(),listTagTrans,descriptionTransaction.getText(),transactionDate.getValue().isBefore(LocalDate.now()));
@@ -190,7 +194,7 @@ public class ControllerAddTransaction implements ControllerFXML{
      * metodo che crea transazioni programmate per ogni tot giorni
      */
     private void addRatedTransaction(){
-        if(!controller.getAccount().isEmpty() && Long.valueOf(numweekTransaction.getText())!= null) {
+        if(!controller.getAccount().isEmpty()) {
             LocalDate data = transactionDate.getValue();
             List<ITransazione> listTransactionRated= new ArrayList<ITransazione>();
             for (int x = 0; x < numberOfTransaction.getValue(); x++) {
@@ -208,9 +212,9 @@ public class ControllerAddTransaction implements ControllerFXML{
         stage.hide();
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/FXMLHome.fxml"));
         loader.setController(new GUIController(controller));
-
+        stage.setResizable(false);
         stage.setTitle("JBudget");
-        stage.setScene(new Scene(loader.load(), 640, 400));
+        stage.setScene(new Scene(loader.load(), 680, 455));
         stage.show();
     }
 
@@ -297,6 +301,7 @@ public class ControllerAddTransaction implements ControllerFXML{
             stage.setTitle(title);
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fileFXML));
             loader.setController(controllerFXML);
+            stage.setResizable(false);
             stage.setScene(new Scene(loader.load(), 800, 400));
             stage.show();
         }catch (IOException e) {

@@ -32,9 +32,9 @@ public class FXMLStart extends Application {
         }*/
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/FXMLHome.fxml"));
         loader.setController(new GUIController(new MainController()));
-
+        stage.setResizable(false);
         stage.setTitle("JBudget");
-        stage.setScene(new Scene(loader.load(), 640, 400));
+        stage.setScene(new Scene(loader.load(), 680, 455));
         stage.show();
     }
 }

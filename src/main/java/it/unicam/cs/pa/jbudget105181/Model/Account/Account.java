@@ -29,7 +29,6 @@ public class Account implements IAccount {
 	 */
 	@Override
 	public String getNameAccount() {
-		// TODO Auto-generated method stub
 		return name;
 	}
 	/**
@@ -38,7 +37,6 @@ public class Account implements IAccount {
 	 */
 	@Override
 	public String getDescriptionAccount() {
-		// TODO Auto-generated method stub
 		return description;
 	}
 
@@ -48,7 +46,6 @@ public class Account implements IAccount {
 	 */
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
 		return ID;
 	}
 
@@ -59,7 +56,6 @@ public class Account implements IAccount {
 
 	@Override
 	public double getBalanceOfAccount() {
-		// TODO Auto-generated method stub
 		return conto;
 	}
 
@@ -69,7 +65,6 @@ public class Account implements IAccount {
 	 */
 	@Override
 	public AccountType getTypeAccount() {
-		// TODO Auto-generated method stub
 		return type;
 	}
 
@@ -79,7 +74,6 @@ public class Account implements IAccount {
 	 */
 	@Override
 	public List<IMovement> getMovementsOfAccount() {
-		// TODO Auto-generated method stub
 		return movimenti;
 	}
 

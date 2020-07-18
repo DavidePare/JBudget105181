@@ -37,7 +37,7 @@ class TagTest {
         assertTrue(t1.getAmount()==0);
         assertFalse(t1.getAmount()!=0);
         t1.addMovement(mov1);
-        assertTrue(t1.getAmount() ==50);
+        assertTrue(t1.getAmount() ==50.0);
     }
 
     @Test
@@ -52,14 +52,14 @@ class TagTest {
 
     @Test
     void getAmount() {
-        assertTrue(t1.getAmount()==0);
+        assertTrue(t1.getAmount()==0.0);
         assertFalse(t1.getAmount()!=0);
         t1.addMovement(mov1);
-        assertTrue(t1.getAmount() ==50);
+        assertTrue(t1.getAmount() ==50.0);
         t1.addMovement(mov2);
-        assertFalse(t1.getAmount() ==50);
-        assertTrue(t1.getAmount() ==200);
+        assertFalse(t1.getAmount() ==50.0);
+        assertTrue(t1.getAmount() ==200.0);
         t1.addMovement(mov3);
-        assertTrue(t1.getAmount()==150);
+        assertTrue(t1.getAmount()==150.0);
     }
 }

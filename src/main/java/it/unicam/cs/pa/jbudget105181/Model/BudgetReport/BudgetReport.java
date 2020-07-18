@@ -24,6 +24,6 @@ public class BudgetReport implements IBudgetReport {
      */
     @Override
     public Double check(ITag tag) {
-        return ledger.getBudget().getValue(tag)-tag.getAmount();
+        return ledger.getBudget().getValue(tag)+tag.getAmount();
     }
 }
