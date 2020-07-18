@@ -245,7 +245,10 @@ public class Ledger implements ILedger {
 	}
 	public ITag getATag(String name, String description){
 		return tag.stream().filter(t-> (t.getNome().compareTo(name)==0) && (t.getDescription().compareTo(description)==0)).collect(Collectors.toList()).get(0);
-
+		/*return tag.stream()
+				.filter(t-> (t.getNome().compareTo(name)==0) && (t.getDescription().compareTo(description)==0))
+				.findAny()
+				.get();*/
 	}
 
 	public void setBudget(IBudget budget){
