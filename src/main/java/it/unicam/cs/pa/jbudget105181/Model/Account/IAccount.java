@@ -23,11 +23,6 @@ public interface IAccount extends IUtility {
 	 */
 	String getDescriptionAccount();
 
-	/**
-	 * metodo per ottenere il bilancio di apertura
-	 * @return
-	 */
-	double getOpeningBalance();
 
 	/**
 	 * metodo per ottenre il bilancio dell'account

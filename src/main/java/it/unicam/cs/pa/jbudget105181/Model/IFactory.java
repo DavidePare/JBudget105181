@@ -66,6 +66,6 @@ public interface IFactory {
      * @return
      */
     static ITransazione generateTransaction(int id, LocalDate data, List<ITag> tag, String description, boolean pagata){
-        return new Transazione(id,data,tag,description,false);
+        return new Transazione(id,data,tag,description,pagata);
     }
 }

@@ -20,7 +20,7 @@ public class Ledger implements ILedger {
 	 */
 	private ArrayList<ITransazione> allTransaction= new ArrayList<ITransazione>();
 	/*
-	 * Questa variabile conterra tutti i tag usati sara utile per stamparli a video nel caso l utente lo richieda
+	 * Lista contenente tutti i tag associati
 	 */
 	private List<ITag> tag= new ArrayList<ITag>();
 	private List<IAccount> listaAccount= new ArrayList<IAccount>();
@@ -41,33 +41,12 @@ public class Ledger implements ILedger {
 
 	@Override
 	public ArrayList<ITransazione> getAllTransactions() {
-		
-		//allTransaction.stream().filter(predicate);
 		return allTransaction;
 	}
 
 	@Override
 	public void addTag(ITag t) {
-	/*	Tag t=new Tag(nome,descrizione); 
-		if(!tag.contains(t)) {
-			/* Da controllare se contains funziona non so 
-			tag.add(t);
-		}*/
 		tag.add(t);		
-	}	
-	
-	public ArrayList<ITransazione> getTransactionsForYear(int year){
-		/*
-		 * Metodo che ritorna mediante lo stream tutte le transazioni che hanno una determinata caratteristica 
-		 */
-		ArrayList<ITransazione> filtrato=new ArrayList<>();
-		allTransaction.stream().filter(t -> t.getData().getYear() ==year).forEach(t->filtrato.add(t));
-		/*Iterator<ITransazione> I=filtrato.iterator();
-		while(I.hasNext()) {
-			System.out.println(I.next());
-		}*/
-		
-		return filtrato;
 	}
 	
 	@Override
@@ -137,7 +116,7 @@ public class Ledger implements ILedger {
 	//	System.out.println("errore prima");
 	}
 	
-	//Un po brutto
+	//Un po brutto TODO
 	@Override
 	public void removeMovement(int id,int idMov) {
 		List<ITransazione> transazione=new ArrayList<>(); 

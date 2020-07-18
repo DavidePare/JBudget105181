@@ -14,7 +14,6 @@ public class Movement implements IMovement {
 	private MovementType type;
 	private IAccount account;
 	private List<ITag> tag=new ArrayList<ITag>();
-	private int idTransazione;
 	private ITransazione associatedTransaction;
 	
 	public Movement(int ID, String descrizione, MovementType type, double prezzo, IAccount account, List<ITag> tag, ITransazione transaction) {

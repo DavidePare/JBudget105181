@@ -65,6 +65,13 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
         return jo;
     }
 
+    /**
+     * Deserializzatore del budger
+     * @param json
+     * @param context
+     * @return budget deseriliazzato
+     * @throws JsonParseException
+     */
     public IBudget<ITag> deserializeBudget(JsonElement json, JsonDeserializationContext context) throws JsonParseException {
         IBudget<ITag> budget = new Budget<>();
         for(JsonElement je : json.getAsJsonArray()) {
@@ -81,6 +88,12 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
         return budget;
     }
 
+    /**
+     * Serializzatore del budget
+     * @param src
+     * @param context
+     * @return budget serializzati
+     */
     public JsonElement serializeBudget(IBudget<ITag> src, JsonSerializationContext context) {
         JsonArray ja = new JsonArray();
         for(ITag t : src.getBudgetMap().keySet()) {
@@ -154,7 +167,7 @@ public class AdapterLedger implements JsonSerializer<ILedger>, JsonDeserializer<
         jo.add("Name", context.serialize(src.getNameAccount()));
         jo.add("Description", context.serialize(src.getDescriptionAccount()));
         jo.add("Type", context.serialize(src.getTypeAccount()));
-        jo.add("OpeningBalance", context.serialize(src.getOpeningBalance()));
+        jo.add("OpeningBalance", context.serialize(src.getBalanceOfAccount()));
         return jo;
     }
 
